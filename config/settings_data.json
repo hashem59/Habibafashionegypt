@@ -1,14 +1,14 @@
 {
   "current": {
-    "purchase_code": "1fff7548-90c2-478e-8b74-6680a158a189",
+    "purchase_code": "66696cba-5fd7-45fe-8bdd-5ddafa955922",
     "presentation_enable": false,
     "logo_types": "image",
     "logo_svg_file": "svg-logo",
-    "logo_image": "shopify:\/\/shop_images\/comfy-logo_transparent-BG-02-500.png",
-    "logo_width": 202,
+    "logo_image": "shopify:\/\/shop_images\/Habiba_Logos.png",
+    "logo_width": 120,
     "logo_mobile_svg_file": "",
-    "logo_mobile_image": "shopify:\/\/shop_images\/comfy-logo_transparent-BG-01-350.png",
-    "logo_mobile_width": 120,
+    "logo_mobile_image": "shopify:\/\/shop_images\/Habiba_Logos.png",
+    "logo_mobile_width": 60,
     "logo_sticky_svg_file": "svg-logo-sticky",
     "logo_sticky_image": "",
     "logo_sticky_width": 34,
@@ -18,22 +18,37 @@
     "logo_footer_mobile_svg_file": "",
     "logo_footer_mobile_image": "",
     "logo_footer_mobile_width": 64,
-    "favicon": "shopify:\/\/shop_images\/fav-32.png",
+    "favicon": "shopify:\/\/shop_images\/Habiba-fav.png",
     "layout_container": "fullwidth",
     "layout_show_breadcrumbs": true,
     "layout_pagination_type": "button_load_more",
-    "layout_enable_rtl": true,
+    "layout_enable_rtl": false,
     "layout_images_lazyload": true,
-    "layout_settings_file": "skin-9",
+    "layout_settings_file": "skin-1",
     "layout_age_confirmation": false,
     "layout_age_confirmation_image": "",
     "layout_age_confirmation_image_width": 600,
     "layout_age_confirmation_checkbox": false,
-    "color_theme_primary": "#005842",
+    "color_theme_primary": "#252525",
     "color_theme_body": "",
-    "color_theme_c": "",
-    "color_theme_head_c": "",
-    "color_theme_link_c": "",
+    "color_theme_c": "#101010",
+    "color_theme_head_c": "#0d0c0c",
+    "color_theme_link_c": "#252525",
+    "color_theme_popups_bg": "#ffffff",
+    "color_button_default_bg": "#2f2f2f",
+    "color_button_default_bd": "#2f2f2f",
+    "color_button_default_c": "#ffffff",
+    "color_button_default_act_bg": "rgba(0,0,0,0)",
+    "color_button_default_act_bd": "rgba(0,0,0,0)",
+    "color_button_default_act_c": "#ffffff",
+    "color_button_secondary_bg": "#991e63",
+    "color_button_secondary_bd": "#991e63",
+    "color_button_secondary_c": "#ffffff",
+    "color_header_line_2_bg": "rgba(0,0,0,0)",
+    "color_header_line_1_bg": "#ffffff",
+    "color_footer_bg": "#252525",
+    "color_footer_c": "#ffffff",
+    "color_footer_links_h_c": "#fafafa",
     "color_theme": "",
     "color_theme2": "",
     "color_theme3": "",
@@ -50,16 +65,16 @@
     "font_base_apply_to_all": true,
     "font_base_type": "none",
     "font_size_body": 16,
-    "font_heading": "basic_commercial_n4",
+    "font_heading": "basic_commercial_n7",
     "font_heading_type": "bold",
     "font_size_h1": 44,
     "font_size_h2": 32,
     "font_size_h3": 24,
-    "font_size_h4": 18,
-    "font_size_h5": 15,
+    "font_size_h4": 26,
+    "font_size_h5": 16,
     "font_size_h6": 13,
     "font_button": "basic_commercial_n4",
-    "font_size_button": 15,
+    "font_size_button": 14,
     "font_size_input": 14,
     "font_menu": "basic_commercial_n4",
     "font_size_menu": 15,
@@ -72,10 +87,10 @@
     "collection_show_sidebar": "desktop_and_mobile",
     "collection_sidebar_position": "left",
     "collection_enable_sticky": true,
-    "collection_tag_filters_logic": "and",
+    "collection_tag_filters_logic": "or",
     "collection_only_available": false,
     "collection_enable_fullwidth_head_section": false,
-    "collection_enable_product_carousel_section": true,
+    "collection_enable_product_carousel_section": false,
     "collection_builder_mode": "",
     "product_format_pjpg": false,
     "product_show_review_loading": false,
@@ -89,7 +104,7 @@
     "product_options_listing_visibility": "all",
     "product_variant_change_on_hover": true,
     "product_options_type_circle_color": "",
-    "product_options_type_circle_image": "اللون",
+    "product_options_type_circle_image": "Color",
     "product_options_type_square_color": "Colour",
     "product_options_type_square_image": "Material 2",
     "product_options_type_select": "Select",
@@ -108,15 +123,15 @@
     "product_collection_more_info_type": "vendor",
     "product_collection_show_title": true,
     "product_collection_show_price": true,
-    "product_collection_show_button_quick_view": true,
+    "product_collection_show_button_quick_view": false,
     "product_collection_show_countdown": false,
     "product_collection_show_images_navigation": true,
     "product_collection_show_options": true,
     "product_collection_show_quantity": false,
     "product_collection_show_button_add_to_cart": true,
     "product_collection_show_button_add_to_wishlist": false,
-    "product_collection_show_button_add_to_compare": true,
-    "product_collection_show_reviews": true,
+    "product_collection_show_button_add_to_compare": false,
+    "product_collection_show_reviews": false,
     "product_collection_hide_reviews_counter": true,
     "product_collection_hide_reviews_mobile_counter": true,
     "product_collection_hide_empty_reviews": true,
@@ -124,7 +139,7 @@
     "product_collection_show_barcode": false,
     "product_collection_show_availability": false,
     "product_collection_show_type": true,
-    "product_collection_show_vendor": true,
+    "product_collection_show_vendor": false,
     "product_collection_show_description": true,
     "product_collection_list_show_quantity": false,
     "product_info_layout": "1",
@@ -145,7 +160,7 @@
     "product_info_show_label_hot": false,
     "product_info_show_collections": false,
     "product_info_show_title": true,
-    "product_info_description_place": "tabs",
+    "product_info_description_place": "info",
     "product_info_show_price": true,
     "product_info_show_sale_details": true,
     "product_info_show_taxes": false,
@@ -153,8 +168,8 @@
     "product_info_show_barcode": false,
     "product_info_show_availability": false,
     "product_info_show_type": false,
-    "product_info_show_vendor": true,
-    "product_info_show_reviews": true,
+    "product_info_show_vendor": false,
+    "product_info_show_reviews": false,
     "product_info_hide_reviews_counter": false,
     "product_info_hide_empty_reviews": false,
     "product_info_show_countdown": false,
@@ -171,6 +186,7 @@
     "product_button_addtocart_size": "default",
     "product_info_show_button_add_to_wishlist": false,
     "product_info_show_button_add_to_compare": false,
+    "product_info_show_pickup_available": false,
     "product_info_show_payments": false,
     "product_info_show_social_share_buttons": false,
     "product_info_social_share_buttons_type": "1",
@@ -236,9 +252,9 @@
     "compare_show_options": true,
     "compare_description_max_size": 100,
     "social_share_image": "shopify:\/\/shop_images\/Frame_7.1_2.png",
-    "social_facebook": "https:\/\/www.facebook.com\/mpthemes\/",
+    "social_facebook": "https:\/\/www.facebook.com\/habibawearonline",
     "social_twitter": "",
-    "social_instagram": "https:\/\/www.instagram.com\/mpthemes2019\/",
+    "social_instagram": "https:\/\/www.instagram.com\/habiba_homewear\/",
     "social_pinterest": "",
     "social_youtube": "",
     "social_behance": "",
@@ -292,7 +308,7 @@
     "services_popup_enable": false,
     "services_popup_page_content": "",
     "javascript_loader_jquery_first": true,
-    "app_language": "none",
+    "app_language": "store_languages",
     "app_language_link_list": "languages",
     "app_klarna_show_info_tab": false,
     "button_border_radius": 0,
@@ -322,11 +338,12 @@
     "header_animation_sticky_opacity": 0.9,
     "header_tape_animation_duration": 0,
     "product_hover_animation_type": "fade",
-    "buttons_animation_icon_enable": true,
+    "buttons_animation_icon_enable": false,
+    "button_add_to_cart_animation_enable": false,
     "dev_enable_custom_css": true,
     "dev_enable_custom_js": false,
     "checkout_header_image": "",
-    "checkout_logo_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Habiba_Logos.png",
     "checkout_logo_position": "left",
     "checkout_logo_size": "medium",
     "checkout_body_background_image": "",
@@ -336,8 +353,8 @@
     "checkout_sidebar_background_color": "#fafafa",
     "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
     "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-    "checkout_accent_color": "#197bbd",
-    "checkout_button_color": "#197bbd",
+    "checkout_accent_color": "#991e63",
+    "checkout_button_color": "#991e63",
     "checkout_error_color": "#e32c2b",
     "color_skin": "default",
     "color_theme_paragraph_c": "",
@@ -540,7 +557,8 @@
           "1582767223711",
           "1582769733910"
         ],
-        "settings": {}
+        "settings": {
+        }
       },
       "header": {
         "type": "header",
@@ -550,7 +568,7 @@
             "settings": {
               "delay": 0,
               "style": "1",
-              "content": "عرض العيد خصم 20 % على كل المنتجات"
+              "content": "شحن مجانى للمشتريات فوق 499 جنية"
             }
           },
           "1527372910910": {
@@ -568,35 +586,6 @@
               "column_right_size": 0,
               "enable_width_limit": false,
               "width_limit": 630
-            }
-          },
-          "1527384342086": {
-            "type": "megamenu_promobox",
-            "settings": {
-              "title": "",
-              "url": "shopify:\/\/collections",
-              "image_size": 400,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "NEW IN",
-              "text_line_2": "Spring\/Summer 2020 Collection",
-              "text_line_3": "Text line 3",
-              "style": "3",
-              "button_1": "",
-              "button_1_url": "",
-              "color_button_type_1": "default",
-              "button_2": "Button text #2",
-              "button_2_url": "",
-              "color_button_type_2": "default",
-              "list_1": "",
-              "custom_html": "",
-              "type": "type-2-2",
-              "content_position": "center",
-              "content_align": "center",
-              "animation_to": "center",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "customization_class": ""
             }
           },
           "1527385504306": {
@@ -728,35 +717,6 @@
               "customization_class": ""
             }
           },
-          "1527420420060": {
-            "type": "megamenu_promobox",
-            "settings": {
-              "title": "",
-              "url": "shopify:\/\/collections",
-              "image_size": 400,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "SALE & SPECIAL OFFERS",
-              "text_line_2": "Get up to 20% off",
-              "text_line_3": "Text line 3",
-              "style": "3",
-              "button_1": "Button text",
-              "button_1_url": "",
-              "color_button_type_1": "default",
-              "button_2": "Button text #2",
-              "button_2_url": "",
-              "color_button_type_2": "default",
-              "list_1": "",
-              "custom_html": "",
-              "type": "type-3",
-              "content_position": "center",
-              "content_align": "center",
-              "animation_to": "center",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "customization_class": ""
-            }
-          },
           "1527420550360": {
             "type": "megamenu_promobox",
             "settings": {
@@ -830,35 +790,6 @@
               "column_right_size": 0,
               "enable_width_limit": false,
               "width_limit": 630
-            }
-          },
-          "1527385990580": {
-            "type": "megamenu_promobox",
-            "settings": {
-              "title": "",
-              "url": "shopify:\/\/collections",
-              "image_size": 400,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "NEW IN",
-              "text_line_2": "Spring\/Summer 2020 Collection",
-              "text_line_3": "Text line 3",
-              "style": "3",
-              "button_1": "",
-              "button_1_url": "",
-              "color_button_type_1": "default",
-              "button_2": "Button text #2",
-              "button_2_url": "",
-              "color_button_type_2": "default",
-              "list_1": "",
-              "custom_html": "",
-              "type": "type-2-2",
-              "content_position": "center",
-              "content_align": "center",
-              "animation_to": "center",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "customization_class": ""
             }
           },
           "1527386066314": {
@@ -1026,18 +957,15 @@
         "block_order": [
           "1525791872612",
           "1527372910910",
-          "1527384342086",
           "1527385504306",
           "1527373213741",
           "1527432364326",
           "1583964796904",
           "1527373220764",
           "1527418910812",
-          "1527420420060",
           "1527420550360",
           "1527420557049",
           "1527373227613",
-          "1527385990580",
           "1527386066314",
           "1527422624107",
           "1543698183190",
@@ -1051,6 +979,8 @@
           "type": "1",
           "style": "1",
           "logo_mobile_centered": true,
+          "height": 0,
+          "items_padding": 0,
           "menu": "main-menu",
           "show_menu_arrows": true,
           "show_menu_hover_underline": true,
@@ -1088,7 +1018,7 @@
             "settings": {
               "title": "",
               "show_title_on_desktop": true,
-              "menu": "footer-menu",
+              "menu": "",
               "size": 0,
               "rows_limit": 0
             }
@@ -1108,7 +1038,8 @@
           },
           "1586284627913": {
             "type": "payments",
-            "settings": {}
+            "settings": {
+            }
           }
         },
         "block_order": [
@@ -1131,9 +1062,10 @@
         "blocks": {
           "1586279874234": {
             "type": "promobox",
+            "disabled": true,
             "settings": {
               "url": "",
-              "image": "shopify:\/\/shop_images\/2c.png",
+              "image": "shopify:\/\/shop_images\/habibaa1554_3000.jpg",
               "image_size": 900,
               "image_mobile_size": 900,
               "image_position_x": 43,
@@ -1172,10 +1104,94 @@
               "animation_text": "none",
               "customization_class": ""
             }
+          },
+          "53e8ee98-2d60-4c2b-9920-ca668457bd4f": {
+            "type": "slick_slider",
+            "settings": {
+              "height": "auto",
+              "min_height": 0,
+              "size_of_column": "auto",
+              "arrows": true,
+              "bullets": true,
+              "speed": 4
+            }
+          },
+          "5b642942-f7a1-4c57-8bbb-47970055d2ac": {
+            "type": "slick_slide",
+            "settings": {
+              "url": "shopify:\/\/collections\/sportswear",
+              "image": "shopify:\/\/shop_images\/habibaa1652_3000.jpg",
+              "image_size": 900,
+              "image_mobile_size": 550,
+              "image_position_x": 50,
+              "color_image_mask": "#f9f9f9",
+              "image_mask_opacity": 0.2,
+              "text_line_1": "",
+              "text_line_2": "Pyjamas",
+              "text_line_3": "",
+              "style": "2",
+              "button_1": "SHOP NOW",
+              "button_1_url": "shopify:\/\/collections\/sportswear",
+              "color_button_type_1": "secondary",
+              "button_2": "",
+              "button_2_url": "",
+              "color_button_type_2": "default",
+              "custom_html": "",
+              "video_external_url": "",
+              "video_mp4_url": "",
+              "video_autoplay": true,
+              "video_controls": false,
+              "type": "type-1",
+              "content_position": "center_left",
+              "content_align": "center",
+              "add_container": false,
+              "content_width": 100,
+              "text_width": 0,
+              "animation_text": "none",
+              "customization_class": ""
+            }
+          },
+          "27f82477-b79c-4d01-9407-2c02c2dc216a": {
+            "type": "slick_slide",
+            "settings": {
+              "url": "shopify:\/\/collections\/nightshirts",
+              "image": "shopify:\/\/shop_images\/habibaa1554.jpg",
+              "image_size": 900,
+              "image_mobile_size": 550,
+              "image_position_x": 50,
+              "color_image_mask": "#f9f9f9",
+              "image_mask_opacity": 0.2,
+              "text_line_1": "",
+              "text_line_2": "Nightshirts",
+              "text_line_3": "",
+              "style": "1",
+              "button_1": "SHOP NOW",
+              "button_1_url": "shopify:\/\/collections\/nightshirts",
+              "color_button_type_1": "default",
+              "button_2": "",
+              "button_2_url": "",
+              "color_button_type_2": "default",
+              "custom_html": "",
+              "video_external_url": "",
+              "video_mp4_url": "",
+              "video_autoplay": true,
+              "video_controls": false,
+              "type": "type-1",
+              "content_position": "top_center",
+              "content_align": "center",
+              "add_container": false,
+              "content_width": 100,
+              "text_width": 0,
+              "animation_text": "none",
+              "customization_class": ""
+            }
           }
         },
         "block_order": [
-          "1586279874234"
+          "1586279874234",
+          "53e8ee98-2d60-4c2b-9920-ca668457bd4f",
+          "5b642942-f7a1-4c57-8bbb-47970055d2ac",
+          "27f82477-b79c-4d01-9407-2c02c2dc216a"
         ],
         "settings": {
           "title": "",
@@ -1191,18 +1207,18 @@
       },
       "1586280453180": {
         "type": "home-builder",
-        "disabled": true,
         "blocks": {
           "1586280489479": {
             "type": "promobox",
             "settings": {
-              "url": "shopify:\/\/collections\/womens",
+              "url": "shopify:\/\/collections\/oreintal-galabya",
+              "image": "shopify:\/\/shop_images\/17.jpg",
               "image_size": 900,
               "image_mobile_size": 900,
               "image_position_x": 50,
               "color_image_mask": "",
               "image_mask_opacity": 0.5,
-              "text_line_1": "WOMEN'S",
+              "text_line_1": "Galabya",
               "text_line_2": "Text line #2",
               "text_line_3": "Text line #3",
               "style": "2",
@@ -1239,13 +1255,14 @@
           "1586280492143": {
             "type": "promobox",
             "settings": {
-              "url": "shopify:\/\/collections\/mens",
+              "url": "shopify:\/\/collections\/sports-wear",
+              "image": "shopify:\/\/shop_images\/sports-wear.jpg",
               "image_size": 900,
               "image_mobile_size": 900,
               "image_position_x": 50,
               "color_image_mask": "",
               "image_mask_opacity": 0.5,
-              "text_line_1": "MEN'S",
+              "text_line_1": "Sportswear",
               "text_line_2": "Text line #2",
               "text_line_3": "Text line #3",
               "style": "2",
@@ -1278,60 +1295,16 @@
               "animation_text": "none",
               "customization_class": ""
             }
-          },
-          "1586280494368": {
-            "type": "promobox",
-            "settings": {
-              "url": "shopify:\/\/collections\/accessories",
-              "image_size": 900,
-              "image_mobile_size": 900,
-              "image_position_x": 50,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "ACCESSORIES",
-              "text_line_2": "Text line #2",
-              "text_line_3": "Text line #3",
-              "style": "2",
-              "button_1": "Button #1 text",
-              "button_1_url": "",
-              "color_button_type_1": "default-transparent",
-              "button_2": "Button #2 text",
-              "button_2_url": "",
-              "color_button_type_2": "default-transparent",
-              "list_1": "include-promo-box-list-accessories",
-              "custom_html": "",
-              "video_external_url": "",
-              "video_mp4_url": "",
-              "video_autoplay": true,
-              "video_controls": false,
-              "type": "type-4",
-              "content_position": "center",
-              "content_align": "center",
-              "add_container": false,
-              "content_width": 100,
-              "text_width": 0,
-              "height": "auto",
-              "min_height": 0,
-              "size_of_column": "auto",
-              "visible": "desktop_mobile",
-              "parallax": "disable",
-              "animation_to": "center",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "animation_text": "none",
-              "customization_class": ""
-            }
           }
         },
         "block_order": [
           "1586280489479",
-          "1586280492143",
-          "1586280494368"
+          "1586280492143"
         ],
         "settings": {
           "title": "",
           "container": "boxed",
-          "size_of_columns": "3",
+          "size_of_columns": "2",
           "size_of_columns_mobile": "1",
           "margins_for_columns": "preset_1",
           "align_of_columns": "top_center",
@@ -1359,347 +1332,17 @@
             "type": "collection",
             "settings": {
               "title": "",
-              "collection": "بيجامات-بناتي"
-            }
-          },
-          "1586282565448": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "title": "",
-              "collection": "special-products"
-            }
-          },
-          "1586282583295": {
-            "type": "collection",
-            "disabled": true,
-            "settings": {
-              "title": "",
-              "collection": "featured"
+              "collection": "sportswear"
             }
           }
         },
         "block_order": [
-          "1586282526457",
-          "1586282565448",
-          "1586282583295"
+          "1586282526457"
         ],
         "settings": {
           "size_of_columns": "4",
           "max_count": 8,
           "show_btn_more_products": true
-        }
-      },
-      "1586282646707": {
-        "type": "spacer",
-        "settings": {
-          "margin_top": 40,
-          "margin_bottom": 0,
-          "margin_top_mobile": 0,
-          "margin_bottom_mobile": 0,
-          "container": "boxed",
-          "show_separator": false,
-          "title": ""
-        }
-      },
-      "1586282852274": {
-        "type": "spacer",
-        "settings": {
-          "margin_top": 20,
-          "margin_bottom": 0,
-          "margin_top_mobile": 10,
-          "margin_bottom_mobile": 0,
-          "container": "boxed",
-          "show_separator": false,
-          "title": ""
-        }
-      },
-      "1586282860739": {
-        "type": "home-builder",
-        "blocks": {
-          "1586282889393": {
-            "type": "promobox",
-            "settings": {
-              "url": "shopify:\/\/collections\/men-shoes",
-              "image": "shopify:\/\/shop_images\/21878.png",
-              "image_size": 900,
-              "image_mobile_size": 900,
-              "image_position_x": 50,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "",
-              "text_line_2": "بيجامه اطفالى ب 89 جنية",
-              "text_line_3": "",
-              "style": "2",
-              "button_1": "استمتع بالعرض",
-              "button_1_url": "",
-              "color_button_type_1": "secondary",
-              "button_2": "Button #2 text",
-              "button_2_url": "",
-              "color_button_type_2": "default-transparent",
-              "list_1": "",
-              "custom_html": "",
-              "video_external_url": "",
-              "video_mp4_url": "",
-              "video_autoplay": true,
-              "video_controls": false,
-              "type": "type-1-3",
-              "content_position": "center",
-              "content_align": "center",
-              "add_container": false,
-              "content_width": 100,
-              "text_width": 0,
-              "height": "auto",
-              "min_height": 180,
-              "size_of_column": "auto",
-              "visible": "desktop_mobile",
-              "parallax": "disable",
-              "animation_to": "none",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "animation_text": "none",
-              "customization_class": ""
-            }
-          },
-          "1586282892935": {
-            "type": "promobox",
-            "settings": {
-              "url": "shopify:\/\/collections\/men-clothing",
-              "image": "shopify:\/\/shop_images\/21878.png",
-              "image_size": 900,
-              "image_mobile_size": 900,
-              "image_position_x": 50,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "",
-              "text_line_2": "بيجامه اطفالى ب 89 جنية",
-              "text_line_3": "",
-              "style": "2",
-              "button_1": "استمتع بالعرض",
-              "button_1_url": "",
-              "color_button_type_1": "secondary",
-              "button_2": "Button #2 text",
-              "button_2_url": "",
-              "color_button_type_2": "default-transparent",
-              "list_1": "",
-              "custom_html": "",
-              "video_external_url": "",
-              "video_mp4_url": "",
-              "video_autoplay": true,
-              "video_controls": false,
-              "type": "type-1-3",
-              "content_position": "center",
-              "content_align": "center",
-              "add_container": false,
-              "content_width": 100,
-              "text_width": 0,
-              "height": "auto",
-              "min_height": 0,
-              "size_of_column": "auto",
-              "visible": "desktop_mobile",
-              "parallax": "disable",
-              "animation_to": "none",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "animation_text": "none",
-              "customization_class": ""
-            }
-          },
-          "7f6ee1a0-e4da-4cc9-85e6-914a392051e0": {
-            "type": "promobox",
-            "disabled": true,
-            "settings": {
-              "url": "",
-              "image_size": 1450,
-              "image_mobile_size": 550,
-              "image_position_x": 50,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "Text line #1",
-              "text_line_2": "Text line #2",
-              "text_line_3": "Text line #3",
-              "style": "1",
-              "button_1": "Button #1 text",
-              "button_1_url": "",
-              "color_button_type_1": "default",
-              "button_2": "Button #2 text",
-              "button_2_url": "",
-              "color_button_type_2": "default",
-              "list_1": "",
-              "custom_html": "",
-              "video_external_url": "",
-              "video_mp4_url": "",
-              "video_autoplay": true,
-              "video_controls": false,
-              "type": "clean",
-              "content_position": "center",
-              "content_align": "center",
-              "add_container": false,
-              "content_width": 100,
-              "text_width": 0,
-              "height": "auto",
-              "min_height": 0,
-              "size_of_column": "auto",
-              "visible": "desktop_mobile",
-              "parallax": "disable",
-              "animation_to": "none",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "animation_text": "none",
-              "customization_class": ""
-            }
-          }
-        },
-        "block_order": [
-          "1586282889393",
-          "1586282892935",
-          "7f6ee1a0-e4da-4cc9-85e6-914a392051e0"
-        ],
-        "settings": {
-          "title": "",
-          "container": "boxed",
-          "size_of_columns": "2",
-          "size_of_columns_mobile": "1",
-          "margins_for_columns": "preset_1",
-          "align_of_columns": "top_center",
-          "disable_column_paddings": false,
-          "precedence": "",
-          "customization_class": ""
-        }
-      },
-      "1586283266986": {
-        "type": "spacer",
-        "settings": {
-          "margin_top": 45,
-          "margin_bottom": 0,
-          "margin_top_mobile": 35,
-          "margin_bottom_mobile": 0,
-          "container": "boxed",
-          "show_separator": false,
-          "title": ""
-        }
-      },
-      "1586283282255": {
-        "type": "carousel-products",
-        "blocks": {
-          "1586283286719": {
-            "type": "collection",
-            "settings": {
-              "title": "",
-              "collection": "بيجامات-بناتي"
-            }
-          }
-        },
-        "block_order": [
-          "1586283286719"
-        ],
-        "settings": {
-          "show_title": true,
-          "container": "boxed",
-          "size_of_columns": "4",
-          "max_count": 6,
-          "autoplay": true,
-          "speed": 5,
-          "infinite": true,
-          "arrows": true,
-          "bullets": true
-        }
-      },
-      "1586283399218": {
-        "type": "spacer",
-        "settings": {
-          "margin_top": 60,
-          "margin_bottom": 50,
-          "margin_top_mobile": 0,
-          "margin_bottom_mobile": 35,
-          "container": "boxed",
-          "show_separator": true,
-          "title": ""
-        }
-      },
-      "1586283433745": {
-        "type": "carousel-brands",
-        "disabled": true,
-        "blocks": {
-          "1586283438841": {
-            "type": "brand",
-            "disabled": true,
-            "settings": {
-              "link": "\/collections\/all?q=vd_:calvin-klein"
-            }
-          },
-          "1586283440593": {
-            "type": "brand",
-            "disabled": true,
-            "settings": {
-              "link": "\/collections\/all?q=vd_:chanel"
-            }
-          },
-          "1586283442261": {
-            "type": "brand",
-            "disabled": true,
-            "settings": {
-              "link": "\/collections\/all?q=vd_:dior"
-            }
-          },
-          "1586283444209": {
-            "type": "brand",
-            "disabled": true,
-            "settings": {
-              "link": "\/collections\/all?q=vd_:gap"
-            }
-          },
-          "1586283447563": {
-            "type": "brand",
-            "disabled": true,
-            "settings": {
-              "link": "\/collections\/all?q=vd_:giorgio-armani"
-            }
-          },
-          "1586283449137": {
-            "type": "brand",
-            "disabled": true,
-            "settings": {
-              "link": "\/collections\/all?q=vd_:lacoste"
-            }
-          },
-          "1586283451048": {
-            "type": "brand",
-            "disabled": true,
-            "settings": {
-              "link": "\/collections\/all?q=vd_:prada"
-            }
-          },
-          "1586283452306": {
-            "type": "brand",
-            "disabled": true,
-            "settings": {
-              "link": "\/collections\/all?q=vd_:zara"
-            }
-          }
-        },
-        "block_order": [
-          "1586283438841",
-          "1586283440593",
-          "1586283442261",
-          "1586283444209",
-          "1586283447563",
-          "1586283449137",
-          "1586283451048",
-          "1586283452306"
-        ],
-        "settings": {
-          "title": "",
-          "layout": "slider",
-          "size_of_columns": "6",
-          "image_max_width": 0,
-          "bordered_links": true,
-          "border_radius": "",
-          "autoplay": true,
-          "speed": 5,
-          "infinite": true,
-          "arrows": true,
-          "bullets": false
         }
       },
       "1586283959656": {
@@ -1712,216 +1355,6 @@
           "container": "boxed",
           "show_separator": false,
           "title": ""
-        }
-      },
-      "1586283978403": {
-        "type": "carousel-articles",
-        "disabled": true,
-        "settings": {
-          "title": "World Of Shella",
-          "blog": "blog",
-          "layout": "1",
-          "max_symbols_count": 200,
-          "show_details": true,
-          "button_text": "Read & Shop",
-          "size_of_columns": "2",
-          "max_items_count": 10,
-          "autoplay": true,
-          "speed": 5,
-          "infinite": true,
-          "arrows": true,
-          "bullets": true
-        }
-      },
-      "1586284034569": {
-        "type": "spacer",
-        "disabled": true,
-        "settings": {
-          "margin_top": 60,
-          "margin_bottom": 0,
-          "margin_top_mobile": 0,
-          "margin_bottom_mobile": 0,
-          "container": "boxed",
-          "show_separator": false,
-          "title": ""
-        }
-      },
-      "1586284059940": {
-        "type": "home-builder",
-        "disabled": true,
-        "blocks": {
-          "1586284065628": {
-            "type": "instagram",
-            "settings": {
-              "user_name": "shellatemplate",
-              "tag": "",
-              "show_post_details": true,
-              "limit": 12,
-              "size_of_images": "6",
-              "inner_disable_paddings": true,
-              "fixed_height": 100,
-              "disable_lazyload": false,
-              "size_of_column": "auto"
-            }
-          },
-          "1586284075152": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-ZctHuBf\/",
-              "likes": "24",
-              "comments": "12"
-            }
-          },
-          "1586284077419": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-RAfHTFy\/",
-              "likes": "15",
-              "comments": "7"
-            }
-          },
-          "1586284080852": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-S3MnoDv\/",
-              "likes": "35",
-              "comments": "10"
-            }
-          },
-          "1586284083626": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-U5AHJY2\/",
-              "likes": "18",
-              "comments": "6"
-            }
-          },
-          "1586284086290": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-O77nsrY\/",
-              "likes": "46",
-              "comments": "28"
-            }
-          },
-          "1586284088787": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-W7IHoyd\/",
-              "likes": "17",
-              "comments": "14"
-            }
-          },
-          "1586366161062": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-MvwnvvP\/",
-              "likes": "42",
-              "comments": "16"
-            }
-          },
-          "1586366163574": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-K8OnLcL\/",
-              "likes": "37",
-              "comments": "22"
-            }
-          },
-          "1586366165951": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-JLIH4zd\/",
-              "likes": "79",
-              "comments": "15"
-            }
-          },
-          "1586366171436": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-HD3HSJc\/",
-              "likes": "83",
-              "comments": "45"
-            }
-          },
-          "1586366174420": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-FOInhR4\/",
-              "likes": "97",
-              "comments": "34"
-            }
-          },
-          "1586366177575": {
-            "type": "instagram_block",
-            "settings": {
-              "image_size": 195,
-              "format_pjpg": true,
-              "disable_lazyload": false,
-              "url": "https:\/\/www.instagram.com\/p\/BnQ-CcMHkKj\/",
-              "likes": "34",
-              "comments": "18"
-            }
-          }
-        },
-        "block_order": [
-          "1586284065628",
-          "1586284075152",
-          "1586284077419",
-          "1586284080852",
-          "1586284083626",
-          "1586284086290",
-          "1586284088787",
-          "1586366161062",
-          "1586366163574",
-          "1586366165951",
-          "1586366171436",
-          "1586366174420",
-          "1586366177575"
-        ],
-        "settings": {
-          "title": "<p><a href=\"https:\/\/instagram.com\/shellatemplate\" title=\"https:\/\/instagram.com\/shellatemplate\">@Shella<\/a> Follow Us On Instagram<\/p>",
-          "container": "boxed",
-          "size_of_columns": "1",
-          "size_of_columns_mobile": "1",
-          "margins_for_columns": "none",
-          "align_of_columns": "top_center",
-          "disable_column_paddings": false,
-          "precedence": "",
-          "customization_class": ""
         }
       },
       "collection-sidebar": {
@@ -1938,30 +1371,16 @@
           "1530696164711": {
             "type": "collections",
             "settings": {
-              "title": "الفئات",
+              "title": "Collections",
               "default_state": "open",
               "show_border": true,
               "menu": "main-menu",
               "collection_tags_select": "radio"
             }
           },
-          "1530696372892": {
-            "type": "filters",
-            "settings": {
-              "title": "الماركة",
-              "default_state": "open",
-              "show_border": true,
-              "type": "vendors",
-              "items": "",
-              "show_all_from_collection": true,
-              "direction": "columns",
-              "max_column_size": 0,
-              "columns": "1",
-              "for_collections": ""
-            }
-          },
           "1530696190431": {
             "type": "filters",
+            "disabled": true,
             "settings": {
               "title": "اللون",
               "default_state": "open",
@@ -1977,12 +1396,13 @@
           },
           "dd57b090-c9e4-4783-a6d4-078dcb6c89d7": {
             "type": "option_filters",
+            "disabled": true,
             "settings": {
-              "title": "",
+              "title": "Size",
               "default_state": "open",
               "show_border": true,
-              "for_option": "",
-              "items": "",
+              "for_option": "Size",
+              "items": "S,M,L,XL,2XL,3XL",
               "type": "default",
               "direction": "columns",
               "max_column_size": 0,
@@ -2005,7 +1425,6 @@
         "block_order": [
           "1530696013571",
           "1530696164711",
-          "1530696372892",
           "1530696190431",
           "dd57b090-c9e4-4783-a6d4-078dcb6c89d7",
           "1530696365086"
@@ -2019,6 +1438,7 @@
         "blocks": {
           "1586289313748": {
             "type": "promobox",
+            "disabled": true,
             "settings": {
               "for_collection": "womens",
               "url": "\/collections\/womens",
@@ -2063,6 +1483,7 @@
           },
           "1586289329527": {
             "type": "promobox",
+            "disabled": true,
             "settings": {
               "for_collection": "mens",
               "url": "\/collections\/mens",
@@ -2107,6 +1528,7 @@
           },
           "1586289339594": {
             "type": "promobox",
+            "disabled": true,
             "settings": {
               "for_collection": "mens",
               "url": "\/collections\/mens",
@@ -2195,6 +1617,7 @@
         "blocks": {
           "1586291186708": {
             "type": "collection",
+            "disabled": true,
             "settings": {
               "title": "",
               "collection": "trending-now-hp"
@@ -2240,7 +1663,7 @@
           "1586291704115"
         ],
         "settings": {
-          "show_tabs": true,
+          "show_tabs": false,
           "scrolling_to_opened_tab": true,
           "tabs_type": "tabs",
           "show_tab_description": true,
@@ -2297,7 +1720,8 @@
           "1586291808135",
           "1586291810188"
         ],
-        "settings": {}
+        "settings": {
+        }
       },
       "list-collections": {
         "type": "list-collections",
@@ -2320,7 +1744,8 @@
       },
       "blog-sidebar": {
         "type": "blog-sidebar",
-        "settings": {}
+        "settings": {
+        }
       },
       "blog-body": {
         "type": "blog-body",
@@ -2422,7 +1847,8 @@
           "1586292269155",
           "1586292270787"
         ],
-        "settings": {}
+        "settings": {
+        }
       },
       "contact-map": {
         "type": "contact-map",
@@ -2714,217 +2140,71 @@
           "image_size": 600
         }
       },
-      "1586567788223": {
+      "162809538512ad99d5": {
+        "type": "sorting-collections",
+        "blocks": {
+          "126d60b7-8ee7-4094-9245-5ea3abda8e1e": {
+            "type": "collection",
+            "settings": {
+              "title": "",
+              "collection": "nightshirts"
+            }
+          }
+        },
+        "block_order": [
+          "126d60b7-8ee7-4094-9245-5ea3abda8e1e"
+        ],
+        "settings": {
+          "size_of_columns": "4",
+          "max_count": 8,
+          "show_btn_more_products": true
+        }
+      },
+      "16280958916f155b46": {
+        "type": "sorting-collections",
+        "blocks": {
+          "114cd4d2-16d7-46b2-93d3-e9d3eed909dd": {
+            "type": "collection",
+            "settings": {
+              "title": "",
+              "collection": "summer-polo-shirt"
+            }
+          }
+        },
+        "block_order": [
+          "114cd4d2-16d7-46b2-93d3-e9d3eed909dd"
+        ],
+        "settings": {
+          "size_of_columns": "4",
+          "max_count": 8,
+          "show_btn_more_products": true
+        }
+      },
+      "1628097186ffd864e7": {
         "type": "spacer",
         "settings": {
           "margin_top": 60,
           "margin_bottom": 0,
-          "margin_top_mobile": 50,
+          "margin_top_mobile": 0,
           "margin_bottom_mobile": 0,
           "container": "boxed",
           "show_separator": false,
           "title": ""
         }
       },
-      "162620940202712288": {
-        "type": "home-builder",
-        "blocks": {
-          "7c75bd10-2f38-42b6-8299-fd977392ae7c": {
-            "type": "promobox",
-            "settings": {
-              "url": "shopify:\/\/collections\/اطفال",
-              "image": "shopify:\/\/shop_images\/21878.png",
-              "image_size": 1150,
-              "image_mobile_size": 950,
-              "image_position_x": 50,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "",
-              "text_line_2": "",
-              "text_line_3": "",
-              "style": "1",
-              "button_1": "بيجامات بناتى",
-              "button_1_url": "",
-              "color_button_type_1": "default",
-              "button_2": "",
-              "button_2_url": "",
-              "color_button_type_2": "default",
-              "list_1": "",
-              "custom_html": "",
-              "video_external_url": "",
-              "video_mp4_url": "",
-              "video_autoplay": true,
-              "video_controls": false,
-              "type": "type-1",
-              "content_position": "center",
-              "content_align": "center",
-              "add_container": false,
-              "content_width": 100,
-              "text_width": 0,
-              "height": "auto",
-              "min_height": 0,
-              "size_of_column": "3",
-              "visible": "desktop_mobile",
-              "parallax": "disable",
-              "animation_to": "none",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "animation_text": "none",
-              "customization_class": ""
-            }
-          },
-          "ca5d1137-4dbf-43de-a993-a5cd99acfe1c": {
-            "type": "promobox",
-            "settings": {
-              "url": "",
-              "image": "shopify:\/\/shop_images\/21878.png",
-              "image_size": 450,
-              "image_mobile_size": 550,
-              "image_position_x": 4,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "",
-              "text_line_2": "",
-              "text_line_3": "",
-              "style": "1",
-              "button_1": "بيجامات رجالى",
-              "button_1_url": "",
-              "color_button_type_1": "default",
-              "button_2": "",
-              "button_2_url": "",
-              "color_button_type_2": "default",
-              "list_1": "",
-              "custom_html": "",
-              "video_external_url": "",
-              "video_mp4_url": "",
-              "video_autoplay": true,
-              "video_controls": false,
-              "type": "type-1",
-              "content_position": "center",
-              "content_align": "center",
-              "add_container": false,
-              "content_width": 100,
-              "text_width": 0,
-              "height": "auto",
-              "min_height": 0,
-              "size_of_column": "3",
-              "visible": "desktop_mobile",
-              "parallax": "disable",
-              "animation_to": "none",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "animation_text": "none",
-              "customization_class": ""
-            }
-          },
-          "f3c8240e-b6ba-4437-87a1-d0411e190a17": {
-            "type": "promobox",
-            "settings": {
-              "url": "",
-              "image": "shopify:\/\/shop_images\/21878.png",
-              "image_size": 450,
-              "image_mobile_size": 550,
-              "image_position_x": 50,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "",
-              "text_line_2": "",
-              "text_line_3": "",
-              "style": "1",
-              "button_1": "بيجامات حريمى",
-              "button_1_url": "",
-              "color_button_type_1": "default",
-              "button_2": "",
-              "button_2_url": "",
-              "color_button_type_2": "default",
-              "list_1": "",
-              "custom_html": "",
-              "video_external_url": "",
-              "video_mp4_url": "",
-              "video_autoplay": true,
-              "video_controls": false,
-              "type": "type-1",
-              "content_position": "center",
-              "content_align": "center",
-              "add_container": false,
-              "content_width": 100,
-              "text_width": 0,
-              "height": "auto",
-              "min_height": 0,
-              "size_of_column": "3",
-              "visible": "desktop_mobile",
-              "parallax": "disable",
-              "animation_to": "none",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "animation_text": "none",
-              "customization_class": ""
-            }
-          },
-          "4d248cc2-3c70-43f5-a531-1d5dadaf4c9d": {
-            "type": "promobox",
-            "settings": {
-              "url": "shopify:\/\/collections\/أحدث-العروض",
-              "image": "shopify:\/\/shop_images\/21878.png",
-              "image_size": 450,
-              "image_mobile_size": 550,
-              "image_position_x": 50,
-              "color_image_mask": "",
-              "image_mask_opacity": 0.5,
-              "text_line_1": "",
-              "text_line_2": "",
-              "text_line_3": "",
-              "style": "1",
-              "button_1": "بيجامات اولادى",
-              "button_1_url": "",
-              "color_button_type_1": "default",
-              "button_2": "",
-              "button_2_url": "",
-              "color_button_type_2": "default",
-              "list_1": "",
-              "custom_html": "",
-              "video_external_url": "",
-              "video_mp4_url": "",
-              "video_autoplay": true,
-              "video_controls": false,
-              "type": "type-1",
-              "content_position": "center",
-              "content_align": "center",
-              "add_container": true,
-              "content_width": 25,
-              "text_width": 0,
-              "height": "auto",
-              "min_height": 0,
-              "size_of_column": "3",
-              "visible": "desktop_mobile",
-              "parallax": "disable",
-              "animation_to": "none",
-              "animation_from": "none",
-              "animation_opacity": "none",
-              "animation_text": "none",
-              "customization_class": ""
-            }
-          }
-        },
-        "block_order": [
-          "7c75bd10-2f38-42b6-8299-fd977392ae7c",
-          "ca5d1137-4dbf-43de-a993-a5cd99acfe1c",
-          "f3c8240e-b6ba-4437-87a1-d0411e190a17",
-          "4d248cc2-3c70-43f5-a531-1d5dadaf4c9d"
-        ],
+      "16280978385d9c30dd": {
+        "type": "spacer",
         "settings": {
-          "title": "",
+          "margin_top": 60,
+          "margin_bottom": 0,
+          "margin_top_mobile": 0,
+          "margin_bottom_mobile": 0,
           "container": "boxed",
-          "size_of_columns": "1",
-          "size_of_columns_mobile": "1",
-          "margins_for_columns": "none",
-          "align_of_columns": "top_center",
-          "disable_column_paddings": false,
-          "precedence": "",
-          "customization_class": ""
+          "show_separator": false,
+          "title": ""
         }
       },
-      "1626216924556c46b1": {
+      "16280978455cd959a7": {
         "type": "spacer",
         "settings": {
           "margin_top": 60,
@@ -2939,23 +2219,15 @@
     },
     "content_for_index": [
       "1586279708879",
-      "1586280477165",
-      "1586280453180",
-      "1586282646707",
+      "16280978455cd959a7",
       "1586282516064",
-      "1586282852274",
-      "1586282860739",
-      "1586283266986",
-      "1586283282255",
-      "1586283399218",
-      "162620940202712288",
-      "1586283433745",
+      "1628097186ffd864e7",
+      "162809538512ad99d5",
+      "16280978385d9c30dd",
+      "1586280453180",
       "1586283959656",
-      "1586283978403",
-      "1586284034569",
-      "1586284059940",
-      "1586567788223",
-      "1626216924556c46b1"
+      "16280958916f155b46",
+      "1586280477165"
     ]
   }
 }
