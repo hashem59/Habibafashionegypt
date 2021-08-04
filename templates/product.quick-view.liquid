@@ -1,0 +1,18 @@
+{% layout none %}
+{% include 'global-variables' %}
+{%- assign is_quick_view = true -%}
+{%- assign sidebar = sidebar | default: 'off' -%}
+{% include 'product-res-variables' %}
+{% include 'product-info-res-variables' %}
+{%- if settings.product_quick_view_layout != 'inherit' -%}
+    {%- assign template_layout = settings.product_quick_view_layout -%}
+{%- endif -%}
+{%- assign full_details = full_details | default: settings.product_quick_view_show_full_details -%}
+<div class="quick-view">
+    <div class="container">
+        {% include 'product-page-get-main' %}
+    </div>
+    {%- if product.metafields.sizeguide.html and product.metafields.sizeguide.html != 'hide' -%}
+        <div class="rte d-none" data-product-size-guide-content>{{ product.metafields.sizeguide.html }}</div>
+    {%- endif -%}
+</div>

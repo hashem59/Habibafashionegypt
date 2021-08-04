@@ -1,0 +1,183 @@
+{%- if section.blocks.size > 0 -%}
+    {% include 'global-variables' %}
+    <div data-section-id="{{ section.id }}" data-section-type="information-line">
+        {%- if section.settings.title != blank -%}
+            <h4 class="information-line-title home-section-title mb-30 text-center">{{ section.settings.title }}</h4>
+        {%- endif -%}
+        <div class="information-line information-line--type-{{ section.settings.type }} information-line--style-{{ section.settings.style }}">
+            <div class="container">
+                <div class="row py-{{ information_line_padding_v }}">
+                    {%- for block in section.blocks -%}
+                        <{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="col-12 col-lg-{{ 12 | divided_by: section.blocks.size }}">
+                            {%- if section.settings.type == '1' -%}
+                                <div class="d-flex align-items-center justify-content-start justify-content-lg-start py-10">
+                                    <i class="mr-15">{% include 'load-icon' with name: block.settings.icon %}</i>
+                                    <div>
+                                        {%- if block.settings.title != blank -%}
+                                            <h6 class="information-line__title d-inline">{{ block.settings.title }} </h6>
+                                        {%- endif -%}
+                                        {%- if block.settings.paragraph != blank -%}
+                                            <p class="d-inline">{{ block.settings.paragraph }}</p>
+                                        {%- endif -%}
+                                    </div>
+                                </div>
+                            {%- else -%}
+                                <div class="d-flex align-items-start justify-content-start py-10">
+                                    <i class="mr-15">{% include 'load-icon' with name: block.settings.icon %}</i>
+                                    <div>
+                                        {%- if block.settings.title != blank -%}
+                                            <h6 class="information-line__title mb-0">{{ block.settings.title }} </h6>
+                                        {%- endif -%}
+                                        {%- if block.settings.paragraph != blank -%}
+                                            <p class="d-inline">{{ block.settings.paragraph }}</p>
+                                        {%- endif -%}
+                                    </div>
+                                </div>
+                            {%- endif -%}
+                        </{% if block.settings.url != blank %}a{% else %}div{% endif %}>
+                    {%- endfor -%}
+                </div>
+            </div>
+        </div>
+    </div>
+{%- else -%}
+    {% render 'no-blocks' %}
+{%- endif -%}
+
+
+{% schema %}
+{
+    "name": "Information line",
+    "settings": [
+        {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title"
+        },
+{
+"type": "select",
+"id": "type",
+"label": "Type",
+"default": "1",
+"options": [
+{
+"value": "1",
+"label": "Type #1"
+},
+{
+"value": "2",
+"label": "Type #2"
+}
+]
+},
+{
+"type": "select",
+"id": "style",
+"label": "Colorize style",
+"default": "1",
+"options": [
+{
+"value": "1",
+"label": "Style #1"
+},
+{
+"value": "2",
+"label": "Style #2"
+},
+{
+"value": "3",
+"label": "Style #3"
+},
+{
+"value": "4",
+"label": "Style #4"
+},
+{
+"value": "5",
+"label": "Style #5"
+}
+]
+},
+{
+  "type": "header",
+  "content": "Video manual"
+},
+{
+  "type": "paragraph",
+  "content": "[Home sections](https:\/\/www.youtube.com\/watch?v=QQ6wFwBts4k&list=PLj-506KaR_vcQjwcpC6yII-1JY0bSj7df&index=9)"
+},
+{
+  "type": "header",
+  "content": "User manual"
+},
+{
+  "type": "paragraph",
+  "content": "[Information Line](https:\/\/mpthemes.net\/shella-shopify-theme\/documentation-version4\/doc02-07-home-information-line.php#information-line)"
+}
+    ],
+    "blocks": [
+        {
+            "type": "content",
+            "name": "Content",
+            "limit": 4,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "icon",
+                    "label": "Icon snippet name",
+                    "default": "theme-116"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Title text."
+                },
+                {
+                    "type": "text",
+                    "id": "paragraph",
+                    "label": "Paragraph",
+                    "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa error iste provident."
+                },
+                {
+                    "type": "url",
+                    "id": "url",
+                    "label": "URL"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Information line",
+            "category": "3) Static content",
+"blocks": [
+{
+"type": "content",
+"settings": {
+"icon": "theme-116",
+"title": "Free Shipping.",
+"paragraph": "All orders of $49 or more of eligible items across any product category qualify."
+}
+},
+{
+"type": "content",
+"settings": {
+"icon": "theme-125",
+"title": "Payment Methods.",
+"paragraph": "Credit Card: Visa, MasterCard, Maestro, American Express."
+}
+},
+{
+"type": "content",
+"settings": {
+"icon": "theme-009",
+"title": "Returns & Refunds.",
+"paragraph": "You can return any item purchased on Shella within 20 days of the delivery date."
+}
+}
+]
+        }
+    ]
+}
+{% endschema %}

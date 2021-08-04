@@ -1,0 +1,805 @@
+{% include 'global-variables' %}
+{%- assign menus = null -%}
+{%- capture section_btn_close -%}
+    <div class="footer__section-btn d-flex d-lg-none position-absolute align-items-center justify-content-center">
+        <i>{% render 'icon-theme-188' %}</i>
+    </div>
+{%- endcapture -%}
+{%- if section.settings.show_logo -%}
+    {%- if section.settings.type == '1' or section.settings.type == '2' or section.settings.type == '6' -%}
+        {%- assign logo_footer_svg_file = settings.logo_footer_svg_file | default: settings.logo_svg_file -%}
+        {%- assign logo_footer_image = settings.logo_footer_image | default: settings.logo_image -%}
+        {%- if settings.logo_types == 'svg' and settings.logo_footer_svg_file != blank -%}
+            {%- assign logo_footer_width = settings.logo_footer_width -%}
+        {%- elsif settings.logo_types == 'image' and settings.logo_footer_image != blank -%}
+            {%- assign logo_footer_width = settings.logo_footer_width -%}
+        {%- else -%}
+            {%- assign logo_footer_width = settings.logo_width -%}
+        {%- endif -%}
+        {%- if settings.logo_types == 'svg' and settings.logo_footer_mobile_svg_file != blank -%}
+            {%- assign need_mobile_logo = true -%}
+        {%- elsif settings.logo_types == 'image' and settings.logo_footer_mobile_image != blank -%}
+            {%- assign need_mobile_logo = true -%}
+        {%- endif -%}
+        {%- capture logo -%}
+            {%- if need_mobile_logo -%}
+                <div class="footer__logo d-lg-none m-auto" style="width: {{ settings.logo_footer_mobile_width }}px;">
+                    {% include 'logo' svg: settings.logo_footer_mobile_svg_file image: settings.logo_footer_mobile_image width: settings.logo_footer_mobile_width %}
+                </div>
+            {%- endif -%}
+            <div class="footer__logo m-auto ml-lg-0 mr-lg-{{ footer_logo_margin_horizontal }}{% if need_mobile_logo %} d-none d-lg-block{% endif %}" style="width: {{ logo_footer_width }}px;">
+                {% include 'logo' svg: logo_footer_svg_file image: logo_footer_image width: logo_footer_width %}
+            </div>
+        {%- endcapture -%}
+    {%- endif -%}
+{%- endif -%}
+{%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'menu' -%}
+        {%- capture menu_html -%}
+            <div class="footer__border d-lg-none"></div>
+            <div class="col-lg{% if block.settings.size > 0 %}-{{ block.settings.size }}{% endif %}">
+                {%- assign menu = linklists[block.settings.menu] -%}
+                <div class="footer__section" data-js-accordion="only-mobile">
+                    <div class="footer__section-head position-relative" data-js-accordion-button>
+                        <h5 class="{% if block.settings.show_title_on_desktop != true %}d-lg-none {% endif %}py-10 py-lg-0 mb-0 mb-lg-10 text-uppercase">{{ block.settings.title | default: menu.title }}</h5>
+                        {%- if block.settings.menu != blank -%}
+                            {{ section_btn_close }}
+                        {%- endif -%}
+                    </div>
+                    <div class="footer__section-content d-none d-lg-block" data-js-accordion-content>
+                        {%- if block.settings.menu != blank -%}
+                            <ul class="list-unstyled pb-15 pb-lg-0{% if block.settings.rows_limit > 0 %} row no-gutters{% endif %}">
+                                {%- for link in menu.links -%}
+                                    {%- if block.settings.rows_limit > 0 -%}
+                                        {%- assign index_modulo = forloop.index0 | modulo: block.settings.rows_limit -%}
+                                        {%- if forloop.first -%}
+                                            <div class="col-lg">
+                                        {%- elsif index_modulo == 0 -%}
+                                            </div>
+                                            <div class="col-lg">
+                                        {%- endif -%}
+                                    {%- endif -%}
+                                    <li class="py-5 py-lg-0"><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                    {%- if block.settings.rows_limit > 0 -%}
+                                        {%- if forloop.last -%}
+                                            </div>
+                                        {%- endif -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            </ul>
+                        {%- endif -%}
+                    </div>
+                </div>
+            </div>
+        {%- endcapture -%}
+        {%- assign menus = menus | append: menu_html -%}
+    {%- when 'custom_html' -%}
+        {%- capture custom_html -%}
+            <div class="footer__border row d-lg-none"></div>
+            <div class="footer__custom-html">
+                <div class="footer__section" data-js-accordion="only-mobile">
+                    <div class="footer__section-head position-relative" data-js-accordion-button>
+                        <h5 class="{% if block.settings.show_title_on_desktop != true %}d-lg-none {% endif %}py-10 py-lg-0 mb-0 mb-lg-10 text-uppercase">{{ block.settings.title }}</h5>
+                        {{ section_btn_close }}
+                    </div>
+                    <div class="footer__section-content footer__section-content--custom-content d-none d-lg-block" data-js-accordion-content>
+                        {%- case section.settings.type -%}
+                            {%- when '3' %}{% assign custom_html_default_page = 'include-footer-custom-html-2' -%}
+                            {%- when '6' %}{% assign custom_html_default_page = 'include-footer-custom-html-3' -%}
+                            {%- else %}{% assign custom_html_default_page = 'include-footer-custom-html' -%}
+                        {%- endcase -%}
+                        {% include 'parse-page-html-content' with default_page: custom_html_default_page page_content: block.settings.page_content %}
+                    </div>
+                </div>
+            </div>
+        {%- endcapture -%}
+    {%- when 'social_media' -%}
+        {%- capture social -%}
+            <div class="footer__social-media{% if section.settings.type == '3' or section.settings.type == '7' %} d-lg-flex justify-content-lg-center align-items-lg-center{% endif %}">
+                {%- if block.settings.title != blank -%}
+                    {%- if section.settings.type == '3' or section.settings.type == '7' -%}
+                        <h5 class="d-none d-lg-block mb-10 mb-lg-0 mr-lg-20 text-uppercase">{{ block.settings.title }}</h5>
+                    {%- elsif section.settings.type != '4' and section.settings.type != '5' and section.settings.type != '6' -%}
+                        <h5 class="d-none d-lg-block mb-10 text-uppercase">{{ block.settings.title }}</h5>
+                    {%- endif -%}
+                {%- endif -%}
+                {%- if section.settings.type == '1' -%}
+                    {% render 'social-media' with block: block type: 'column' %}
+                {%- else -%}
+                    {% render 'social-media' with block: block type: 'row' size: footer_social_media_size social_enable_tooltip: footer_social_enable_tooltips %}
+                {%- endif -%}
+            </div>
+        {%- endcapture -%}
+        {%- capture social_mobile -%}
+            <div class="footer__social-media-mobile">
+                {% render 'social-media' with block: block type: 'row' %}
+            </div>
+        {%- endcapture -%}
+    {%- when 'subscription' -%}
+        {%- capture subscription -%}
+            {%- capture title -%}
+                {%- if block.settings.title != blank -%}
+                    <h5 class="mb-10 text-uppercase">{{ block.settings.title }}</h5>
+                {%- endif -%}
+                {%- if block.settings.paragraph != blank -%}
+                    <p class="mb-10">{{ block.settings.paragraph }}</p>
+                {%- endif -%}
+            {%- endcapture -%}
+            {%- capture content -%}
+                {%- if section.settings.type == '3' -%}
+                    {%- if settings.subscription_method == 'shopify' -%}
+                        {% form 'customer', id: null, class: 'form-group--type-column d-flex flex-column align-items-lg-center mb-10' %}
+                            {% render 'form-get-check-error-popup' %}
+                            <input type="hidden" name="contact[tags]" value="newsletter">
+                            <input type="email" name="contact[email]" class="mb-10 mb-lg-20{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn" name="commit" value="{{ block.settings.button_text }}">
+                        {% endform %}
+                    {%- elsif settings.subscription_method == 'mailchimp' -%}
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="form-group--type-column d-flex flex-column align-items-lg-center mb-10" target="_blank">
+                            <input type="email" name="EMAIL" id="FooterSubscribe" class="mb-10 mb-lg-20" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn" value="{{ block.settings.button_text }}">
+                        </form>
+                    {%- endif -%}
+                {%- elsif section.settings.type == '7' -%}
+                    {%- if settings.subscription_method == 'shopify' -%}
+                        {% form 'customer', id: null, class: 'form-group--type-column d-flex flex-column align-items-lg-start mb-10' %}
+                            {% render 'form-get-check-error-popup' %}
+                            <input type="hidden" name="contact[tags]" value="newsletter">
+                            <input type="email" name="contact[email]" class="mb-10 mb-lg-20{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn" name="commit" value="{{ block.settings.button_text }}">
+                        {% endform %}
+                    {%- elsif settings.subscription_method == 'mailchimp' -%}
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="form-group--type-column d-flex flex-column align-items-lg-start mb-10" target="_blank">
+                            <input type="email" name="EMAIL" id="FooterSubscribe" class="mb-10 mb-lg-20" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn" value="{{ block.settings.button_text }}">
+                        </form>
+                    {%- endif -%}
+                {%- else -%}
+                    {% capture subscription_form_class %}form-group--type-inline d-flex flex-column flex-lg-row{% if section.settings.type == '4' %} mb-0{% else %} mb-10{% endif %}{% endcapture %}
+                    {%- if settings.subscription_method == 'shopify' -%}
+                        {% form 'customer', id: null, class: subscription_form_class %}
+                            {% render 'form-get-check-error-popup' %}
+                            <input type="hidden" name="contact[tags]" value="newsletter">
+                            <input type="email" name="contact[email]" class="mb-10 mb-lg-0 mr-lg-10 {% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn px-lg-{{ footer_subscription_button_padding_horizontal }}" name="commit" value="{{ block.settings.button_text }}">
+                        {% endform %}
+                    {%- elsif settings.subscription_method == 'mailchimp' -%}
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="{{ subscription_form_class }}" target="_blank">
+                            <input type="email" name="EMAIL" id="FooterSubscribe" class="mb-10 mb-lg-0 mr-lg-10" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn px-lg-{{ footer_subscription_button_padding_horizontal }}" value="{{ block.settings.button_text }}">
+                        </form>
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endcapture -%}
+            {%- if section.settings.type == '1' -%}
+                <div class="footer__subscription row align-items-center mb-25">
+                    <div class="col-lg-6 mb-10 mb-lg-0">
+                        {{ title }}
+                    </div>
+                    <div class="col-lg-6">
+                        {{ content }}
+                    </div>
+                </div>
+            {%- else -%}
+                <div class="footer__subscription row{% if section.settings.type != '4' %} mb-25{% endif %}">
+                    <div class="col-lg-12 mb-10">
+                        {{ title }}
+                    </div>
+                    <div class="col-lg-12">
+                        {{ content }}
+                    </div>
+                </div>
+            {%- endif -%}
+        {%- endcapture -%}
+    {%- when 'copyright' -%}
+        {%- capture copyright -%}
+            <div class="footer__copyright pt-lg-0{% if section.settings.type == '1' or section.settings.type == '2' or section.settings.type == '5' %} mt-20 mt-lg-0{% endif %}">
+                <div class="mb-0">
+                    {%- case section.settings.type -%}
+                        {%- when '3' %}{% assign copyright_default_page = 'include-footer-copyright-2' -%}
+                        {%- when '4' %}{% assign copyright_default_page = 'include-footer-copyright-2' -%}
+                        {%- when '6' %}{% assign copyright_default_page = 'include-footer-copyright-2' -%}
+                        {%- else %}{% assign copyright_default_page = 'include-footer-copyright' -%}
+                    {%- endcase -%}
+                    {% capture copyright_page_content %}{% include 'parse-page-html-content' with default_page: copyright_default_page page_content: block.settings.page_content ignore_icons: true %}{% endcapture %}
+                    {%- if copyright_page_content != blank -%}
+                        {{ copyright_page_content }}
+                    {%- else -%}
+                        {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}
+                    {%- endif -%}
+                </div>
+            </div>
+        {%- endcapture -%}
+    {%- when 'payments' -%}
+        {%- capture payments -%}
+            <div class="footer__payments justify-content-center pt-5{% if section.settings.type != '3' and section.settings.type != '7' %} ml-lg-auto{% endif %}">
+                {% include 'payments' with size: 2 payments_sequence: settings.payment_sequence_footer %}
+            </div>
+        {%- endcapture -%}
+    {%- endcase -%}
+{%- endfor -%}
+{%- capture menus -%}
+    <div class="footer__menus row flex-column flex-lg-row">
+        {{ menus }}
+    </div>
+{%- endcapture -%}
+{%- if section.settings.show_button_back_to_top -%}
+    {%- capture back_to_top -%}
+        <a href="#header" class="footer__back-to-top d-flex position-lg-fixed flex-center" data-js-button-back-to-top="{{ footer_button_back_to_top_limit }}">
+            <i>{% render 'icon-theme-014' %}</i><span class="d-lg-none mt-4 ml-2">{{ 'layout.footer.button_back_to_top' | t }}</span>
+        </a>
+    {%- endcapture -%}
+{%- endif -%}
+{% capture fixed_attr %}{% if section.settings.enable_fixed %} data-js-footer-fixed{% endif %}{% endcapture %}
+<div data-section-id="{{ section.id }}" data-section-type="footer" data-postload="footer"{% render 'layout-get-container-class' with container: footer_container %}>
+    {%- case section.settings.type -%}
+    {%- when '1' -%}
+        <footer id="footer" class="footer footer--style-{{ section.settings.style }}{% if template != 'index' %} {{ footer_other_page_margins }}{% endif %}{% if section.settings.enable_fixed %} pt-1{% endif %} text-center text-lg-left js-footer"{{ fixed_attr }}>
+            <div class="footer__border-top d-none d-lg-block"></div>
+            <div class="footer__content pt-lg-55 pb-lg-50">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer__border-top w-100 mb-45 d-lg-none"></div>
+                        {%- if subscription -%}
+                            <div class="col-lg-12">
+                                {{ subscription }}
+                            </div>
+                        {%- endif -%}
+                        <div class="col-lg-6">
+                            {{ menus }}
+                        </div>
+                        <div class="col-lg-4">
+                            {{ custom_html }}
+                        </div>
+                        <div class="col-lg-2 d-none d-lg-block">
+                            {{ social }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%- if logo or copyright or payments -%}
+                <div class="footer__border-bottom d-none d-lg-block"></div>
+                <div class="footer__border d-lg-none"></div>
+                <div class="footer__tape py-lg-15">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 d-flex flex-column flex-lg-row align-items-lg-center py-40 py-lg-0">
+                                {{ logo }}
+                                {{ copyright }}
+                                {%- if social_mobile -%}
+                                    <div class="d-lg-none mt-25">
+                                        {{ social_mobile }}
+                                    </div>
+                                {%- endif -%}
+                            </div>
+                            {%- if payments -%}
+                                <div class="footer__border-bottom w-100 d-lg-none"></div>
+                                <div class="col-lg-6 d-flex flex-column flex-lg-row align-items-lg-center pt-20 pb-15 py-lg-0">
+                                    {{ payments }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                </div>
+            {%- endif -%}
+        </footer>
+        {{ back_to_top }}
+    {%- when '2' -%}
+        <footer id="footer" class="footer footer--style-{{ section.settings.style }}{% if template != 'index' %} {{ footer_other_page_margins }}{% endif %}{% if section.settings.enable_fixed %} pt-1{% endif %} text-center text-lg-left js-footer"{{ fixed_attr }}>
+            <div class="footer__border-top d-none d-lg-block"></div>
+            <div class="footer__content {% if footer_content_offsets == 1 %}pt-lg-55 pb-lg-50{% else %}pt-lg-80 pb-lg-75{% endif %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer__border-top w-100 mb-45 d-lg-none"></div>
+                        <div class="col-lg-6 order-1 order-lg-0">
+                            {{ menus }}
+                        </div>
+                        <div class="col-lg-6">
+                            {{ subscription }}
+                            {%- if social -%}
+                                <div class="d-none d-lg-block">
+                                    {{ social }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%- if logo or copyright or payments -%}
+                <div class="footer__border-bottom d-none d-lg-block"></div>
+                <div class="footer__border d-lg-none"></div>
+                <div class="footer__tape {% if footer_content_offsets == 1 %}py-lg-15{% else %}py-lg-20{% endif %}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-{% if payments %}6{% else %}12{% endif %} d-flex flex-column flex-lg-row align-items-lg-center py-40 py-lg-0">
+                                {{ logo }}
+                                {{ copyright }}
+                                {%- if social_mobile -%}
+                                    <div class="d-lg-none mt-25">
+                                        {{ social_mobile }}
+                                    </div>
+                                {%- endif -%}
+                            </div>
+                            {%- if payments -%}
+                                <div class="footer__border-bottom w-100 d-lg-none"></div>
+                                <div class="col-lg-6 d-flex flex-column flex-lg-row align-items-lg-center pt-20 pb-15 py-lg-0">
+                                    {{ payments }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                </div>
+            {%- endif -%}
+        </footer>
+        {{ back_to_top }}
+    {%- when '3' -%}
+        <footer id="footer" class="footer footer--style-{{ section.settings.style }}{% if template != 'index' %} {{ footer_other_page_margins }}{% endif %}{% if section.settings.enable_fixed %} pt-1{% endif %} text-center js-footer"{{ fixed_attr }}>
+            <div class="footer__border-top d-none d-lg-block"></div>
+            <div class="footer__content pt-lg-55 pb-lg-50">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer__border-top w-100 mb-45 d-lg-none"></div>
+                        <div class="col-12 col-lg">
+                            {{ subscription }}
+                        </div>
+                        <div class="footer__border footer__border-side d-none d-lg-block"></div>
+                        <div class="col-12 col-lg">
+                            {{ custom_html }}
+                        </div>
+                        <div class="footer__border footer__border-side d-none d-lg-block"></div>
+                        <div class="col-12 col-lg">
+                            {{ menus }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%- if social -%}
+                <div class="d-none d-lg-block">
+                    <div class="footer__border-bottom d-none d-lg-block"></div>
+                    <div class="footer__border d-lg-none"></div>
+                    <div class="footer__tape py-lg-20">
+                        <div class="container">
+                            {{ social }}
+                        </div>
+                    </div>
+                </div>
+            {%- endif -%}
+            {%- if copyright or payments -%}
+                <div class="footer__border-bottom"></div>
+                <div class="footer__tape py-lg-20 text-center">
+                    <div class="container">
+                        <div class="py-40 py-lg-0">
+                            {{ copyright }}
+                            {%- if social_mobile -%}
+                                <div class="d-lg-none mt-25">
+                                    {{ social_mobile }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                        {%- if payments -%}
+                            <div class="footer__border-bottom row w-100 d-lg-none"></div>
+                            <div class="d-flex flex-column align-items-center pt-20 pb-15 py-lg-0 mt-lg-10">
+                                {{ payments }}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                </div>
+            {%- endif -%}
+        </footer>
+        {{ back_to_top }}
+    {%- when '4' -%}
+        <footer id="footer" class="footer footer--style-{{ section.settings.style }}{% if template != 'index' %} {{ footer_other_page_margins }}{% endif %}{% if section.settings.enable_fixed %} pt-1{% endif %} text-center js-footer"{{ fixed_attr }}>
+            <div class="footer__border-top d-none d-lg-block"></div>
+            <div class="footer__content footer__content--boxed-sm pt-lg-55 pb-lg-50">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer__border-top w-100 mb-45 d-lg-none"></div>
+                        <div class="col">
+                            {{ subscription }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%- if copyright or payments -%}
+                <div class="footer__border-bottom d-none d-lg-block"></div>
+                <div class="footer__tape py-lg-15 text-center">
+                    <div class="container">
+                        <div class="py-40 py-lg-0">
+                            {{ copyright }}
+                            {%- if social_mobile -%}
+                                <div class="d-lg-none mt-25">
+                                    {{ social_mobile }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                        {%- if social -%}
+                            <div class="d-none d-lg-flex justify-content-lg-center mt-lg-10">
+                                {{ social }}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                </div>
+            {%- endif -%}
+        </footer>
+        {{ back_to_top }}
+    {%- when '5' -%}
+        <footer id="footer" class="footer footer--style-{{ section.settings.style }}{% if template != 'index' %} {{ footer_other_page_margins }}{% endif %}{% if section.settings.enable_fixed %} pt-1{% endif %} text-center text-lg-left js-footer"{{ fixed_attr }}>
+            <div class="footer__border-top d-none d-lg-block"></div>
+            <div class="footer__content py-lg-10">
+                <div class="container">
+                    <div class="d-lg-flex align-items-lg-center py-15 py-lg-0">
+                        <div class="pb-15 pb-lg-0">
+                            {{ copyright }}
+                        </div>
+                        {%- if social -%}
+                            <div class="d-flex justify-content-center align-items-center py-15 py-lg-0 ml-lg-auto">
+                                {{ social }}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                </div>
+            </div>
+        </footer>
+        {{ back_to_top }}
+    {%- when '6' -%}
+        <footer id="footer" class="footer footer--style-{{ section.settings.style }}{% if template != 'index' %} {{ footer_other_page_margins }}{% endif %}{% if section.settings.enable_fixed %} pt-1{% endif %} text-center text-lg-left js-footer"{{ fixed_attr }}>
+            <div class="footer__border-top d-none d-lg-block"></div>
+            <div class="footer__content pt-lg-50 pb-lg-50">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer__border-top w-100 mb-45 d-lg-none"></div>
+                        {%- if subscription -%}
+                            <div class="col-lg-12">
+                                {{ subscription }}
+                            </div>
+                        {%- endif -%}
+                        <div class="col-lg-5">
+                            {{ logo }}
+                            <div class="mt-20">
+                                {{ custom_html }}
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            {{ menus }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%- if copyright or social -%}
+                <div class="footer__border-bottom d-none d-lg-block"></div>
+                <div class="footer__border d-lg-none"></div>
+                <div class="footer__tape py-lg-15">
+                    <div class="container d-flex flex-column flex-lg-row align-items-lg-center py-40 py-lg-0">
+                        {{ copyright }}
+                        {%- if social -%}
+                            <div class="mt-25 mt-lg-0 ml-lg-auto">
+                                {{ social }}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                </div>
+            {%- endif -%}
+        </footer>
+        {{ back_to_top }}
+    {%- when '7' -%}
+        <footer id="footer" class="footer footer--style-{{ section.settings.style }}{% if template != 'index' %} {{ footer_other_page_margins }}{% endif %}{% if section.settings.enable_fixed %} pt-1{% endif %} text-center text-lg-left js-footer"{{ fixed_attr }}>
+            <div class="footer__border-top d-none d-lg-block"></div>
+            <div class="footer__content pt-lg-55 pb-lg-50">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer__border-top w-100 mb-45 d-lg-none"></div>
+                        <div class="col-12 col-lg">
+                            {{ subscription }}
+                        </div>
+                        <div class="col-12 col-lg">
+                            {{ custom_html }}
+                        </div>
+                        <div class="col-12 col-lg">
+                            {{ menus }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%- if social -%}
+                <div class="d-none d-lg-block text-center">
+                    <div class="footer__border-bottom d-none d-lg-block"></div>
+                    <div class="footer__border d-lg-none"></div>
+                    <div class="footer__tape py-lg-20">
+                        <div class="container">
+                            {{ social }}
+                        </div>
+                    </div>
+                </div>
+            {%- endif -%}
+            {%- if copyright or payments -%}
+                <div class="footer__border-bottom"></div>
+                <div class="footer__tape py-lg-15 text-center">
+                    <div class="container">
+                        <div class="py-40 py-lg-0">
+                            {{ copyright }}
+                            {%- if social_mobile -%}
+                                <div class="d-lg-none mt-25">
+                                    {{ social_mobile }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                        {%- if payments -%}
+                            <div class="footer__border-bottom row w-100 d-lg-none"></div>
+                            <div class="d-flex flex-column align-items-center pt-20 pb-15 py-lg-0 mt-lg-5">
+                                {{ payments }}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                </div>
+            {%- endif -%}
+        </footer>
+        {{ back_to_top }}
+    {%- endcase -%}
+</div>
+
+<script>
+    Loader.require({type: "script", name: "footer"});
+</script>
+
+{% schema %}
+{
+"name": "Footer",
+"settings": [
+{
+"type": "select",
+"id": "type",
+"label": "Type",
+"default": "5",
+"options": [
+{
+"value": "1",
+"label": "Type #1"
+},
+{
+"value": "2",
+"label": "Type #2"
+},
+{
+"value": "3",
+"label": "Type #3"
+},
+{
+"value": "4",
+"label": "Type #4"
+},
+{
+"value": "5",
+"label": "Type #5"
+},
+{
+"value": "6",
+"label": "Type #6"
+},
+{
+"value": "7",
+"label": "Type #7"
+}
+]
+},
+{
+"type": "select",
+"id": "style",
+"label": "Colorize style",
+"default": "1",
+"options": [
+{
+"value": "1",
+"label": "Style #1"
+},
+{
+"value": "2",
+"label": "Style #2"
+}
+]
+},
+{
+"type": "checkbox",
+"id": "show_logo",
+"label": "Show logo",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_button_back_to_top",
+"label": "Show button 'Back to top'",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "enable_fixed",
+"label": "Enable fixed footer",
+"default": true
+},
+{
+"type": "header",
+"content": "User manual"
+},
+{
+"type": "paragraph",
+"content": "[Footer](https://mpthemes.net/shella-shopify-theme/documentation-version4/doc01-02-general-footer.php#footer)"
+}
+],
+"blocks": [
+{
+"type": "menu",
+"name": "Menu",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Title"
+},
+{
+"type": "checkbox",
+"id": "show_title_on_desktop",
+"label": "Show title on the desktop",
+"default": true
+},
+{
+"type": "link_list",
+"id": "menu",
+"label": "Menu"
+},
+{
+"type": "range",
+"id": "size",
+"min": 0,
+"max": 12,
+"step": 1,
+"label": "Column size",
+"info": "0 - is auto size",
+"default": 0
+},
+{
+"type": "range",
+"id": "rows_limit",
+"min": 0,
+"max": 20,
+"step": 1,
+"label": "Rows limit",
+"info": "0 - disable",
+"default": 0
+}
+]
+},
+{
+"type": "custom_html",
+"name": "Custom html",
+"limit": 1,
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default": "Here to help"
+},
+{
+"type": "checkbox",
+"id": "show_title_on_desktop",
+"label": "Show title on the desktop",
+"default": true
+},
+{
+"type": "page",
+"id": "page_content",
+"label": "Page content",
+"info": "Default page: 'Include Footer Custom HTML'"
+}
+]
+},
+{
+"type": "social_media",
+"name": "Social media",
+"limit": 1,
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default": "Follow us"
+},
+{
+"type": "checkbox",
+"id": "show_facebook",
+"label": "Show facebook",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_twitter",
+"label": "Show twitter",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_instagram",
+"label": "Show instagram",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_pinterest",
+"label": "Show pinterest",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_youtube",
+"label": "Show youtube",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_behance",
+"label": "Show behance",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_skype",
+"label": "Show skype",
+"default": true
+}
+]
+},
+{
+"type": "subscription",
+"name": "Subscription",
+"limit": 1,
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default": "Newsletter subscription"
+},
+{
+"type": "text",
+"id": "paragraph",
+"label": "Paragraph",
+"default": "Sign up for Shella updates to receive information about new arrivals, future events and specials."
+},
+{
+"type": "text",
+"id": "placeholder",
+"label": "Placeholder",
+"default": "Enter Your Email Address"
+},
+{
+"type": "text",
+"id": "button_text",
+"label": "Button text",
+"default": "SUBSCRIBE!"
+}
+]
+},
+{
+"type": "copyright",
+"name": "Copyright",
+"limit": 1,
+"settings": [
+{
+"type": "page",
+"id": "page_content",
+"label": "Page content",
+"info": "Default page: 'Include Footer Copyright'"
+}
+]
+},
+{
+"type": "payments",
+"name": "Payments",
+"limit": 1,
+"settings": [
+]
+}
+]
+}
+{% endschema %}
+

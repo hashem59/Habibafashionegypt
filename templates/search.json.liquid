@@ -1,0 +1,24 @@
+{% layout none %}
+{%- capture results -%}
+	{%- for item in search.results limit: 6 -%}
+		{%- if item.object_type == 'product' -%}
+			{%- assign product = item -%}
+			{% include 'product-res-variables' %}
+			{% capture products_html %}
+				{{ products_html }}{% if products_html != blank %},{% endif %}{"url": {{ url | json }}, "title": {{ title | json }}, "price_min": "{{ price }}", "compare_at_price_min": "{{ compare_at_price }}", "image": {{ image.src | img_url: 'master' | json }}}
+			{% endcapture %}
+		{%- elsif settings.search_show_only_products != true -%}
+			{% capture pages_html %}
+				{{ pages_html }}{% if pages_html != blank %},{% endif %}{"url": {{ item.url | json }} ,"title": {{ item.title | json }}{% if item.image.src != blank %}, "image": {{ item.image.src | img_url: 'master' | json }}{% endif %}}
+			{% endcapture %}
+		{%- endif -%}
+	{%- endfor -%}
+{%- endcapture -%}
+{
+	"resources": {
+		"results": {
+			"products": [{{ products_html }}],
+			"pages": [{{ pages_html }}]
+		}
+	}
+}

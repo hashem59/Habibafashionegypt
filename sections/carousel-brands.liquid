@@ -1,0 +1,234 @@
+{%- if section.blocks.size > 0 -%}
+    {% include 'global-variables' %}
+    <div data-section-id="{{ section.id }}" data-section-type="carousel-brands" data-postload="carousel_brands">
+        <div class="container">
+            {%- if section.settings.layout == 'slider' -%}
+            <div class="carousel carousel--preload-spacer{% if section.settings.arrows %} carousel--arrows{% endif %} carousel-brands position-relative">
+                {%- if section.settings.title != blank -%}
+                    <h4 class="carousel__title home-section-title mb-30 text-center">{{ section.settings.title }}</h4>
+                {%- endif -%}
+                <div class="carousel__slider position-relative invisible"
+                     data-js-carousel
+                     data-autoplay="{{ section.settings.autoplay }}"
+                     data-speed="{{ section.settings.speed | times: 1000 }}"
+                     data-count="{{ section.settings.size_of_columns }}"
+                     data-infinite="{{ section.settings.infinite }}"
+                     data-arrows="{{ section.settings.arrows }}"
+                     data-bullets="{{ section.settings.bullets }}">
+                    {%- if section.settings.arrows -%}
+                        <div class="carousel__prev position-absolute cursor-pointer" data-js-carousel-prev><i>{% render 'icon-theme-006' %}</i></div>
+                    {%- endif -%}
+                    <div class="carousel__items overflow-hidden">
+                        <div class="carousel__slick" data-js-carousel-slick>
+                            {%- for block in section.blocks -%}
+                                {%- assign link = block.settings.link -%}
+                                <{% if link != blank %}a href="{{ link }}"{% else %}div{% endif %} class="carousel__item promobox position-relative d-flex align-items-center justify-content-center">
+                                    <div class="w-100"{% if section.settings.image_max_width > 0 %} style="max-width: {{ section.settings.image_max_width }}px;"{% endif %}>
+                                        <div class="overflow-hidden"{% if section.settings.border_radius != blank %} style="border-radius: {{ section.settings.border_radius }}"{% endif %}>
+                                            {% render 'rimage' with image: block.settings.image size: '400x' image_class: 'w-100' disable_lazyload: carousel_brands_image_lazyload_disable scale: 2 %}
+                                        </div>
+                                    </div>
+                                    {%- if section.settings.bordered_links and link != blank -%}
+                                        <div class="promobox__border promobox__border--only-hover absolute-stretch"{% if section.settings.border_radius != blank %} style="border-radius: {{ section.settings.border_radius }}"{% endif %}></div>
+                                    {%- endif -%}
+                                </{% if link != blank %}a{% else %}div{% endif %}>
+                            {%- endfor -%}
+                        </div>
+                    </div>
+                    {%- if section.settings.arrows -%}
+                        <div class="carousel__next position-absolute cursor-pointer" data-js-carousel-next><i>{% render 'icon-theme-007' %}</i></div>
+                    {%- endif -%}
+                </div>
+            </div>
+            {%- elsif section.settings.layout == 'grid' -%}
+                {%- if section.settings.title != blank -%}
+                    <h4 class="carousel__title home-section-title mb-30 text-center">{{ section.settings.title }}</h4>
+                {%- endif -%}
+                <div class="row justify-content-center">
+                    {%- for block in section.blocks -%}
+                        <div class="col-4 col-sm-3 col-lg-2 mb-15 mb-lg-30">
+                            {%- assign link = block.settings.link -%}
+                            <{% if link != blank %}a href="{{ link }}"{% else %}div{% endif %} class="promobox w-100 position-relative">
+                                <div class="overflow-hidden"{% if section.settings.border_radius != blank %} style="border-radius: {{ section.settings.border_radius }}"{% endif %}>
+                                    {% render 'rimage' with image: block.settings.image size: '400x' image_class: 'w-100' disable_lazyload: carousel_brands_image_lazyload_disable scale: 2 %}
+                                </div>
+                                {%- if section.settings.bordered_links and link != blank -%}
+                                    <div class="promobox__border promobox__border--only-hover absolute-stretch"{% if section.settings.border_radius != blank %} style="border-radius: {{ section.settings.border_radius }}"{% endif %}></div>
+                                {%- endif -%}
+                            </{% if link != blank %}a{% else %}div{% endif %}>
+                        </div>
+                    {%- endfor -%}
+                </div>
+            {%- endif -%}
+        </div>
+    </div>
+
+    <script>
+        Loader.require({type: "script", name: "carousel_brands"});
+    </script>
+{%- else -%}
+    {% render 'no-blocks' %}
+{%- endif -%}
+
+
+{% schema %}
+{
+    "name": "Brand carousel",
+    "settings": [
+        {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title"
+        },
+{
+"type": "header",
+"content": "General"
+},
+        {
+            "type": "select",
+            "id": "layout",
+            "label": "Layout",
+            "default": "slider",
+            "options": [
+                {
+                    "value": "slider",
+                    "label": "Slider"
+                },
+                {
+                    "value": "grid",
+                    "label": "Grid"
+                }
+            ]
+        },
+{
+"type": "select",
+"id": "size_of_columns",
+"label": "Size of the columns",
+"info": " Only for Slider",
+"default": "6",
+"options": [
+{
+"value": "4",
+"label": "4 items in the row"
+},
+{
+"value": "5",
+"label": "5 items in the row"
+},
+{
+"value": "6",
+"label": "6 items in the row"
+},
+{
+"value": "7",
+"label": "7 items in the row"
+},
+{
+"value": "8",
+"label": "8 items in the row"
+}
+]
+},
+        {
+            "type": "range",
+            "id": "image_max_width",
+            "min": 0,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Image max width",
+            "info": "0 - is auto width",
+            "default": 0
+        },
+        {
+            "type": "checkbox",
+            "id": "bordered_links",
+            "label": "Bordered links",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "border_radius",
+            "label": "Border-radius (px, %)",
+            "info": "Example: 5px or 50%"
+        },
+{
+"type": "header",
+"content": "Slider settings"
+},
+        {
+            "type": "checkbox",
+            "id": "autoplay",
+            "label": "Autoplay",
+            "default": true
+        },
+        {
+            "type": "range",
+            "id": "speed",
+            "min": 2,
+            "max": 10,
+            "step": 1,
+            "label": "Autoplay speed (sec)",
+            "default": 5
+        },
+        {
+            "type": "checkbox",
+            "id": "infinite",
+            "label": "Is infinite",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "arrows",
+            "label": "Arrows",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "bullets",
+            "label": "Bullets",
+            "default": false
+        },
+        {
+            "type": "header",
+            "content": "Video manual"
+        },
+        {
+            "type": "paragraph",
+            "content": "[Home sections](https:\/\/www.youtube.com\/watch?v=QQ6wFwBts4k&list=PLj-506KaR_vcQjwcpC6yII-1JY0bSj7df&index=9)"
+        },
+        {
+            "type": "header",
+            "content": "User manual"
+        },
+        {
+            "type": "paragraph",
+            "content": "[Brands Carousel](https:\/\/mpthemes.net\/shella-shopify-theme\/documentation-version4\/doc02-03-home-brands-carousel.php#brands-carousel)"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "brand",
+            "name": "Brand",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Link"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Brand carousel",
+            "category": "2) Carousels"
+        }
+    ]
+}
+{% endschema %}

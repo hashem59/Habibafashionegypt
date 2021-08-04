@@ -1,0 +1,72 @@
+{%- if template contains 'collection.' -%}
+    {%- assign items_length = current_tags | size -%}
+{%- else -%}
+    {%- assign namespace = template | remove: 'cart.' | remove: 'page.' -%}
+    {%- assign items = customer.metafields[namespace] -%}
+    {%- assign items_length = items | size -%}
+{%- endif -%}
+<div class="wishlist">
+    <div class="container">
+        <div class="wishlist__head d-flex justify-content-lg-center align-items-center position-relative mb-15 mb-lg-30">
+            {%- if template contains 'page.' -%}
+                <h1 class="h3 mt-20 mb-0 text-center{% if items_length < 1 %} d-none-important{% endif %}" data-js-store-lists-has-items-wishlist>{{ page.title }}</h1>
+            {%- else -%}
+                <h2 class="h3 mb-0 text-center{% if items_length < 1 %} d-none-important{% endif %}" data-js-store-lists-has-items-wishlist>{{ 'general.popups.wishlist-full.title' | t }}</h2>
+            {%- endif -%}
+            <div class="wishlist__button-remove position-absolute d-inline-flex align-items-center cursor-pointer right-0 js-store-lists-clear-wishlist{% if items_length < 1 %} d-none-important{% endif %}" data-js-store-lists-has-items-wishlist><i class="mb-4 mr-4">{% render 'icon-theme-165' %}</i>{{ 'wishlist_page.button_remove_all' | t }}</div>
+        </div>
+        <div class="row{% if items_length < 1 %} d-none-important{% endif %}" data-js-store-lists-has-items-wishlist>
+            {%- if template contains 'collection.' -%}
+                {%- for tag in current_tags limit: 20 -%}
+                    {%- assign item = tag | split: '=' -%}
+                    {%- assign current_handle = item[0] -%}
+                    {%- assign current_variant_id = item[1] | abs -%}
+                    {%- assign product = all_products[current_handle] -%}
+                    <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                        {% capture product_html %}
+                            {% include 'product-wishlist' with select_current_variant_by_id: current_variant_id %}
+                        {% endcapture %}
+                        {%- unless product_html contains 'Liquid error' -%}
+                            {{ product_html }}
+                        {%- else -%}
+                            <div class="product-wishlist{% if settings.product_collection_centered_info %} product-wishlist--centered{% endif %} d-flex flex-column mb-30" data-js-product data-js-store-lists-product-wishlist data-product-handle="{{ current_handle }}" data-product-variant-id="{{ current_variant_id }}">
+                                <div class="product-wishlist__title mb-3">
+                                    <h3 class="m-0">This product has been removed from the store.</h3>
+                                </div>
+                                <div class="product-wishlist__remove btn-link js-store-lists-remove-wishlist">{{ 'products.product.remove' | t }}</div>
+                            </div>
+                        {%- endunless -%}
+                    </div>
+                {%- endfor -%}
+            {%- else -%}
+                {%- for item in items -%}
+                    {%- assign current_handle = item[1] -%}
+                    {%- assign current_variant_id = item[0] | abs -%}
+                    {%- assign product = all_products[current_handle] -%}
+                    {%- if product == blank -%}
+                        {%- continue -%}
+                    {%- endif -%}
+                    <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                        {% capture product_html %}
+                            {% include 'product-wishlist' with select_current_variant_by_id: current_variant_id %}
+                        {% endcapture %}
+                        {%- unless product_html contains 'Liquid error' -%}
+                            {{ product_html }}
+                        {%- else -%}
+                            <div class="product-wishlist{% if settings.product_collection_centered_info %} product-wishlist--centered{% endif %} d-flex flex-column mb-30" data-js-product data-js-store-lists-product-wishlist data-product-handle="{{ current_handle }}" data-product-variant-id="{{ current_variant_id }}">
+                                <div class="product-wishlist__title mb-3">
+                                    <h3 class="m-0">This product has been removed from the store.</h3>
+                                </div>
+                                <div class="product-wishlist__remove btn-link js-store-lists-remove-wishlist">{{ 'products.product.remove' | t }}</div>
+                            </div>
+                        {%- endunless -%}
+                    </div>
+                {%- endfor -%}
+            {%- endif -%}
+        </div>
+        <div class="d-flex flex-column align-items-center py-40 py-md-100 my-100{% if items_length > 0 %} d-none-important{% endif %}" data-js-store-lists-dhas-items-wishlist>
+            <h3>{{ 'wishlist_page.empty.title' | t }}</h3>
+            <p>{{ 'wishlist_page.empty.paragraph' | t }}</p>
+        </div>
+    </div>
+</div>

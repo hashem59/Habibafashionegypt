@@ -1,0 +1,429 @@
+{%- if section.blocks.size > 0 -%}
+    {%- if settings.layout_images_lazyload == false -%}
+        {%- assign disable_lazyload = true -%}
+    {%- endif -%}
+    <template class="js-loader-inline-style">
+        <style>
+            {%- for block in section.blocks -%}
+                {%- if block.type == 'product_option_setting' and block.settings.property != blank and block.settings.value != blank -%}
+                    {%- assign assign_to_product = false -%}
+                    {%- if block.settings.assign_to == 'all' or block.settings.assign_to == 'products' -%}
+                        {%- assign assign_to_product = true -%}
+                        {% if block.settings.product != blank %}[data-product-handle="{{ block.settings.product }}"] {% endif %}.product-options__section[data-property="{% render 'product-get-options-strip-symbols' with value: block.settings.property %}"] [data-value="{% render 'product-get-options-strip-symbols' with value: block.settings.value %}"]
+                    {%- endif -%}
+                    {%- if block.settings.product == blank -%}
+                        {%- if block.settings.assign_to == 'all' or block.settings.assign_to == 'filters' -%}
+                            {% if assign_to_product %}, {% endif %}.collection-filters[data-property="color"] [data-value="{% render 'product-get-options-strip-symbols' with value: block.settings.value %}"]
+                        {%- endif -%}
+                    {%- endif -%}
+                        {
+                            {%- if block.settings.color != blank -%}
+                                background-color: {{ block.settings.color }} !important;
+                            {%- elsif block.settings.disable_default_color -%}
+                                background-color: transparent !important;
+                            {%- endif -%}
+                        }
+                    {%- assign assign_to_product = false -%}
+                    {%- if block.settings.assign_to == 'all' or block.settings.assign_to == 'products' -%}
+                        {%- assign assign_to_product = true -%}
+                        {% if block.settings.product != blank %}[data-product-handle="{{ block.settings.product }}"] {% endif %}.product-options__section[data-property="{% render 'product-get-options-strip-symbols' with value: block.settings.property %}"] [data-value="{% render 'product-get-options-strip-symbols' with value: block.settings.value %}"]
+                    {%- endif -%}
+                    {%- if block.settings.product == blank -%}
+                        {%- if block.settings.assign_to == 'all' or block.settings.assign_to == 'filters' -%}
+                            {% if assign_to_product %}, {% endif %}.collection-filters[data-property="color"] [data-value="{% render 'product-get-options-strip-symbols' with value: block.settings.value %}"]
+                        {%- endif -%}
+                    {%- endif -%}
+                        {
+                            {%- if block.settings.image != blank -%}
+                                {%- if settings.product_format_pjpg -%}
+                                    background-image: url({{ block.settings.image | img_url: '92x', format: 'pjpg' }}) !important;
+                                {%- else -%}
+                                    background-image: url({{ block.settings.image | img_url: '92x' }}) !important;
+                                {%- endif -%}
+                            {%- elsif block.settings.disable_default_image -%}
+                                background-image: none !important;
+                            {%- endif -%}
+                        }
+                {%- elsif block.type == 'option_images' -%}
+                    {%- for i in (1..10) -%}
+                        {%- assign prop_property_value_name = 'property_value_' | append: i -%}
+                        {%- assign prop_image_name = 'image_' | append: i -%}
+                        {%- if block.settings[prop_property_value_name] != blank and block.settings[prop_image_name] != blank -%}
+                            {%- assign property_value_split = block.settings[prop_property_value_name] | split: '|' -%}
+                            {%- assign property = property_value_split[0] -%}
+                            {%- assign value = property_value_split[1] -%}
+                            {%- assign image = block.settings[prop_image_name] -%}
+                            {% if block.settings.product != blank %}[data-product-handle="{{ block.settings.product }}"] {% endif %}.product-options__section[data-property="{% render 'product-get-options-strip-symbols' with value: property %}"] [data-value="{% render 'product-get-options-strip-symbols' with value: value %}"]
+                                {
+                                    {%- if settings.product_format_pjpg -%}
+                                        background-image: url({{ image | img_url: '92x', format: 'pjpg' }}) !important;
+                                    {%- else -%}
+                                        background-image: url({{ image | img_url: '92x' }}) !important;
+                                    {%- endif -%}
+                                }
+                        {%- else -%}
+                            {%- break -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                {%- elsif block.type == 'option_colors' -%}
+                    {%- for i in (1..10) -%}
+                        {%- assign prop_property_value_name = 'property_value_' | append: i -%}
+                        {%- assign prop_color_name = 'color_' | append: i -%}
+                        {%- if block.settings[prop_property_value_name] != blank and block.settings[prop_color_name] != blank -%}
+                            {%- assign property_value_split = block.settings[prop_property_value_name] | split: '|' -%}
+                            {%- assign property = property_value_split[0] -%}
+                            {%- assign value = property_value_split[1] -%}
+                            {%- assign color = block.settings[prop_color_name] -%}
+                            {% if block.settings.product != blank %}[data-product-handle="{{ block.settings.product }}"] {% endif %}.product-options__section[data-property="{% render 'product-get-options-strip-symbols' with value: property %}"] [data-value="{% render 'product-get-options-strip-symbols' with value: value %}"]
+                            {%- if block.settings.product == blank -%}
+                                , .collection-filters[data-property="color"] [data-value="{% render 'product-get-options-strip-symbols' with value: value %}"]
+                            {%- endif -%}
+                                {
+                                    background-color: {{ color }} !important;
+                                }
+                        {%- else -%}
+                            {%- break -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                {%- endif -%}
+            {%- endfor -%}
+        </style>
+    </template>
+{%- endif -%}
+
+
+{% schema %}
+{
+"name": "Product variants",
+"settings": [
+{
+"type": "header",
+"content": "Video manuals"
+},
+{
+"type": "paragraph",
+"content": "[How to add product variants and set images](https:\/\/www.youtube.com\/watch?v=TZJp8e7omi4&list=PLj-506KaR_vfRdRRBX0k8jYIt_VcxN-34&index=17)"
+},
+{
+"type": "paragraph",
+"content": "[How to change product swatches design](https:\/\/www.youtube.com\/watch?v=ZJemKevn-5k&list=PLj-506KaR_vfRdRRBX0k8jYIt_VcxN-34&index=18)"
+},
+{
+"type": "paragraph",
+"content": "[How to configure custom color for product color options](https:\/\/www.youtube.com\/watch?v=kXkKg-2s6TM&list=PLj-506KaR_vfRdRRBX0k8jYIt_VcxN-34&index=19)"
+},
+{
+"type": "paragraph",
+"content": "[How to add product variants and configure option design](https:\/\/www.youtube.com\/watch?v=cYbFCOcYI04&list=PLj-506KaR_vfRdRRBX0k8jYIt_VcxN-34&index=20)"
+},
+{
+"type": "paragraph",
+"content": "[How to change default option color to custom image](https:\/\/www.youtube.com\/watch?v=eHgIS_aU0fc&list=PLj-506KaR_vfRdRRBX0k8jYIt_VcxN-34&index=21)"
+},
+{
+"type": "paragraph",
+"content": "[How to add color options to collection sidebar](https:\/\/www.youtube.com\/watch?v=JY_M57G3SYk&list=PLj-506KaR_vfRdRRBX0k8jYIt_VcxN-34&index=22)"
+},
+{
+"type": "header",
+"content": "User manual"
+},
+{
+"type": "paragraph",
+"content": "[Product variants](https:\/\/mpthemes.net\/shella-shopify-theme\/documentation-version4\/doc01-03-general-product-variants.php#variants)"
+}
+],
+"blocks": [
+{
+"type": "product_option_setting",
+"name": "Option setting",
+"settings": [
+{
+"type": "product",
+"id": "product",
+"label": "Product",
+"info": "Associate with the product. Is not a required field. If selected - you can assign it to only one product"
+},
+{
+"type": "text",
+"id": "property",
+"label": "Property"
+},
+{
+"type": "text",
+"id": "value",
+"label": "Value"
+},
+{
+"type": "color",
+"id": "color",
+"label": "Color"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image"
+},
+{
+"type": "select",
+"id": "assign_to",
+"label": "Assign to",
+"default": "all",
+"options": [
+{
+"value": "all",
+"label": "All"
+},
+{
+"value": "products",
+"label": "Product"
+},
+{
+"value": "filters",
+"label": "Filters"
+}
+]
+},
+{
+"type": "checkbox",
+"id": "disable_default_color",
+"label": "Disable default color",
+"default": false
+},
+{
+"type": "checkbox",
+"id": "disable_default_image",
+"label": "Disable default image",
+"default": false
+}
+]
+},
+{
+"type": "option_images",
+"name": "Option images",
+"settings": [
+{
+"type": "product",
+"id": "product",
+"label": "Product",
+"info": "Associate with the product. Is not required field. If selected - you can assign to only for product"
+},
+{
+"type": "text",
+"id": "property_value_1",
+"label": "Property & Value #1",
+"info": "Example: Property|Value"
+},
+{
+"type": "image_picker",
+"id": "image_1",
+"label": "Image #1"
+},
+{
+"type": "text",
+"id": "property_value_2",
+"label": "Property & Value #2"
+},
+{
+"type": "image_picker",
+"id": "image_2",
+"label": "Image #2"
+},
+{
+"type": "text",
+"id": "property_value_3",
+"label": "Property & Value #3"
+},
+{
+"type": "image_picker",
+"id": "image_3",
+"label": "Image #3"
+},
+{
+"type": "text",
+"id": "property_value_4",
+"label": "Property & Value #4"
+},
+{
+"type": "image_picker",
+"id": "image_4",
+"label": "Image #4"
+},
+{
+"type": "text",
+"id": "property_value_5",
+"label": "Property & Value #5"
+},
+{
+"type": "image_picker",
+"id": "image_5",
+"label": "Image #5"
+},
+{
+"type": "text",
+"id": "property_value_6",
+"label": "Property & Value #6"
+},
+{
+"type": "image_picker",
+"id": "image_6",
+"label": "Image #6"
+},
+{
+"type": "text",
+"id": "property_value_7",
+"label": "Property & Value #7"
+},
+{
+"type": "image_picker",
+"id": "image_7",
+"label": "Image #7"
+},
+{
+"type": "text",
+"id": "property_value_8",
+"label": "Property & Value #8"
+},
+{
+"type": "image_picker",
+"id": "image_8",
+"label": "Image #8"
+},
+{
+"type": "text",
+"id": "property_value_9",
+"label": "Property & Value #9"
+},
+{
+"type": "image_picker",
+"id": "image_9",
+"label": "Image #9"
+},
+{
+"type": "text",
+"id": "property_value_10",
+"label": "Property & Value #10"
+},
+{
+"type": "image_picker",
+"id": "image_10",
+"label": "Image #10"
+}
+]
+},
+{
+"type": "option_colors",
+"name": "Option colors",
+"settings": [
+{
+"type": "product",
+"id": "product",
+"label": "Product",
+"info": "Associate with the product. Is not required field. If selected - you can assign to only for product"
+},
+{
+"type": "text",
+"id": "property_value_1",
+"label": "Property & Value #1",
+"info": "Example: Property|Value"
+},
+{
+"type": "color",
+"id": "color_1",
+"label": "Color #1"
+},
+{
+"type": "text",
+"id": "property_value_2",
+"label": "Property & Value #2"
+},
+{
+"type": "color",
+"id": "color_2",
+"label": "Color #2"
+},
+{
+"type": "text",
+"id": "property_value_3",
+"label": "Property & Value #3"
+},
+{
+"type": "color",
+"id": "color_3",
+"label": "Color #3"
+},
+{
+"type": "text",
+"id": "property_value_4",
+"label": "Property & Value #4"
+},
+{
+"type": "color",
+"id": "color_4",
+"label": "Color #4"
+},
+{
+"type": "text",
+"id": "property_value_5",
+"label": "Property & Value #5"
+},
+{
+"type": "color",
+"id": "color_5",
+"label": "Color #5"
+},
+{
+"type": "text",
+"id": "property_value_6",
+"label": "Property & Value #6"
+},
+{
+"type": "color",
+"id": "color_6",
+"label": "Color #6"
+},
+{
+"type": "text",
+"id": "property_value_7",
+"label": "Property & Value #7"
+},
+{
+"type": "color",
+"id": "color_7",
+"label": "Color #7"
+},
+{
+"type": "text",
+"id": "property_value_8",
+"label": "Property & Value #8"
+},
+{
+"type": "color",
+"id": "color_8",
+"label": "Color #8"
+},
+{
+"type": "text",
+"id": "property_value_9",
+"label": "Property & Value #9"
+},
+{
+"type": "color",
+"id": "color_9",
+"label": "Color #9"
+},
+{
+"type": "text",
+"id": "property_value_10",
+"label": "Property & Value #10"
+},
+{
+"type": "color",
+"id": "color_10",
+"label": "Color #10"
+}
+]
+}
+]
+}
+{% endschema %}

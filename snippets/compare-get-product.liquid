@@ -1,0 +1,57 @@
+{%- assign product = all_products[current_handle] -%}
+<div class="compare__item col">
+    {% capture product_html %}
+        {% include 'product-compare' with select_current_variant_by_id: current_variant_id %}
+    {% endcapture %}
+    {%- unless product_html contains 'Liquid error' -%}
+        {{ product_html }}
+    {%- else -%}
+    <div class="product-compare{% if settings.product_collection_centered_info %} product-compare--centered{% endif %} d-flex flex-column" data-js-product data-js-store-lists-product-compare data-product-handle="{{ current_handle }}" data-product-variant-id="{{ current_variant_id }}">
+        {%- if show_button_remove -%}
+            <div class="product-compare__remove btn-link mb-15 js-store-lists-remove-compare">{{ 'products.product.remove' | t }}</div>
+        {%- endif -%}
+        <p class="m-0">This product has been removed from the store.</p>
+    </div>
+    {%- endunless -%}
+</div>
+{% capture handles %}{{ handles }}{% if handles %}|||{% endif %}{{ product.handle }}{% endcapture %}
+{% capture ids %}{{ ids }}{% if ids %}|||{% endif %}{{ current_variant_id }}{% endcapture %}
+{%- if settings.compare_show_description -%}
+    {% capture compare_descriptions %}{{ compare_descriptions }}{% if compare_descriptions %}|||{% endif %}{% if product.description != blank %}{{ product.description | strip_html | truncate: settings.compare_description_max_size }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+{%- endif -%}
+{%- if settings.compare_show_collection -%}
+    {% capture compare_collections %}{{ compare_collections }}{% if compare_collections %}|||{% endif %}{% if product.collections.size > 0 %}{% render 'product-get-collections' with product: product %}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+{%- endif -%}
+{%- if settings.compare_show_availability -%}
+    {% capture compare_availabilities %}{{ compare_availabilities }}{% if compare_availabilities %}|||{% endif %}{% if product != blank and current_variant.available %}<span class="in-stock">{{ 'compare_page.in_stock' | t }}</span>{% else %}<span class="out-stock">{{ 'compare_page.out_stock' | t }}</span>{% endif %}{% endcapture %}
+{%- endif -%}
+{%- if settings.compare_show_product_type -%}
+    {% capture compare_product_types %}{{ compare_product_types }}{% if compare_product_types %}|||{% endif %}{% if product.type != blank %}{{ product.type }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+{%- endif -%}
+{%- if settings.compare_show_vendor -%}
+    {% capture compare_vendors %}{{ compare_vendors }}{% if compare_vendors %}|||{% endif %}{% if product.vendor != blank %}{{ product.vendor }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+{%- endif -%}
+{%- if settings.compare_show_sku -%}
+    {% capture compare_skus %}{{ compare_skus }}{% if compare_skus %}|||{% endif %}{% if current_variant.sku != blank %}{{ current_variant.sku }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+{%- endif -%}
+{%- if settings.compare_show_barcode -%}
+    {% capture compare_barcodes %}{{ compare_barcodes }}{% if compare_barcodes %}|||{% endif %}{% if current_variant.barcode != blank %}{{ current_variant.barcode }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+{%- endif -%}
+{%- if settings.compare_show_options -%}
+    {%- if current_variant.option1 and current_variant.option1 != 'Default Title' -%}
+        {%- unless compare_options contains product.options[0] -%}
+            {% capture compare_options %}{{ compare_options }}{%- if compare_options %}|||{% endif -%}{{ product.options[0] }}{% endcapture %}
+        {%- endunless -%}
+    {%- endif -%}
+    {%- if current_variant.option2 and current_variant.option2 != 'Default Title' -%}
+        {%- unless compare_options contains product.options[1] -%}
+            {% capture compare_options %}{{ compare_options }}{%- if compare_options %}|||{% endif -%}{{ product.options[1] }}{% endcapture %}
+        {%- endunless -%}
+    {%- endif -%}
+    {%- if current_variant.option3 and current_variant.option3 != 'Default Title' -%}
+        {%- unless compare_options contains product.options[2] -%}
+            {% capture compare_options %}{{ compare_options }}{%- if compare_options %}|||{% endif -%}{{ product.options[2] }}{% endcapture %}
+        {%- endunless -%}
+    {%- endif -%}
+    {% capture compare_variants %}{{ compare_variants }}{% if compare_variants %}|||{% endif %}{{ product.options[0] }}={{ current_variant.option1 }}+{{ product.options[1] }}={{ current_variant.option2 }}+{{ product.options[2] }}={{ current_variant.option3 }}{% endcapture %}
+{%- endif -%}

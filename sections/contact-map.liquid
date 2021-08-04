@@ -1,0 +1,20 @@
+{%- if section.settings.code != blank -%}
+    <div class="contact-map position-relative">
+        {{ section.settings.code }}
+    </div>
+{%- endif -%}
+
+
+{% schema %}
+{
+    "name": "Contact Map",
+    "settings": [
+        {
+            "type": "textarea",
+            "id": "code",
+            "label": "Code",
+            "default": "<iframe width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyBwY_0PWuwH_A5y4iwNAqpaUbUjRPySkFc%0A%20%20%20%20&q=7563%20St.%20Vicent%20Place,%20Glasgow\" allowfullscreen=\"\"></iframe>"
+        }
+    ]
+}
+{% endschema %}

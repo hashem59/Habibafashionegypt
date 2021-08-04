@@ -1,0 +1,1361 @@
+<div data-section-id="{{ section.id }}" data-section-type="home-builder-2021"{% render 'layout-get-container-class' %}>
+    <div class="home-builder-2021">
+        <div class="row">
+            {%- for block in section.blocks -%}
+                <div class="col" {{ block.shopify_attributes }}>
+                    {% assign banner_id = section.id | append: forloop.index %}
+                    {% render 'banner' block: block id: banner_id %}
+                </div>
+            {%- else -%}
+                {%- if template == 'index' -%}
+                    {% render 'no-blocks' %}
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Loader.require({type: "script", name: "home_builder_2021"});
+</script>
+
+
+
+
+{% schema %}
+{
+"name": "Builder 2021",
+"settings": [
+
+],
+"blocks": [
+{
+"type": "banner",
+"name": "Banner",
+"settings": [
+{
+"type": "url",
+"id": "url",
+"label": "URL for banner"
+},
+{
+"type": "select",
+"id": "banner_type",
+"label": "Banner type",
+"default": "type-1",
+"options": [
+{
+"value": "clean",
+"label": "Image without text"
+},
+{
+"value": "text",
+"label": "Text"
+},
+{
+"value": "type-1",
+"label": "Text over the image"
+},
+{
+"value": "type-2",
+"label": "Text below the image"
+}
+]
+},
+{
+"type": "header",
+"content": "Text content"
+},
+{
+"type": "paragraph",
+"content": "If you need to set the text for different screen resolutions, use the \">>\" separator. Examples: \"My text\" or \"My text for desktop>>My text for tablets>>My text for phones\""
+},
+{
+"type": "textarea",
+"id": "text_1",
+"label": "Text 1",
+"default": "Limited Time: Online Only!"
+},
+{
+"type": "textarea",
+"id": "text_2",
+"label": "Text 2",
+"default": "FINAL \nCLEARANCE"
+},
+{
+"type": "textarea",
+"id": "text_3",
+"label": "Text 3",
+"default": "Take 20% Off ‘Sale Must-Haves'"
+},
+{
+"type": "text",
+"id": "button_1",
+"label": "Button 1 text",
+"default": "SHOP WOMEN’S"
+},
+{
+"type": "url",
+"id": "button_1_url",
+"label": "URL for the button 1"
+},
+{
+"type": "text",
+"id": "button_2",
+"label": "Button 2 text",
+"default": "SHOP MEN’S"
+},
+{
+"type": "url",
+"id": "button_2_url",
+"label": "URL for the button 2"
+},
+{
+"type": "color",
+"id": "text_1_color",
+"label": "Text 1 color"
+},
+{
+"type": "color",
+"id": "text_2_color",
+"label": "Text 2 color"
+},
+{
+"type": "color",
+"id": "text_3_color",
+"label": "Text 3 color"
+},
+{
+"type": "color",
+"id": "button_1_background",
+"label": "Button 1 background"
+},
+{
+"type": "color",
+"id": "button_1_text",
+"label": "Button 1 text"
+},
+{
+"type": "color",
+"id": "button_1_border",
+"label": "Button 1 border"
+},
+{
+"type": "color",
+"id": "button_1_background_act",
+"label": "Active button 1 background"
+},
+{
+"type": "color",
+"id": "button_1_text_act",
+"label": "Active button 1 text"
+},
+{
+"type": "color",
+"id": "button_1_border_act",
+"label": "Active button 1 border"
+},
+{
+"type": "color",
+"id": "button_2_background",
+"label": "Button 2 background"
+},
+{
+"type": "color",
+"id": "button_2_text",
+"label": "Button 2 text"
+},
+{
+"type": "color",
+"id": "button_2_border",
+"label": "Button 2 border"
+},
+{
+"type": "color",
+"id": "button_2_background_act",
+"label": "Active button 2 background"
+},
+{
+"type": "color",
+"id": "button_2_text_act",
+"label": "Active button 2 text"
+},
+{
+"type": "color",
+"id": "button_2_border_act",
+"label": "Active button 2 border"
+},
+{
+"type": "range",
+"id": "content_mask_opacity",
+"min": 0,
+"max": 100,
+"step": 1,
+"label": "Content mask opacity (0 - disable)",
+"default": 0
+},
+{
+"type": "color",
+"id": "content_mask_color",
+"label": "Content mask color"
+},
+{
+"type": "select",
+"id": "content_position",
+"label": "Content position",
+"info": "Use the setting below \"Content margins\" to add vertical and horizontal padding to prevent text from sticking to the edges",
+"default": "center",
+"options": [
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "center_left",
+"label": "Center & Left"
+},
+{
+"value": "center_right",
+"label": "Center & Right"
+},
+{
+"value": "top_center",
+"label": "Top & Center"
+},
+{
+"value": "top_left",
+"label": "Top & Left"
+},
+{
+"value": "top_right",
+"label": "Top & Right"
+},
+{
+"value": "bottom_center",
+"label": "Bottom & Center"
+},
+{
+"value": "bottom_left",
+"label": "Bottom & Left"
+},
+{
+"value": "bottom_right",
+"label": "Bottom & Right"
+},
+{
+"value": "container_center_left",
+"label": "Container & Center & Left"
+},
+{
+"value": "container_center_right",
+"label": "Container & Center & Right"
+},
+{
+"value": "container_top_left",
+"label": "Container & Top & Left"
+},
+{
+"value": "container_top_right",
+"label": "Container & Top & Right"
+},
+{
+"value": "container_bottom_left",
+"label": "Container & Bottom & Left"
+},
+{
+"value": "container_bottom_right",
+"label": "Container & Bottom & Right"
+}
+]
+},
+{
+"type": "text",
+"id": "content_margins",
+"label": "Content margins",
+"info": "Integer + px or %. If you need to set the value for the horizontal and vertical padding, use the \",\" separator. Examples: 10% or \"10%,60px\"."
+},
+{
+"type": "text",
+"id": "content_width",
+"label": "Content width",
+"info": "Integer, in px. Example: 500"
+},
+{
+"type": "text",
+"id": "content_vertical_paddings",
+"label": "Content vertical paddings",
+"info": "Integer, in px. If you need to set the value for the top and bottom padding separately, use the \",\" separator. Examples: 50 or \"50,60\"."
+},
+{
+"type": "select",
+"id": "text_align",
+"label": "Text align",
+"default": "center",
+"options": [
+{
+"value": "left",
+"label": "Left"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "right",
+"label": "Right"
+}
+]
+},
+{
+"type": "select",
+"id": "buttons_direction",
+"label": "Buttons direction",
+"default": "row",
+"options": [
+{
+"value": "column",
+"label": "Column"
+},
+{
+"value": "row",
+"label": "Row"
+}
+]
+},
+{
+"type": "text",
+"id": "buttons_width",
+"label": "Buttons width",
+"info": "Integer, in px. Example: 400",
+"default": "400"
+},
+{
+"type": "range",
+"id": "text_1_size",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 SIZE (0 - hide element)",
+"default": 13
+},
+{
+"type": "range",
+"id": "text_1_line_height",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 LINE HEIGHT",
+"default": 17
+},
+{
+"type": "range",
+"id": "text_1_letter_spacing",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "em",
+"label": "Text 1 LETTER SPACING",
+"default": 0
+},
+{
+"type": "range",
+"id": "text_1_weight",
+"min": 100,
+"max": 900,
+"step": 100,
+"label": "Text 1 font WEIGHT",
+"default": 400
+},
+{
+"type": "range",
+"id": "text_1_margin_bottom",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 MARGIN bottom",
+"default": 20
+},
+{
+"type": "text",
+"id": "text_1_font_name",
+"label": "Text 1 font NAME"
+},
+{
+"type": "range",
+"id": "text_2_size",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 SIZE (0 - hide element)",
+"default": 44
+},
+{
+"type": "range",
+"id": "text_2_line_height",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 LINE HEIGHT",
+"default": 48
+},
+{
+"type": "range",
+"id": "text_2_letter_spacing",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "em",
+"label": "Text 2 LETTER SPACING",
+"default": 5
+},
+{
+"type": "range",
+"id": "text_2_weight",
+"min": 100,
+"max": 900,
+"step": 100,
+"label": "Text 2 font WEIGHT",
+"default": 400
+},
+{
+"type": "range",
+"id": "text_2_margin_bottom",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 MARGIN bottom",
+"default": 15
+},
+{
+"type": "text",
+"id": "text_2_font_name",
+"label": "Text 2 font NAME"
+},
+{
+"type": "range",
+"id": "text_3_size",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 SIZE (0 - hide element)",
+"default": 18
+},
+{
+"type": "range",
+"id": "text_3_line_height",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 LINE HEIGHT",
+"default": 24
+},
+{
+"type": "range",
+"id": "text_3_letter_spacing",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "em",
+"label": "Text 3 LETTER SPACING",
+"default": 0
+},
+{
+"type": "range",
+"id": "text_3_weight",
+"min": 100,
+"max": 900,
+"step": 100,
+"label": "Text 3 font WEIGHT",
+"default": 400
+},
+{
+"type": "range",
+"id": "text_3_margin_bottom",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 MARGIN bottom",
+"default": 0
+},
+{
+"type": "text",
+"id": "text_3_font_name",
+"label": "Text 3 font NAME"
+},
+{
+"type": "range",
+"id": "buttons_size",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons SIZE (0 - hide element)",
+"default": 13
+},
+{
+"type": "range",
+"id": "buttons_line_height",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons LINE HEIGHT",
+"default": 17
+},
+{
+"type": "range",
+"id": "buttons_letter_spacing",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "em",
+"label": "Buttons LETTER SPACING",
+"default": 0
+},
+{
+"type": "range",
+"id": "buttons_weight",
+"min": 100,
+"max": 900,
+"step": 100,
+"label": "Buttons font WEIGHT",
+"default": 400
+},
+{
+"type": "range",
+"id": "buttons_margin_top",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons MARGIN top",
+"default": 30
+},
+{
+"type": "text",
+"id": "buttons_font_name",
+"label": "Buttons font NAME"
+},
+{
+"type": "header",
+"content": "Media content"
+},
+{
+"type": "paragraph",
+"content": "Select an image or video. If video is selected, the image is used as a poster for the video."
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image",
+"info": "Recommended size width 1440 pixels"
+},
+{
+"type": "select",
+"id": "parallax",
+"label": "Image parallax",
+"default": "disable",
+"info": "If the block height is not in the automatic adaptation mode, then the strength of the parallax effect will be adjusted to the selected height. If the height is too large for the image, the parallax effect may be minimal or not manifested at all",
+"options": [
+{
+"value": "disable",
+"label": "Disable"
+},
+{
+"value": "to_top",
+"label": "To top"
+},
+{
+"value": "to_bottom",
+"label": "To bottom"
+},
+{
+"value": "fixed",
+"label": "Fixed"
+}
+]
+},
+{
+"type": "video_url",
+"id": "video_external_url",
+"label": "YouTube or Vimeo video URL link",
+"accept": ["youtube", "vimeo"]
+},
+{
+"type": "text",
+"id": "video_mp4_url",
+"label": "Video URL link",
+"info": "Upload your video in Admin-> Settings-> Files and add a link here"
+},
+{
+"type": "select",
+"id": "video_settings",
+"label": "Video settings (autoplay, controls)",
+"default": "default",
+"options": [
+{
+"value": "default",
+"label": "Default"
+},
+{
+"value": "autoplay",
+"label": "Enable autoplay"
+},
+{
+"value": "controls",
+"label": "Show controls"
+},
+{
+"value": "autoplay_n_controls",
+"label": "Enable autoplay and show controls"
+}
+]
+},
+{
+"type": "select",
+"id": "media_height",
+"label": "Media height",
+"default": "auto",
+"options": [
+{
+"value": "auto",
+"label": "Auto adaptation to the image"
+},
+{
+"value": "fullscreen",
+"label": "Fullscreen"
+},
+{
+"value": "fullscreen_header",
+"label": "Fullscreen excluding header"
+},
+{
+"value": "preset_550",
+"label": "Preset 1 (height 550px)"
+},
+{
+"value": "custom",
+"label": "Custom value (Enter a value in the area below)"
+}
+]
+},
+{
+"type": "text",
+"id": "media_height_custom",
+"label": "Media height custom value",
+"info": "Integer, in px or % of image width. Works in conjunction with the option Media height -> Custom value. If you need to set the value for different screen resolutions, use the \",\" separator. Examples: 550px or 40% or 550px,550px,550px"
+},
+{
+"type": "range",
+"id": "media_mask_opacity",
+"min": 0,
+"max": 100,
+"step": 1,
+"label": "Media mask opacity (0 - disable)",
+"default": 0
+},
+{
+"type": "color",
+"id": "media_mask_color",
+"label": "Media mask color"
+},
+{
+"type": "header",
+"content": "Screen breakpoint 1 (for tablets)"
+},
+{
+"type": "range",
+"id": "breakpoint_1",
+"min": 800,
+"max": 1200,
+"step": 4,
+"label": "Max screen width (default 1024px)",
+"default": 1024
+},
+{
+"type": "image_picker",
+"id": "image_bp1",
+"label": "Image for this screen width and less",
+"info": "Recommended size width 1024 pixels"
+},
+{
+"type": "select",
+"id": "content_position_bp1",
+"label": "Content position",
+"default": "center",
+"options": [
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "center_left",
+"label": "Center & Left"
+},
+{
+"value": "center_right",
+"label": "Center & Right"
+},
+{
+"value": "top_center",
+"label": "Top & Center"
+},
+{
+"value": "top_left",
+"label": "Top & Left"
+},
+{
+"value": "top_right",
+"label": "Top & Right"
+},
+{
+"value": "bottom_center",
+"label": "Bottom & Center"
+},
+{
+"value": "bottom_left",
+"label": "Bottom & Left"
+},
+{
+"value": "bottom_right",
+"label": "Bottom & Right"
+},
+{
+"value": "container_center_left",
+"label": "Container & Center & Left"
+},
+{
+"value": "container_center_right",
+"label": "Container & Center & Right"
+},
+{
+"value": "container_top_left",
+"label": "Container & Top & Left"
+},
+{
+"value": "container_top_right",
+"label": "Container & Top & Right"
+},
+{
+"value": "container_bottom_left",
+"label": "Container & Bottom & Left"
+},
+{
+"value": "container_bottom_right",
+"label": "Container & Bottom & Right"
+}
+]
+},
+{
+"type": "select",
+"id": "text_align_bp1",
+"label": "Text align",
+"default": "center",
+"options": [
+{
+"value": "left",
+"label": "Left"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "right",
+"label": "Right"
+}
+]
+},
+{
+"type": "select",
+"id": "buttons_direction_bp1",
+"label": "Buttons direction",
+"default": "column",
+"options": [
+{
+"value": "column",
+"label": "Column"
+},
+{
+"value": "row",
+"label": "Row"
+}
+]
+},
+{
+"type": "checkbox",
+"id": "text_bp1_enable",
+"label": "Enable breakpoint text settings"
+},
+{
+"type": "range",
+"id": "text_1_size_bp1",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 SIZE (0 - hide element)",
+"default": 13
+},
+{
+"type": "range",
+"id": "text_1_line_height_bp1",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 LINE HEIGHT",
+"default": 17
+},
+{
+"type": "range",
+"id": "text_1_margin_bottom_bp1",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 MARGIN bottom",
+"default": 20
+},
+{
+"type": "range",
+"id": "text_2_size_bp1",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 SIZE (0 - hide element)",
+"default": 44
+},
+{
+"type": "range",
+"id": "text_2_line_height_bp1",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 LINE HEIGHT",
+"default": 48
+},
+{
+"type": "range",
+"id": "text_2_margin_bottom_bp1",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 MARGIN bottom",
+"default": 15
+},
+{
+"type": "range",
+"id": "text_3_size_bp1",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 SIZE (0 - hide element)",
+"default": 18
+},
+{
+"type": "range",
+"id": "text_3_line_height_bp1",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 LINE HEIGHT",
+"default": 24
+},
+{
+"type": "range",
+"id": "text_3_margin_bottom_bp1",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 MARGIN bottom",
+"default": 0
+},
+{
+"type": "range",
+"id": "buttons_size_bp1",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons SIZE (0 - hide element)",
+"default": 13
+},
+{
+"type": "range",
+"id": "buttons_line_height_bp1",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons LINE HEIGHT",
+"default": 17
+},
+{
+"type": "range",
+"id": "buttons_margin_top_bp1",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons MARGIN top",
+"default": 30
+},
+{
+"type": "header",
+"content": "Screen breakpoint 2 (for phones)"
+},
+{
+"type": "range",
+"id": "breakpoint_2",
+"min": 400,
+"max": 800,
+"step": 4,
+"label": "Max screen width (default 540px)",
+"default": 540
+},
+{
+"type": "image_picker",
+"id": "image_bp2",
+"label": "Image for this screen width and less",
+"info": "Recommended size width 540 pixels"
+},
+{
+"type": "select",
+"id": "content_position_bp2",
+"label": "Content position",
+"default": "center",
+"options": [
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "center_left",
+"label": "Center & Left"
+},
+{
+"value": "center_right",
+"label": "Center & Right"
+},
+{
+"value": "top_center",
+"label": "Top & Center"
+},
+{
+"value": "top_left",
+"label": "Top & Left"
+},
+{
+"value": "top_right",
+"label": "Top & Right"
+},
+{
+"value": "bottom_center",
+"label": "Bottom & Center"
+},
+{
+"value": "bottom_left",
+"label": "Bottom & Left"
+},
+{
+"value": "bottom_right",
+"label": "Bottom & Right"
+}
+]
+},
+{
+"type": "text",
+"id": "content_margins_bp2",
+"label": "Content margins",
+"info": "Integer + px or %. If you need to set the value for the horizontal and vertical padding, use the \",\" separator. Examples: 10% or \"10%,60px\"."
+},
+{
+"type": "text",
+"id": "content_width_bp2",
+"label": "Content width",
+"info": "Integer, in px. Example: 500"
+},
+{
+"type": "text",
+"id": "content_vertical_paddings_bp2",
+"label": "Content vertical paddings",
+"info": "Integer, in px. If you need to set the value for the top and bottom padding separately, use the \",\" separator. Examples: 50 or \"50,60\"."
+},
+{
+"type": "select",
+"id": "text_align_bp2",
+"label": "Text align",
+"default": "center",
+"options": [
+{
+"value": "left",
+"label": "Left"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "right",
+"label": "Right"
+}
+]
+},
+{
+"type": "select",
+"id": "buttons_direction_bp2",
+"label": "Buttons direction",
+"default": "column",
+"options": [
+{
+"value": "column",
+"label": "Column"
+},
+{
+"value": "row",
+"label": "Row"
+}
+]
+},
+{
+"type": "text",
+"id": "buttons_width_bp2",
+"label": "Buttons width",
+"info": "Integer, in px. Example: 220",
+"default": "220"
+},
+{
+"type": "checkbox",
+"id": "text_bp2_enable",
+"label": "Enable breakpoint text settings"
+},
+{
+"type": "range",
+"id": "text_1_size_bp2",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 SIZE (0 - hide element)",
+"default": 13
+},
+{
+"type": "range",
+"id": "text_1_line_height_bp2",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 LINE HEIGHT",
+"default": 17
+},
+{
+"type": "range",
+"id": "text_1_margin_bottom_bp2",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 1 MARGIN bottom",
+"default": 20
+},
+{
+"type": "range",
+"id": "text_2_size_bp2",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 SIZE (0 - hide element)",
+"default": 44
+},
+{
+"type": "range",
+"id": "text_2_line_height_bp2",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 LINE HEIGHT",
+"default": 48
+},
+{
+"type": "range",
+"id": "text_2_margin_bottom_bp2",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 2 MARGIN bottom",
+"default": 15
+},
+{
+"type": "range",
+"id": "text_3_size_bp2",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 SIZE (0 - hide element)",
+"default": 18
+},
+{
+"type": "range",
+"id": "text_3_line_height_bp2",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 LINE HEIGHT",
+"default": 24
+},
+{
+"type": "range",
+"id": "text_3_margin_bottom_bp2",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Text 3 MARGIN bottom",
+"default": 0
+},
+{
+"type": "range",
+"id": "buttons_size_bp2",
+"min": 0,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons SIZE (0 - hide element)",
+"default": 13
+},
+{
+"type": "range",
+"id": "buttons_line_height_bp2",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons LINE HEIGHT",
+"default": 17
+},
+{
+"type": "range",
+"id": "buttons_margin_top_bp2",
+"min": 1,
+"max": 100,
+"step": 1,
+"unit": "px",
+"label": "Buttons MARGIN top",
+"default": 30
+},
+{
+"type": "header",
+"content": "Advanced settings"
+},
+{
+"type": "select",
+"id": "texts_style",
+"label": "Style of texts",
+"default": "clean",
+"options": [
+{
+"value": "clean",
+"label": "Clean"
+},
+{
+"value": "link_underline",
+"label": "Underline links"
+},
+{
+"value": "link_hover_underline",
+"label": "Underline links on hover"
+},
+{
+"value": "link_revert_hover_underline",
+"label": "Revert underline links on hover"
+},
+{
+"value": "underline_1",
+"label": "Underline text 1"
+},
+{
+"value": "underline_2",
+"label": "Underline text 2"
+},
+{
+"value": "underline_3",
+"label": "Underline text 3"
+},
+{
+"value": "underline_1_2",
+"label": "Underline text 1+2"
+},
+{
+"value": "underline_1_3",
+"label": "Underline text 1+3"
+},
+{
+"value": "underline_2_3",
+"label": "Underline text 2+3"
+},
+{
+"value": "underline_1_2_3",
+"label": "Underline text 1+2+3"
+}
+]
+},
+{
+"type": "select",
+"id": "text_1_type",
+"label": "Type of text 1",
+"default": "paragraph",
+"options": [
+{
+"value": "paragraph",
+"label": "Paragraph"
+},
+{
+"value": "link",
+"label": "Link"
+},
+{
+"value": "h1",
+"label": "Heading h1"
+},
+{
+"value": "h2",
+"label": "Heading h2"
+},
+{
+"value": "h3",
+"label": "Heading h3"
+},
+{
+"value": "h1_link",
+"label": "Link & heading h1"
+},
+{
+"value": "h2_link",
+"label": "Link & heading h2"
+},
+{
+"value": "h3_link",
+"label": "Link & heading h3"
+}
+]
+},
+{
+"type": "select",
+"id": "text_2_type",
+"label": "Type of text 2",
+"default": "paragraph",
+"options": [
+{
+"value": "paragraph",
+"label": "Paragraph"
+},
+{
+"value": "link",
+"label": "Link"
+},
+{
+"value": "h1",
+"label": "Heading h1"
+},
+{
+"value": "h2",
+"label": "Heading h2"
+},
+{
+"value": "h3",
+"label": "Heading h3"
+},
+{
+"value": "h1_link",
+"label": "Link & heading h1"
+},
+{
+"value": "h2_link",
+"label": "Link & heading h2"
+},
+{
+"value": "h3_link",
+"label": "Link & heading h3"
+}
+]
+},
+{
+"type": "select",
+"id": "text_3_type",
+"label": "Type of text 3",
+"default": "paragraph",
+"options": [
+{
+"value": "paragraph",
+"label": "Paragraph"
+},
+{
+"value": "link",
+"label": "Link"
+},
+{
+"value": "h1",
+"label": "Heading h1"
+},
+{
+"value": "h2",
+"label": "Heading h2"
+},
+{
+"value": "h3",
+"label": "Heading h3"
+},
+{
+"value": "h1_link",
+"label": "Link & heading h1"
+},
+{
+"value": "h2_link",
+"label": "Link & heading h2"
+},
+{
+"value": "h3_link",
+"label": "Link & heading h3"
+}
+]
+},
+{
+"type": "page",
+"id": "custom_html",
+"label": "Custom HTML",
+"info": "Include the word \"Replace\" in the title of the page to replace all content, or include the word \"Line1\", \"Line2\" or \"Line3\" to display the content of the page immediately below the corresponding text. Styles for texts will be applied to your HTML. Wrap your content in <div> and </div> tags to avoid this."
+},
+{
+"type": "text",
+"id": "image_width_resolution",
+"label": "Image width resolution (optional)",
+"info": "Integer, in px. Works only if lazy loading of images is disabled. If you need to set the value for different screen resolutions, use the \",\" separator. Examples: 1440 or 1440,1024,540"
+}
+]
+}
+]
+}
+{% endschema %}

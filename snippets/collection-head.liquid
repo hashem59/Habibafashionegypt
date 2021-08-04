@@ -1,0 +1,89 @@
+{% include 'global-variables' %}
+<div class="collection-head{% if type_fullwidth %} collection-head--fullwidth{% endif %}" data-postload="home_builder">
+    {%- assign contents = null -%}
+    {%- assign desktop_title = section.settings.default_desktop_title -%}
+    {%- assign mobile_title = section.settings.default_mobile_title -%}
+    {%- case section.settings.margins_for_columns -%}
+        {%- when 'preset_1' %}{% assign margins_for_columns = home_builder_margins_for_columns_preset_1 %}
+        {%- when 'preset_2' %}{% assign margins_for_columns = home_builder_margins_for_columns_preset_2 %}
+        {%- when 'preset_3' %}{% assign margins_for_columns = home_builder_margins_for_columns_preset_3 %}
+        {%- when 'preset_4' %}{% assign margins_for_columns = home_builder_margins_for_columns_preset_4 %}
+        {%- when 'preset_5' %}{% assign margins_for_columns = home_builder_margins_for_columns_preset_5 %}
+    {%- endcase -%}
+    {%- for block in section.blocks -%}
+        {%- assign is_content = false -%}
+        {%- assign is_slider = false -%}
+        {%- if block.settings.for_collection == collection.handle and block.type == 'promobox' -%}
+            {%- assign is_content = true -%}
+        {%- elsif block.settings.for_collection == collection.handle and block.type == 'slick_slider' -%}
+            {%- assign is_slider = true -%}
+        {%- endif -%}
+        {%- if is_content or is_slider -%}
+            {%- capture content -%}
+                {% capture block_id %}home-builder-block-id-{{ section.id }}-{{ forloop.index }}{% endcapture %}
+                <div class="{{ block_id }} col-12 col-md-{{ block.settings.size_of_column }} {{ margins_for_columns }}{% if block.settings.visible != blank %} {% if block.settings.visible == 'desktop' %}d-none d-md-{% if section.settings.vertical_align == 'stretch' %}flex{% else %}block{% endif %}{% elsif block.settings.visible == 'mobile' %}d-md-none{% endif %}{% endif %}">
+                    {%- if block.settings.type == 'description' and collection.description != blank -%}
+                        <div class="rte fs">
+                            {{ collection.description }}
+                        </div>
+                    {%- elsif is_content -%}
+                        {% render 'promobox' with block: block block_id: block_id promobox_curtain_opacity: promobox_curtain_opacity promobox_height_preset_1: promobox_height_preset_1 promobox_height_preset_2: promobox_height_preset_2 promobox_height_preset_3: promobox_height_preset_3 promobox_ultra_height_preset_1: promobox_ultra_height_preset_1 promobox_ultra_height_preset_3: promobox_ultra_height_preset_3 %}
+                    {%- elsif is_slider -%}
+                        {% include 'builder-slider-slick' %}
+                    {%- endif -%}
+                </div>
+            {%- endcapture -%}
+            {%- assign contents = contents | append: content -%}
+        {%- elsif block.type == 'title' and block.settings.for_collection == collection.handle -%}
+            {%- assign desktop_title = block.settings.desktop_title -%}
+            {%- assign mobile_title = block.settings.mobile_title -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {%- if contents -%}
+        <div class="{% if type_fullwidth %}mt-15 {% endif %}mb-20 overflow-hidden">
+            <div class="row">
+                {{ contents }}
+            </div>
+        </div>
+    {%- endif -%}
+    {%- if desktop_title == 'title' or desktop_title == 'title_with_description' -%}
+        {%- assign desktop_need_title = true -%}
+    {%- endif -%}
+    {%- if desktop_title == 'description' or desktop_title == 'title_with_description' -%}
+        {%- assign desktop_need_description = true -%}
+    {%- endif -%}
+    {%- if mobile_title == 'title' or mobile_title == 'title_with_description' -%}
+        {%- assign mobile_need_title = true -%}
+    {%- endif -%}
+    {%- if mobile_title == 'description' or mobile_title == 'title_with_description' -%}
+        {%- assign mobile_need_description = true -%}
+    {%- endif -%}
+    {%- capture head -%}
+        {%- if desktop_need_title or mobile_need_title -%}
+            {% capture title_class %}{% if mobile_need_title != true %} d-none{% endif %}{% if desktop_need_title %} d-lg-block{% else %} d-lg-none{% endif %}{% endcapture %}
+            <h1 class="mb-10{{ title_class }} text-center{% unless offset_collection_page_head_centered_d %} text-lg-left{% endunless %}">{% if collection.handle == 'all' %}{{ 'collections.general.all_products_title' | t }}{% else %}{{ collection.title }}{% endif %}</h1>
+            {%- assign has_head = true -%}
+        {%- endif -%}
+        {%- if desktop_need_description or mobile_need_description -%}
+            {% capture description_class %}{% if mobile_need_description != true %} d-none{% endif %}{% if desktop_need_description %} d-lg-block{% else %} d-lg-none{% endif %}{% endcapture %}
+            {%- if collection.description != blank -%}
+                <div class="rte fs{{ description_class }}">
+                    {{ collection.description }}
+                </div>
+                {%- assign has_head = true -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endcapture -%}
+    {%- if has_head -%}
+        <div class="{% if type_fullwidth %}container mt-15 {% endif %}mb-15">
+            {{ head }}
+        </div>
+    {%- endif -%}
+</div>
+
+<script>
+    {%- assign selected_blocks = section.blocks | where: 'type', 'slick_slider' -%}
+    {%- if selected_blocks.size > 0 -%}
+        Loader.require({type: "script", name: "home_builder"});
+    {%- endif -%}
+</script>

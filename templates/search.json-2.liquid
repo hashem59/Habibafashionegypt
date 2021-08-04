@@ -1,0 +1,34 @@
+{% layout none %}
+{%- assign results_count = 0 -%}
+{%- capture results -%}
+	{%- for item in search.results limit: 5 -%}
+		{%- assign image_size = '200x' -%}
+		{%- if item.object_type == 'product' -%}
+			{%- assign product = item -%}
+			{% include 'product-res-variables' %}
+			{%- if results_count > 0 -%},{%- endif -%}
+			{
+				"url":{{ url | json }},
+				"title":{{ title | json }},
+				"price":{{ price | json }},
+				"compare_at_price":{{ compare_at_price | json }},
+				"thumbnail":{{ image.src | img_url: image_size | json }},
+				"thumbnail2x":{{ image.src | img_url: image_size, scale: 2 | json }}
+			}
+			{%- assign results_count = results_count | plus: 1 -%}
+		{%- elsif settings.search_show_only_products != true -%}
+			{%- if results_count > 0 -%},{%- endif -%}
+			{
+				"url":{{ item.url | json }},
+				"title":{{ item.title | json }},
+				"thumbnail":{{ item.image.src | img_url: image_size | json }},
+				"thumbnail2x":{{ item.image.src | img_url: image_size, scale: 2 | json }}
+			}
+			{%- assign results_count = results_count | plus: 1 -%}
+		{%- endif -%}
+	{%- endfor -%}
+{%- endcapture -%}
+{
+"count": {{ results_count }},
+"results": [{{ results }}]
+}

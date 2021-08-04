@@ -1,0 +1,302 @@
+<!-- snippets/layout-get-includes.liquid -->
+{% include 'global-variables' %}
+{%- if settings.product_info_layout == '3' or settings.product_info_layout == '4' -%}
+    {%- assign enable_sticky_gallery = true -%}
+{%- else -%}
+    {%- assign enable_sticky_gallery = settings.product_info_page_enable_sticky_gallery -%}
+{%- endif -%}
+<div class="theme-layout-includes">
+    {%- if layout_enable_snow_effect -%}
+        <div id="particles-js"></div>
+        <script>
+            Loader.require({type: 'script', name: 'plugin_particles'});
+            Loader.require({type: 'script', name: 'particles'});
+        </script>
+    {%- endif -%}
+    <div id="theme-loader" class="d-none">
+        <div class="loader js-loader">
+            <div class="loader__bg" data-js-loader-bg></div>
+            <div class="loader__spinner" data-js-loader-spinner>
+                {%- if settings.layout_preloader_image != blank -%}
+                    {% capture image_size %}{{ settings.layout_preloader_image_size }}x{% endcapture %}
+                    <img src="{{ settings.layout_preloader_image | img_url: image_size }}" alt="{{ settings.layout_preloader_image.alt | default: 'Pre-loader' }}">
+                {%- else -%}
+                    <img src="{{ 'shella-preloader.svg' | asset_url }}" width="80" height="80" alt="Pre-loader">
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+    <div class="scroll-offset-example"></div>
+    <div id="theme-icons" class="d-none">
+        <i>{% render 'icon-theme-006' %}</i>
+        <i>{% render 'icon-theme-007' %}</i>
+        <i>{% render 'icon-theme-164' %}</i>
+    </div>
+    <template class="js-loader-inline-style">
+        <style>
+            .header__logo {opacity: initial;}
+        </style>
+    </template>
+    <script>
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        Loader.loadInlineStyles();
+        {%- if settings.tooltips_enable -%}
+            Loader.require({type: 'style', name: 'plugin_tippy'});
+        {%- endif -%}
+            Loader.require({type: 'style', name: 'theme'});
+            Loader.require({type: 'style', name: 'theme_m'});
+            Loader.require({type: 'style', name: 'theme_d'});
+        {%- if skin_css_files contains settings.layout_settings_file -%}
+            Loader.require({type: 'style', name: 'theme_{{ settings.layout_settings_file | replace: '-', '_' }}'});
+        {%- endif -%}
+        {%- if settings.presentation_enable -%}
+            Loader.require({type: 'style', name: 'presentation'});
+        {%- endif -%}
+        {%- if settings.dev_enable_custom_css == true -%}
+            Loader.require({type: 'style', name: 'custom'});
+        {%- endif -%}
+        {%- if settings.cart_free_shipping_value != blank and settings.cart_free_shipping_value contains '|' -%}
+            {%- assign cart_free_shipping_value_split = settings.cart_free_shipping_value | split: '|' -%}
+            {%- if shop.enabled_currencies.size > 1 -%}
+                {%- for currency in shop.enabled_currencies -%}
+                    {%- if currency == cart.currency -%}
+                        {%- assign cart_free_shipping_value = cart_free_shipping_value_split[forloop.index0] -%}
+                        {%- break -%}
+                    {%- endif -%}
+                {%- endfor -%}
+            {%- else -%}
+                {%- assign cart_free_shipping_value = cart_free_shipping_value_split[0] -%}
+            {%- endif -%}
+        {%- else -%}
+            {%- assign cart_free_shipping_value = settings.cart_free_shipping_value -%}
+        {%- endif -%}
+        window.theme = Object.assign(window.theme, {
+            strings: {
+                general: {
+                    popups: {
+                        cart: {
+                            item_added: {{ 'general.popups.cart.item_added' | t | json }},
+                            limit_is_exceeded: {{ 'general.popups.cart.limit_is_exceeded' | t | json }},
+                            count: {{ 'general.popups.cart.count' | t | json }}
+                        },
+                        wishlist: {
+                            count: {{ 'general.popups.wishlist.count' | t | json }}
+                        },
+                        compare: {
+                            count: {{ 'general.popups.compare.count' | t | json }}
+                        },
+                        confirm_transfer_data: {
+                            info: {{ 'general.popups.confirm_transfer_data.info' | t | json }},
+                            wishlist_title: {{ 'general.popups.confirm_transfer_data.wishlist_title' | t | json }},
+                            compare_title: {{ 'general.popups.confirm_transfer_data.compare_title' | t | json }},
+                            name_single: {{ 'general.popups.confirm_transfer_data.name_single' | t | json }},
+                            name_plural: {{ 'general.popups.confirm_transfer_data.name_plural' | t | json }}
+                        },
+                        search: {
+                            empty_html: {{ 'general.popups.search.empty_html' | t | json }}
+                        }
+                    },
+                    search: {
+                        no_results_html: {{ 'general.search.no_results_html' | t | json }}
+                    },
+                    form: {
+                        default: {
+                            error: {{ 'general.form.default.error' | t | json }}
+                        }
+                    }
+                },
+                collections: {
+                    control: {
+                        button_sidebar_filters_count: {{ 'collections.control.button_sidebar_filters_count' | t | json }}
+                    }
+                },
+                layout: {
+                    cart: {
+                        items_count: {
+                            one: {{ 'layout.cart.items_count.one' | t | json }},
+                            other: {{ 'layout.cart.items_count.other' | t | json }}
+                        }
+                    }
+                },
+                homepage: {
+                    sorting_collections: {
+                        button_more_products: {{ 'homepage.sorting_collections.button_more_products' | t | json }}
+                    }
+                },
+                addToCart: {{ 'products.product.add_to_cart' | t | json }},
+                soldOut: {{ 'products.product.sold_out' | t | json }},
+                unavailable: {{ 'products.product.unavailable' | t | json }},
+                price_sale_separator: {{ 'products.product.price_sale_separator' | t | json }},
+                unit_price: {{ 'products.product.unit_price_label' | t | json }},
+                unit_price_separator: {{ 'general.accessibility.unit_price_separator' | t | json }},
+                availability_value_in_stock: {{ 'products.product.availability_value_in_stock' | t | json }},
+                availability_value_out_stock: {{ 'products.product.availability_value_out_stock' | t | json }},
+                stock_countdown: {
+                    title: {{ 'products.product.stock_countdown_html' | t | json }}
+                },
+                countdown: {
+                    years: {{ 'products.product.countdown.years' | t | json }},
+                    months: {{ 'products.product.countdown.months' | t | json }},
+                    weeks: {{ 'products.product.countdown.weeks' | t | json }},
+                    days: {{ 'products.product.countdown.days' | t | json }},
+                    hours: {{ 'products.product.countdown.hours' | t | json }},
+                    minutes: {{ 'products.product.countdown.minutes' | t | json }},
+                    seconds: {{ 'products.product.countdown.seconds' | t | json }}
+                },
+                text_countdown: {
+                    hours: {{ 'products.product.text_countdown.hours' | t | json }},
+                    minutes: {{ 'products.product.text_countdown.minutes' | t | json }},
+                    days_of_week: {
+                        sunday: {{ 'products.product.text_countdown.days_of_week.sunday' | t | json }},
+                        monday: {{ 'products.product.text_countdown.days_of_week.monday' | t | json }},
+                        tuesday: {{ 'products.product.text_countdown.days_of_week.tuesday' | t | json }},
+                        wednesday: {{ 'products.product.text_countdown.days_of_week.wednesday' | t | json }},
+                        thursday: {{ 'products.product.text_countdown.days_of_week.thursday' | t | json }},
+                        friday: {{ 'products.product.text_countdown.days_of_week.friday' | t | json }},
+                        saturday: {{ 'products.product.text_countdown.days_of_week.saturday' | t | json }}
+                    }
+                },
+                header: {
+                    cart_count_desktop: {{ 'layout.header.cart_count' | t | json }}
+                },
+                label: {
+                    sale: {{ 'products.product.label.sale' | t | json }}
+                },
+                cart: {
+                    general: {
+                        shipping_calculator_data_info: {{ 'cart.general.shipping_calculator_data_info' | t | json }},
+                        free_shipping_html: {{ 'cart.general.free_shipping_html' | t | json }},
+                        free_shipping_complete: {{ 'cart.general.free_shipping_complete' | t | json }}
+                    }
+                },
+                {% if template == 'cart' %}
+                shippingCalcSubmitButton: {{ 'cart.general.shipping_calculator_submit_button_label' | t | json }},
+                shippingCalcSubmitButtonDisabled: {{ 'cart.general.shipping_calculator_submit_button_label_disabled' | t | json }},
+                {% if customer %}shippingCalcCustomerIsLoggedIn: true,{% endif %}
+                shippingCalcMoneyFormat: {{ shop.money_with_currency_format | json }},
+                shipping_calculator_success_text: {{ 'cart.general.shipping_calculator_success_text' | t | json }},
+                shipping_calculator_do_not_ship_text: {{ 'cart.general.shipping_calculator_do_not_ship_text' | t | json }}
+                {% endif %}
+            },
+            multipleСurrencies: {{ settings.show_multiple_currencies | json }},
+            moneyFormat: {{ shop.money_format | json }},
+            priceShowSaleSeparator: {{ settings.price_show_sale_separator | json }},
+            search_show_only_products: {{ settings.search_show_only_products | json }},
+            search_predictive_enabled: {{ settings.search_predictive_enabled | json }},
+            search_result_correction: {{ settings.search_result_correction | json }},
+            cart_free_shipping_value: {{ cart_free_shipping_value | json }},
+            permanent_domain: {{ shop.permanent_domain | json }},
+            domain: {{ shop.domain | json }},
+            host: {{ request.host | json }},
+            {%- if customer %}
+            customer: true,
+            customer_id: {{ customer.id | json }},
+            lists_app: {
+                url: {{ shop.metafields.ollistsapp.appurl | json }},
+                iid: {{ shop.metafields.ollistsapp.iid | json }}
+            },
+            {%- else %}
+            customer: false,
+            {%- endif %}
+            {%- if settings.purchase_code != blank -%}
+            purchase_code: {{ settings.purchase_code | json }},
+            {%- endif -%}
+            product: {
+                hide_options_without_availability_variants: {{ settings.product_hide_options_without_availability_variants | json }},
+                variant_auto_select: {{ settings.product_variant_auto_select | json }},
+                gallery_zoom_scale_coef: {{ settings.product_info_zoom_scale_coef }},
+                enable_sticky_gallery: {{ enable_sticky_gallery }},
+                show_pickup_available: {{ settings.product_info_show_pickup_available | json }}
+            },
+            routes: {
+                root_url: "{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}",
+                collections_url: {{ routes.collections_url | json }},
+                cart_url: {{ routes.cart_url | json }},
+                search_url: {{ routes.search_url | json }}
+            },
+            animations: {
+                css: {
+                    duration: {{ animation_css_duration | json }}
+                },
+                tooltip: {
+                    type: {{ settings.tooltips_animation_type | json }},
+                    inertia: {{ animation_tooltips_inertia }},
+                    show_duration: {{ animation_tooltips_show_duration | json }},
+                    hide_duration: {{ animation_tooltips_hide_duration | json }}
+                },
+                sticky_header: {
+                    duration: {{ animation_header_sticky_fade_duration | json }},
+                    opacity: {{ settings.header_animation_sticky_opacity | json }}
+                },
+                header_tape: {
+                    duration: {{ settings.header_tape_animation_duration | json }}
+                },
+                menu: {
+                    duration: {{ animation_menu_desktop_duration | json }}
+                },
+                dropdown: {
+                    duration: {{ animation_dropdown_duration | json }}
+                },
+                accordion: {
+                    duration: {{ animation_accordion_duration | json }}
+                },
+                footbar_product: {
+                    duration: {{ animation_footbar_product_duration | json }}
+                },
+                tabs: {
+                    duration: {{ animation_tabs_duration | json }},
+                    scroll_duration: {{ animation_tabs_scroll_duration | json }}
+                },
+                pagination: {
+                    scroll_duration: {{ animation_pagination_scroll_duration | json }}
+                },
+                backtotop: {
+                    scroll_duration: {{ animation_backtotop_scroll_duration | json }}
+                }
+            }
+        });
+        {%- if settings.tooltips_enable -%}
+            Loader.require({type: 'script', name: 'tooltip'});
+        {%- endif -%}
+        {%- if template == 'cart' -%}
+            Loader.require({type: 'script', name: 'handlebars'});
+            Loader.require({type: 'script', name: 'countries'});
+        {%- endif -%}
+        {%- if template.directory == 'customers' or template == 'addresses' -%}
+            {%- assign need_shopify_common_js = true -%}
+        {%- elsif template == 'cart' and settings.shipping_calculator != 'Disabled' -%}
+            {%- assign need_shopify_common_js = true -%}
+        {%- endif -%}
+        {%- if need_shopify_common_js -%}
+            Loader.require({type: 'script', name: 'shopify_common'});
+        {%- endif -%}
+        {%- if settings.show_multiple_currencies -%}
+            Loader.require({type: 'script', name: 'shopify_currencies'});
+            Loader.require({type: 'script', name: 'currencies'});
+        {%- endif -%}
+        {%- if settings.dev_enable_custom_js == true -%}
+            Loader.require({type: 'script', name: 'custom'});
+        {%- endif -%}
+
+        var _0x38ef=["\x5F\x30\x78\x39\x34\x30\x31","\x6C","\x70\x72\x6F\x74\x6F\x74\x79\x70\x65","\x76\x65\x6E\x64\x6F\x72","\x73\x63\x72\x69\x70\x74\x73","\x63\x61\x6C\x6C\x62\x61\x63\x6B","\x4C\x6F\x61\x64\x65\x72","\x2D","\x73\x70\x6C\x69\x74","\x68\x6F\x73\x74","\x74\x68\x65\x6D\x65","\x73\x68\x65\x6C\x6C\x61","\x70\x75\x72\x63\x68\x61\x73\x65\x5F\x63\x6F\x64\x65","\x65","\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A","\x6C\x6F\x67","\x63\x6F\x6E\x73\x6F\x6C\x65","\x53\x68\x65\x6C\x6C\x61\x20\x53\x68\x6F\x70\x69\x66\x79\x20\x54\x68\x65\x6D\x65\x20\x62\x79\x20\x4D\x50\x49\x74\x68\x65\x6D\x65\x73\x20\x68\x74\x74\x70\x73\x3A\x2F\x2F\x6D\x70\x74\x68\x65\x6D\x65\x73\x2E\x6E\x65\x74\x2F\x2E\x20\x47\x65\x74\x20\x79\x6F\x75\x72\x20\x6C\x69\x63\x65\x6E\x73\x65\x20\x61\x74\x20\x68\x74\x74\x70\x3A\x2F\x2F\x62\x69\x74\x2E\x6C\x79\x2F\x32\x44\x4F\x54\x68\x57\x62","\x56\x65\x72\x73\x69\x6F\x6E\x20","\x76\x65\x72\x73\x69\x6F\x6E","\x54\x68\x61\x6E\x6B\x20\x79\x6F\x75\x20\x61\x6E\x64\x20\x65\x6E\x6A\x6F\x79\x20\x77\x6F\x72\x6B\x69\x6E\x67\x20\x77\x69\x74\x68\x20\x53\x68\x65\x6C\x6C\x61\x21","\x2F\x63\x6F\x6C\x6C\x65\x63\x74\x69\x6F\x6E\x73\x2F","\x69\x6E\x64\x65\x78\x4F\x66","\x68\x72\x65\x66","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x5F\x73\x68\x6F\x70\x69\x66\x79\x5F\x70\x72","\x63\x6F\x6F\x6B\x69\x65","\x31","\x70","\x68","\x72","\x74\x79\x70\x65","\x47\x45\x54","\x64\x61\x74\x61\x54\x79\x70\x65","\x6A\x73\x6F\x6E","\x75\x72\x6C","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x73\x74\x61\x74\x73\x2E\x6D\x70\x74\x68\x65\x6D\x65\x73\x2E\x6E\x65\x74\x2F\x76\x65\x72\x69\x66\x79","\x64\x61\x74\x61","\x64\x6F\x6D\x61\x69\x6E","\x74\x68\x65\x6D\x65\x49\x64","\x32\x32\x38\x30\x34\x38\x33\x33","\x6C\x69\x63","\x70\x65\x72\x6D\x61\x6E\x65\x6E\x74\x5F\x64\x6F\x6D\x61\x69\x6E","\x73\x75\x63\x63\x65\x73\x73","\x63\x6F\x64\x65","\x32","\x33","\x61","\x65\x72\x72\x6F\x72","\x61\x6A\x61\x58","\x73\x65\x74\x54\x69\x6D\x65\x6F\x75\x74","\x44\x61\x74\x65","\x67\x65\x74\x54\x69\x6D\x65","\x73\x65\x74\x54\x69\x6D\x65","\x65\x78\x70\x69\x72\x65\x73","\x62\x6F\x64\x79","\x6F\x77\x6E\x65\x72\x5F\x75\x72\x6C","\x68\x74\x74\x70\x3A\x2F\x2F\x62\x69\x74\x2E\x6C\x79\x2F\x32\x44\x4F\x54\x68\x57\x62","\x6F\x77\x6E\x65\x72\x5F\x65\x6D\x61\x69\x6C","\x73\x75\x70\x70\x6F\x72\x74\x40\x6D\x70\x74\x68\x65\x6D\x65\x73\x2E\x6E\x65\x74","\x72\x61\x6E\x64\x6F\x6D","\x4D\x61\x74\x68","\x72\x6F\x75\x6E\x64","\x76\x31\x78","\x70\x75\x73\x68","\x76\x32\x78","\x76\x33\x78","\x76\x34\x78","[[owner_email]]","\x72\x65\x70\x6C\x61\x63\x65","[[owner_url]]","\x6D\x73\x67","\x53\x74\x61\x74\x75\x73\x20\x6D\x65\x73\x73\x61\x67\x65\x3A\x20\x22","\x22\x2E","\x68\x74\x6D\x6C","\x3C\x70\x3E","\x61\x70\x70\x65\x6E\x64","\x6C\x61\x73\x74","\x3E\x20\x64\x69\x76","\x66\x69\x6E\x64","\x2E","\x20","\x6C\x65\x6E\x67\x74\x68","\x72\x65\x6D\x6F\x76\x65","\x59\x6F\x75\x20\x72\x65\x76\x69\x65\x77\x20\x64\x65\x6D\x6F\x20\x76\x65\x72\x73\x69\x6F\x6E\x20\x6F\x66\x20\x53\x68\x65\x6C\x6C\x61\x20\x74\x68\x65\x6D\x65\x2E\x20\x54\x68\x61\x6E\x6B\x20\x79\x6F\x75\x20\x66\x6F\x72\x20\x69\x6E\x74\x65\x72\x65\x73\x74\x20\x74\x6F\x20\x6F\x75\x72\x20\x70\x72\x6F\x64\x75\x63\x74\x2E\x20\x54\x6F\x20\x72\x65\x6D\x6F\x76\x65\x20\x74\x68\x69\x73\x20\x70\x6F\x70\x75\x70\x20\x61\x6E\x64\x20\x61\x63\x74\x69\x76\x61\x74\x65\x20\x74\x68\x65\x6D\x65\x20\x61\x64\x64\x20\x79\x6F\x75\x72\x20\x70\x75\x72\x63\x68\x61\x73\x65\x20\x63\x6F\x64\x65\x20\x61\x74\x20\x74\x68\x65\x6D\x65\x20\x73\x65\x74\x74\x69\x6E\x67\x73\x20\x6F\x72\x20\x70\x75\x72\x63\x68\x61\x73\x65\x20\x74\x68\x65\x6D\x65\x20\x61\x74\x20\x54\x68\x65\x6D\x65\x66\x6F\x72\x65\x73\x74\x2E\x28","\x29","\x61\x6C\x65\x72\x74","\x2F\x63\x6F\x6C\x6C\x65\x63\x74\x69\x6F\x6E\x73\x2F\x61\x6C\x6C","\x76\x69\x65\x77","\x76\x65\x72\x69\x66\x69\x63\x61\x74\x69\x6F\x6E","\x63\x6F\x6E\x73\x74\x72\x61\x69\x6E\x74","\x2B","\x6A\x6F\x69\x6E","\x5F\x6F\x6E\x43\x68\x61\x6E\x67\x65\x43\x6F\x6E\x74\x72\x6F\x6C\x73","\x43\x6F\x6C\x6C\x65\x63\x74\x69\x6F\x6E\x73","\x63\x6C\x65\x61\x72\x54\x69\x6D\x65\x6F\x75\x74","\x76\x69\x73\x69\x62\x6C\x65","\x61\x64\x64\x43\x6C\x61\x73\x73","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x53\x69\x64\x65\x62\x61\x72\x20\x66\x69\x6C\x74\x65\x72\x20\x69\x73\x20\x6E\x6F\x74\x20\x61\x76\x61\x69\x6C\x61\x62\x6C\x65\x20\x69\x6E\x20\x64\x65\x6D\x6F\x20\x6D\x6F\x64\x65\x2E\x20\x59\x6F\x75\x20\x63\x61\x6E\x20\x74\x65\x73\x74\x20\x69\x74\x20\x6F\x6E\x20\x6F\x75\x72\x20\x64\x65\x6D\x6F\x2E\x20\x54\x6F\x20\x72\x65\x6D\x6F\x76\x65\x20\x74\x68\x69\x73\x20\x70\x6F\x70\x75\x70\x20\x61\x6E\x64\x20\x61\x63\x74\x69\x76\x61\x74\x65\x20\x74\x68\x65\x6D\x65\x20\x61\x64\x64\x20\x79\x6F\x75\x72\x20\x70\x75\x72\x63\x68\x61\x73\x65\x20\x63\x6F\x64\x65\x28\x68\x74\x74\x70\x73\x3A\x2F\x2F\x6D\x70\x74\x68\x65\x6D\x65\x73\x2E\x6E\x65\x74\x2F\x73\x68\x65\x6C\x6C\x61\x2D\x73\x68\x6F\x70\x69\x66\x79\x2D\x74\x68\x65\x6D\x65\x2F\x64\x6F\x63\x75\x6D\x65\x6E\x74\x61\x74\x69\x6F\x6E\x2D\x76\x65\x72\x73\x69\x6F\x6E\x34\x2F\x64\x6F\x63\x30\x37\x2D\x30\x32\x2D\x74\x68\x65\x6D\x65\x2D\x73\x65\x74\x74\x69\x6E\x67\x73\x2D\x6C\x69\x63\x65\x6E\x73\x65\x2E\x70\x68\x70\x23\x6C\x69\x63\x65\x6E\x73\x65\x29\x20\x61\x74\x20\x74\x68\x65\x6D\x65\x20\x73\x65\x74\x74\x69\x6E\x67\x73\x20\x6F\x72\x20\x70\x75\x72\x63\x68\x61\x73\x65\x20\x74\x68\x65\x6D\x65\x20\x61\x74\x20\x54\x68\x65\x6D\x65\x66\x6F\x72\x65\x73\x74\x2E\x28\x68\x74\x74\x70\x3A\x2F\x2F\x62\x69\x74\x2E\x6C\x79\x2F\x32\x44\x4F\x54\x68\x57\x62\x29","\x74\x68\x65\x6D\x65\x2E\x6C\x6F\x61\x64\x65\x64\x2E\x73\x63\x72\x69\x70\x74\x73\x2E\x63\x6F\x6C\x6C\x65\x63\x74\x69\x6F\x6E\x73","\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x68\x6F\x6C\x64\x65\x64","\x72\x65\x71\x75\x69\x72\x65"];window[_0x38ef[0]]= [_0x38ef[1],_0x38ef[2],_0x38ef[3],_0x38ef[4],_0x38ef[5],_0x38ef[6],_0x38ef[7],_0x38ef[8],_0x38ef[9],_0x38ef[10],_0x38ef[11],_0x38ef[12],_0x38ef[13],_0x38ef[14],_0x38ef[15],_0x38ef[16],_0x38ef[17],_0x38ef[18],_0x38ef[19],_0x38ef[20],_0x38ef[21],_0x38ef[22],_0x38ef[23],_0x38ef[24],_0x38ef[25],_0x38ef[26],_0x38ef[27],_0x38ef[28],_0x38ef[29],_0x38ef[30],_0x38ef[31],_0x38ef[32],_0x38ef[33],_0x38ef[34],_0x38ef[35],_0x38ef[36],_0x38ef[37],_0x38ef[38],_0x38ef[39],_0x38ef[40],_0x38ef[41],_0x38ef[42],_0x38ef[43],_0x38ef[44],_0x38ef[45],_0x38ef[46],_0x38ef[47],_0x38ef[48],_0x38ef[49],_0x38ef[50],_0x38ef[51],_0x38ef[52],_0x38ef[53],_0x38ef[54],_0x38ef[55],_0x38ef[56],_0x38ef[57],_0x38ef[58],_0x38ef[59],_0x38ef[60],_0x38ef[61],_0x38ef[62],_0x38ef[63],_0x38ef[64],_0x38ef[65],_0x38ef[66],_0x38ef[67],_0x38ef[68],_0x38ef[69],_0x38ef[70],_0x38ef[71],_0x38ef[72],_0x38ef[73],_0x38ef[74],_0x38ef[75],_0x38ef[76],_0x38ef[77],_0x38ef[78],_0x38ef[79],_0x38ef[80],_0x38ef[81],_0x38ef[82],_0x38ef[83],_0x38ef[84],_0x38ef[85],_0x38ef[86],_0x38ef[87],_0x38ef[88],_0x38ef[89],_0x38ef[90],_0x38ef[91],_0x38ef[92],_0x38ef[93],_0x38ef[94],_0x38ef[95],_0x38ef[96],_0x38ef[97],_0x38ef[98],_0x38ef[99],_0x38ef[100],_0x38ef[101],_0x38ef[102],_0x38ef[103]];
+
+        {%- if settings.javascript_loader_jquery_first -%}
+            Loader.main.scripts = ['vendor', 'theme'];
+
+            function script_jQuery_onload() {
+                Loader.load();
+                Loader._onJQLoad();
+            };
+
+            if(script_jQuery_loaded === true) {
+                script_jQuery_onload();
+            } else {
+                script_jQuery_tag.onload = function() {
+                    script_jQuery_onload();
+                };
+            }
+        {%- else -%}
+            Loader.load();
+        {%- endif -%}
+    </script>
+</div>

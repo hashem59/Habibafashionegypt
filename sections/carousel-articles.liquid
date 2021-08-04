@@ -1,0 +1,263 @@
+{%- if section.settings.blog != blank -%}
+    {% include 'global-variables' %}
+    {%- assign size_of_columns = section.settings.size_of_columns | abs -%}
+    <div data-section-id="{{ section.id }}" data-section-type="carousel-articles" data-postload="carousel_articles">
+        <div class="container">
+            <div class="carousel carousel--preload-spacer{% if section.settings.arrows %} carousel--arrows{% endif %} carousel-articles position-relative">
+                {%- if section.settings.title != blank -%}
+                    <h4 class="carousel__title home-section-title mb-35 text-center"><a href="{{ blogs[section.settings.blog].url }}" class="active">{{ section.settings.title }}</a></h4>
+                {%- endif -%}
+                <div class="carousel__slider position-relative invisible"
+                     data-js-carousel
+                     data-autoplay="{{ section.settings.autoplay }}"
+                     data-speed="{{ section.settings.speed | times: 1000 }}"
+                     data-count="{{ section.settings.size_of_columns }}"
+                     data-infinite="{{ section.settings.infinite }}"
+                     data-arrows="{{ section.settings.arrows }}"
+                     data-bullets="{{ section.settings.bullets }}">
+                    {%- if section.settings.arrows -%}
+                        <div class="carousel__prev position-absolute cursor-pointer" data-js-carousel-prev><i>{% render 'icon-theme-006' %}</i></div>
+                    {%- endif -%}
+                    <div class="carousel__items overflow-hidden">
+                        <div class="carousel__slick row" data-js-carousel-slick>
+                            {%- assign max_count = section.settings.max_items_count -%}
+                            {%- if max_count < size_of_columns -%}
+                                {%- assign max_count = size_of_columns -%}
+                            {%- endif -%}
+                            {%- for article in blogs[section.settings.blog].articles limit: max_count -%}
+                                {%- if section.settings.layout == '1' -%}
+                                    <div class="carousel__item carousel-articles__item carousel-articles__item--layout-01 col-auto d-flex flex-column flex-xl-row align-items-center text-center text-xl-left">
+                                        <a href="{{ article.url }}" class="carousel-articles__image d-block mr-xl-20 w-100">
+                                            {% render 'rimage' with image: article.image size: '270x' format: 'pjpg' alt: article.title disable_lazyload: carousel_articles_image_lazyload_disable %}
+                                        </a>
+                                        <div class="mt-20 mt-xl-0">
+                                            <h3 class="carousel-articles__title mb-0"><a href="{{ article.url }}">{{ article.title | truncate: 66 }}</a></h3>
+                                            {%- if section.settings.show_details -%}
+                                                {% capture author %}{{ article.author | upcase }}{% endcapture %}
+                                                {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+                                                <div class="mt-10 font-italic">{{ 'blogs.article.author_on_date_carousel_html' | t: author: author, date: date }}</div>
+                                            {%- endif -%}
+                                        </div>
+                                    </div>
+                                    {%- elsif section.settings.layout == '2' -%}
+                                    <div class="carousel__item carousel-articles__item carousel-articles__item--layout-02 col-auto d-flex flex-column">
+                                        <a href="{{ article.url }}" class="carousel-articles__image d-block w-100">
+                                            {% render 'rimage' with image: article.image size: '270x' format: 'pjpg' alt: article.title disable_lazyload: carousel_articles_image_lazyload_disable %}
+                                        </a>
+                                        <h3 class="carousel-articles__title mt-20 mb-0"><a href="{{ article.url }}">{{ article.title | truncate: 66 }}</a></h3>
+                                        {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+                                            <div class="rte mt-10">
+                                                {%- if article.excerpt.size > 0 -%}
+                                                    {{ article.excerpt }}
+                                                {%- else -%}
+                                                    <p class="mb-0">{{ article.content | strip_html | truncate: section.settings.max_symbols_count, '' }}</p>
+                                                {%- endif -%}
+                                            </div>
+                                        {%- endif -%}
+                                        {%- if section.settings.show_details -%}
+                                            {% capture author %}{{ article.author | upcase }}{% endcapture %}
+                                            {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+                                            <div class="mt-15 font-italic">{{ 'blogs.article.author_on_date_carousel_html' | t: author: author, date: date }}</div>
+                                        {%- endif -%}
+                                        {%- if section.settings.button_text -%}
+                                            <div class="mt-20">
+                                                <a href="{{ article.url }}" class="btn">{{ section.settings.button_text }}</a>
+                                            </div>
+                                        {%- endif -%}
+                                    </div>
+                                    {%- elsif section.settings.layout == '3' -%}
+                                    <div class="carousel__item carousel-articles__item carousel-articles__item--layout-03 col-auto d-flex flex-column text-center">
+                                        <a href="{{ article.url }}" class="carousel-articles__image d-block w-100">
+                                            {% render 'rimage' with image: article.image size: '270x' format: 'pjpg' alt: article.title disable_lazyload: carousel_articles_image_lazyload_disable %}
+                                        </a>
+                                        <h3 class="carousel-articles__title mt-20 mb-0"><a href="{{ article.url }}">{{ article.title | truncate: 66 }}</a></h3>
+                                        {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+                                            <div class="rte mt-10">
+                                                {%- if article.excerpt.size > 0 -%}
+                                                    {{ article.excerpt }}
+                                                {%- else -%}
+                                                    <p class="mb-0">{{ article.content | strip_html | truncate: section.settings.max_symbols_count, '' }}</p>
+                                                {%- endif -%}
+                                            </div>
+                                        {%- endif -%}
+                                        {%- if section.settings.show_details -%}
+                                            {% capture author %}{{ article.author | upcase }}{% endcapture %}
+                                            {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+                                            <div class="mt-15 font-italic">{{ 'blogs.article.author_on_date_carousel_html' | t: author: author, date: date }}</div>
+                                        {%- endif -%}
+                                        {%- if section.settings.button_text -%}
+                                            <div class="mt-20">
+                                                <a href="{{ article.url }}" class="btn">{{ section.settings.button_text }}</a>
+                                            </div>
+                                        {%- endif -%}
+                                    </div>
+                                {%- endif -%}
+                            {%- endfor -%}
+                        </div>
+                    </div>
+                    {%- if section.settings.arrows -%}
+                        <div class="carousel__next position-absolute cursor-pointer" data-js-carousel-next><i>{% render 'icon-theme-007' %}</i></div>
+                    {%- endif -%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        Loader.require({type: "script", name: "carousel_articles"});
+    </script>
+{%- else -%}
+    {% render 'no-blocks' with message: 'homepage.onboarding.no_content_message.carousel_articles' %}
+{%- endif -%}
+
+{% schema %}
+{
+"name": "Article carousel",
+"settings": [
+{
+"type": "textarea",
+"id": "title",
+"label": "Title"
+},
+{
+"type": "header",
+"content": "General"
+},
+{
+"type": "blog",
+"id": "blog",
+"label": "Blog"
+},
+{
+"type": "select",
+"id": "layout",
+"label": "Layout",
+"default": "1",
+"options": [
+{
+"value": "1",
+"label": "Row"
+},
+{
+"value": "2",
+"label": "Column"
+},
+{
+"value": "3",
+"label": "Centered in the column"
+}
+]
+},
+{
+"type": "range",
+"id": "max_symbols_count",
+"min": 50,
+"max": 500,
+"step": 10,
+"label": "Max length of the description",
+"default": 200
+},
+{
+"type": "checkbox",
+"id": "show_details",
+"label": "Show the post details",
+"default": true
+},
+{
+"type": "text",
+"id": "button_text",
+"label": "Button text",
+"info": "For the 'Column' layout",
+"default": "READ & SHOP"
+},
+{
+"type": "select",
+"id": "size_of_columns",
+"label": "Size of the columns",
+"default": "2",
+"options": [
+{
+"value": "2",
+"label": "2 items in the row"
+},
+{
+"value": "3",
+"label": "3 items in the row"
+},
+{
+"value": "4",
+"label": "4 items in the row"
+}
+]
+},
+{
+"type": "range",
+"id": "max_items_count",
+"min": 2,
+"max": 20,
+"step": 1,
+"label": "Max items count",
+"default": 10
+},
+{
+"type": "header",
+"content": "Slider settings"
+},
+{
+"type": "checkbox",
+"id": "autoplay",
+"label": "Autoplay",
+"default": true
+},
+{
+"type": "range",
+"id": "speed",
+"min": 2,
+"max": 10,
+"step": 1,
+"label": "Autoplay speed (sec)",
+"default": 5
+},
+{
+"type": "checkbox",
+"id": "infinite",
+"label": "Is infinite",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "arrows",
+"label": "Arrows",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "bullets",
+"label": "Bullets",
+"default": true
+},
+{
+"type": "header",
+"content": "Video manual"
+},
+{
+"type": "paragraph",
+"content": "[Home sections](https:\/\/www.youtube.com\/watch?v=QQ6wFwBts4k&list=PLj-506KaR_vcQjwcpC6yII-1JY0bSj7df&index=9)"
+},
+{
+"type": "header",
+"content": "User manual"
+},
+{
+"type": "paragraph",
+"content": "[Articles Carousel](https:\/\/mpthemes.net\/shella-shopify-theme\/documentation-version4\/doc02-02-home-article-carousel.php#articles-carousel)"
+}
+],
+"presets": [
+{
+"name": "Article carousel",
+"category": "2) Carousels"
+}
+]
+}
+{% endschema %}

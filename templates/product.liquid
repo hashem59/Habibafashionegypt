@@ -1,0 +1,5 @@
+{% include 'breadcrumbs' %}
+{% section 'product' %}
+{%- if settings.product_info_page_show_related_products -%}
+    {% section 'carousel-related-products' %}
+{%- endif -%}

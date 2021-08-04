@@ -1,0 +1,64 @@
+{% include 'global-variables' %}
+<div class="collections js-collections pb-10">
+    <div data-js-collection-replace="breadcrumbs">
+        {% include 'breadcrumbs' %}
+    </div>
+    {%- if settings.collection_enable_fullwidth_head_section -%}
+        {% section 'collection-fullwidth-head' %}
+    {%- endif -%}
+    {% capture collection_head_html %}
+        {% section 'collection-head' %}
+    {% endcapture %}
+    <div class="container mt-10 mt-lg-{{ offset_collection_page_content_margin_top_d }}">
+        <div class="row mb-40 mb-lg-{{ offset_collection_page_pagination_margin_bottom_d }}">
+            {%- if settings.collection_sidebar_position == 'dropdown' -%}
+                <div class="collections__sidebar collections__sidebar--dropdown d-none">
+                    {% section 'collection-sidebar' %}
+                </div>
+            {%- elsif settings.collection_sidebar_position == 'top' -%}
+                {%- if content_for_header contains 'Shopify.designMode' -%}
+                    {%- assign is_design_mode = true -%}
+                {%- endif -%}
+                <div class="collections__sidebar collections__sidebar--top {% if is_design_mode %}w-100 mt-20{% else %}d-none{% endif %}">
+                    {% section 'collection-sidebar' %}
+                </div>
+            {%- elsif settings.collection_show_sidebar != 'hide' -%}
+                <div class="collections__sidebar collections__sidebar--width-md d-none col-auto d-lg-block collections__sidebar--{% if settings.collection_sidebar_position == 'right' %}right order-2{% else %}left{% endif %}{% if settings.collection_enable_sticky %} sticky-sidebar js-sticky-sidebar{% endif %}">
+                    {%- if settings.collection_enable_sticky -%}
+                        <div data-js-sticky-sidebar-body>
+                    {%- endif -%}
+                            <div data-js-position-desktop="sidebar">
+                                {% section 'collection-sidebar' %}
+                            </div>
+                    {%- if settings.collection_enable_sticky -%}
+                        </div>
+                    {%- endif -%}
+                </div>
+            {%- endif -%}
+            <div class="collections__body col pb-25" data-js-collections-body>
+                {{ collection_head_html }}
+                {%- assign collection_builder_mode_handle = settings.collection_builder_mode | replace: '|', '___' | handleize | split: '___' -%}
+                {%- if collection_builder_mode_handle contains collection.handle -%}
+                    {%- assign builder_mode = true -%}
+                {%- endif -%}
+                <div data-js-collection-replace="banner-builder" data-js-collection-replace-only-full{% unless builder_mode %} class="d-none-important"{% endunless %}>
+                    {%- if builder_mode -%}
+                        {% section 'collection-builder' %}
+                    {%- endif -%}
+                </div>
+                {% section 'collection-body' %}
+            </div>
+        </div>
+    </div>
+    {%- if settings.collection_enable_product_carousel_section -%}
+        <div class="pb-60">
+            {% section 'carousel-products' %}
+        </div>
+    {%- endif -%}
+</div>
+
+{%- if settings.collection_enable_sticky -%}
+    <script>
+        Loader.require({type: "script", name: "sticky_sidebar"});
+    </script>
+{%- endif -%}

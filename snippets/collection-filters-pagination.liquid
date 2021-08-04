@@ -1,0 +1,89 @@
+<div class="pagination">
+    {%- if filter_by_tags != blank -%}
+        {% capture paginate_tags_url %}tg_:{{ filter_by_tags | join: '+tg_:' }}{% endcapture %}
+    {%- endif -%}
+    {%- if filter_only_available_enable != blank -%}
+        {% capture paginate_tags_url %}{{ paginate_tags_url }}{% if paginate_tags_url != blank %}+{% endif %}oa_:{{ filter_only_available_enable }}{% endcapture %}
+    {%- endif -%}
+    {%- if filter_logic_or_enable != blank -%}
+        {% capture paginate_tags_url %}{{ paginate_tags_url }}{% if paginate_tags_url %}+{% endif %}lo_:{{ filter_logic_or_enable }}{% endcapture %}
+    {%- endif -%}
+    {%- if sort_by != collection.default_sort_by -%}
+        {% capture paginate_sort_by_url %}&sort_by={{ sort_by }}{% endcapture %}
+    {%- endif -%}
+    {%- if view_length != default_view_length_abs -%}
+        {% capture paginate_view_url %}&view={{ view_length }}{% endcapture %}
+    {%- endif -%}
+    {% capture paginate_url %}{{ shop.url }}/collections/{{ collection.handle }}?q={% if paginate_tags_url %}{{ paginate_tags_url }}+{% endif %}{% endcapture %}
+    {%- if pagination_type == 'button_load_more' -%}
+        <div class="d-flex justify-content-center mt-35">
+            {%- if paginate_current_page < paginate_pages -%}
+                {%- assign value = paginate_current_page | plus: 1 -%}
+                <a href="{{ paginate_url }}pg_:{{ value }}{{ paginate_sort_by_url }}{{ paginate_view_url }}" data-value="{{ value }}" class="btn">
+                    <span>{{ 'layout.paginate.load_more' | t }}</span>
+                </a>
+            {%- else -%}
+                <div class="btn" disabled="disabled">
+                    <span>{{ 'layout.paginate.no_more_products' | t }}</span>
+                </div>
+            {%- endif -%}
+        </div>
+    {%- elsif pagination_type == 'infinite_scroll' -%}
+        <div class="d-flex justify-content-center mt-35 pointer-events-none">
+            {%- if paginate_current_page < paginate_pages -%}
+                {%- assign value = paginate_current_page | plus: 1 -%}
+                <a href="{{ paginate_url }}pg_:{{ value }}{{ paginate_sort_by_url }}{{ paginate_view_url }}" data-value="{{ value }}" class="btn">
+                    <span>{{ 'layout.paginate.infinite_scroll' | t }}</span>
+                </a>
+            {%- else -%}
+                <div class="btn" disabled="disabled">
+                    <span>{{ 'layout.paginate.no_more_products' | t }}</span>
+                </div>
+            {%- endif -%}
+        </div>
+    {%- elsif pagination_type == 'classic' or pagination_type == 'centered_classic' -%}
+        <div class="d-flex align-items-center{% if pagination_type == 'centered_classic' %} justify-content-center{% endif %} mt-35">
+            {%- if paginate_current_page > 1 -%}
+                <span class="pagination__prev px-7">
+                    {%- assign value = paginate_current_page | minus: 1 -%}
+                    <a href="{{ paginate_url }}pg_:{{ value }}{{ paginate_sort_by_url }}{{ paginate_view_url }}" data-value="{{ value }}" class="btn">{{ 'layout.paginate.previous' | t }}</a>
+                  </span>
+            {%- endif -%}
+            {%- assign delimiter_from = paginate_current_page | minus: 3 -%}
+            {%- assign delimiter_to = paginate_current_page | plus: 3 -%}
+            {%- assign limit_from = 1 -%}
+            {%- assign limit_to = paginate_pages -%}
+            {%- if delimiter_from > 1 -%}
+                {%- assign limit_from = delimiter_from | plus: 1 -%}
+            {%- endif -%}
+            {%- if delimiter_to < paginate_pages -%}
+                {%- assign limit_to = delimiter_to | minus: 1 -%}
+            {%- endif -%}
+            {%- for page in (1..paginate_pages) -%}
+                {%- if forloop.index > 1 and forloop.index < paginate_pages -%}
+                    {% if forloop.index < limit_from or forloop.index > limit_to %}
+                        {%- if forloop.index == delimiter_from or forloop.index == delimiter_to -%}
+                            <span class="pagination__page px-7">...</span>
+                        {%- endif -%}
+                        {%- continue -%}
+                    {%- endif -%}
+                {%- endif -%}
+                {%- if page != paginate_current_page -%}
+                    <span class="pagination__page px-7">
+                      <a href="{{ paginate_url }}{% if page != 1 %}pg_:{{ page }}{{ paginate_sort_by_url }}{{ paginate_view_url }}{% endif %}" data-value="{{ page }}">{{ page }}</a>
+                    </span>
+                {%- else -%}
+                    <span class="pagination__page current px-7">
+                      {{ page }}
+                    </span>
+                {%- endif -%}
+            {%- endfor -%}
+            {%- if paginate_current_page < paginate_pages -%}
+                <span class="pagination__next px-7">
+                    {%- assign value = paginate_current_page | plus: 1 -%}
+                    <a href="{{ paginate_url }}pg_:{{ value }}{{ paginate_sort_by_url }}{{ paginate_view_url }}" data-value="{{ value }}" class="btn">{{ 'layout.paginate.next' | t }}</a>
+                  </span>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+</div>

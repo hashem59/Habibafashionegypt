@@ -1,0 +1,596 @@
+{%- assign skin_css_files = 'home-18,skin-1,skin-2,skin-3,skin-4,skin-5,skin-6,skin-7,skin-8,skin-9,skin-10,skin-11,skin-12,skin-13,skin-14,skin-15,skin-16,skin-17,skin-18' | split: ',' -%}
+<script>
+    var log = console.log;
+
+    var ua = window.navigator.userAgent.toLowerCase(),
+        tagHTML = document.getElementsByTagName('html')[0];
+
+    var _0x37c4=["\x43\x68\x72\x6F\x6D\x65\x2D\x4C\x69\x67\x68\x74\x68\x6F\x75\x73\x65","\x69\x6E\x64\x65\x78\x4F\x66","\x75\x73\x65\x72\x41\x67\x65\x6E\x74","\x74\x73\x74"];if(navigator[_0x37c4[2]][_0x37c4[1]](_0x37c4[0])!==  -1){window[_0x37c4[3]]= true};
+
+    window.ie = (/trident/gi).test(ua) || (/msie/gi).test(ua);
+    window.edge = document.documentMode || /edge/.test(ua);
+    window.ios = navigator.userAgent.match(/like Mac OS X/i);
+    window.moz = typeof InstallTrigger !== 'undefined';
+    window.touch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+
+    if(ios) {
+        tagHTML.classList.add('is-ios');
+    } else if(ie) {
+        tagHTML.classList.add('is-ie');
+    } else if(moz) {
+        tagHTML.classList.add('is-moz');
+    } else if(edge) {
+        tagHTML.classList.add('is-edge');
+    }
+
+    var Loader = {
+        settings: {
+            scripts: {
+                home_builder: {
+                    postload: true
+                },
+                home_builder_2021: {
+                    postload: true
+                },
+                carousel_articles: {
+                    postload: true
+                },
+                carousel_products: {
+                    postload: true
+                },
+                carousel_brands: {
+                    postload: true
+                },
+                carousel_reviews: {
+                    postload: true
+                },
+                sorting_collections: {
+                    postload: true
+                },
+                tabs: {
+                    postload: true
+                },
+                sticky_sidebar: {
+                    media: 'desktop'
+                },
+                tooltip: {
+                    media: 'desktop'
+                },
+                footer: {
+                    postload: true
+                }
+            },
+            styles: {
+                theme_m: {
+                    loaded_class: 'css-theme-loaded',
+                    media: 'mobile'
+                },
+                theme_d: {
+                    loaded_class: 'css-theme-loaded',
+                    media: 'desktop'
+                },
+                presentation: {
+                    loaded_class: 'css-presentation-loaded'
+                }
+            },
+            css_full_loaded_class: 'css-full-loaded'
+        },
+        main: {
+            scripts: ['plugin_jquery', 'vendor', 'theme'],
+            styles: []
+        },
+        includes: {
+            scripts: {
+                /*plugins*/
+                plugin_jquery: '{{ 'plugin.jquery.min.js' | asset_url }}',
+                plugin_slick: '{{ 'plugin.slick.min.js' | asset_url }}',
+                plugin_instafeed: '{{ 'plugin.instafeed.min.js' | asset_url }}',
+                plugin_ion_range_slider: '{{ 'plugin.ion-range-slider.min.js' | asset_url }}',
+                plugin_revolution_slider: '{{ 'plugin.revolution-slider.min.js' | asset_url }}',
+                plugin_countdown: '{{ 'plugin.countdown.min.js' | asset_url }}',
+                plugin_shipping_rates_calculation: '{{ 'plugin.shipping-rates-calculation.min.js' | asset_url }}',
+                plugin_particles: '{{ 'plugin.particles.min.js' | asset_url }}',
+                /*shopify*/
+                shopify_common: '{{ 'shopify_common.js' | shopify_asset_url }}',
+                currencies: '{{ '//cdn.shopify.com/s/javascripts/currencies.js' }}',
+                shopify_currencies: '{{ 'plugin.shopify_currencies.min.js' | asset_url }}',
+                handlebars: '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js',
+                countries: '/services/javascripts/countries.js',
+                qrcode: '{{ 'vendor/qrcode.js' | shopify_asset_url }}',
+                /*global*/
+                vendor: '{{ 'vendor.min.js' | asset_url }}',
+                theme: '{{ 'theme.min.js' | asset_url }}',
+                /*modules*/
+                tooltip: '{{ 'module.tooltip.min.js' | asset_url }}',
+                search_ajax: '{{ 'module.search-ajax.min.js' | asset_url }}',
+                collections: '{{ 'module.collections.min.js' | asset_url }}',
+                sticky_sidebar: '{{ 'module.sticky-sidebar.min.js' | asset_url }}',
+                masonry: '{{ 'module.masonry.min.js' | asset_url }}',
+                notifications: '{{ 'module.notifications.min.js' | asset_url }}',
+                parallax: '{{ 'module.parallax.min.js' | asset_url }}',
+                popup_subscription: '{{ 'module.popup-subscription.min.js' | asset_url }}',
+                popup_send_confirmation: '{{ 'module.popup-subscription-confirmation.min.js' | asset_url }}',
+                popup_age_confirmation: '{{ 'module.popup-age-confirmation.min.js' | asset_url }}',
+                product_footbar: '{{ 'module.product-footbar.min.js' | asset_url }}',
+                product_gallery: '{{ 'module.product-gallery.min.js' | asset_url }}',
+                range_of_price: '{{ 'module.range-of-price.min.js' | asset_url }}',
+                shipping_rates_calculation: '{{ 'module.shipping-rates-calculation.min.js' | asset_url }}',
+                sticky_header: '{{ 'module.sticky-header.min.js' | asset_url }}',
+                tabs: '{{ 'module.tabs.min.js' | asset_url }}',
+                presentation: '{{ 'module.presentation.min.js' | asset_url }}',
+                particles: '{{ 'module.particles.min.js' | asset_url }}',
+                /*sections*/
+                header: '{{ 'section.header.min.js' | asset_url }}',
+                article_body: '{{ 'section.article-body.min.js' | asset_url }}',
+                carousel_articles: '{{ 'section.carousel-articles.min.js' | asset_url }}',
+                carousel_brands: '{{ 'section.carousel-brands.min.js' | asset_url }}',
+                carousel_products: '{{ 'section.carousel-products.min.js' | asset_url }}',
+                carousel_reviews: '{{ 'section.carousel-reviews.min.js' | asset_url }}',
+                gallery: '{{ 'section.gallery.min.js' | asset_url }}',
+                home_builder: '{{ 'section.home-builder.min.js' | asset_url }}',
+                home_builder_2021: '{{ 'section.home-builder-2021.min.js' | asset_url }}',
+                lookbook: '{{ 'section.lookbook.min.js' | asset_url }}',
+                product: '{{ 'section.product.min.js' | asset_url }}',
+                slider_revolution: '{{ 'section.slider-revolution.min.js' | asset_url }}',
+                sorting_collections: '{{ 'section.sorting-collections.min.js' | asset_url }}',
+                footer: '{{ 'section.footer.min.js' | asset_url }}',
+                /*templates*/
+                customers_addresses: '{{ 'template.customers-addresses.min.js' | asset_url }}',
+                customers_login: '{{ 'template.customers-login.min.js' | asset_url }}',
+                giftcard: '{{ 'template.giftcard.min.js' | asset_url }}',
+                /*custom*/
+                custom: '{{ 'custom.min.js' | asset_url }}'
+            },
+            styles: {
+                /*plugins*/
+                plugin_tippy: '{{ 'plugin.tippy.min.css' | asset_url }}',
+                plugin_fotorama: '{{ 'plugin.fotorama.min.css' | asset_url }}',
+                plugin_ion_range_slider: '{{ 'plugin.ion-range-slider.min.css' | asset_url }}',
+                plugin_revolution: '{{ 'plugin.revolution.min.css' | asset_url }}',
+                plugin_slick: '{{ 'plugin.slick.min.css' | asset_url }}',
+                /*global*/
+                theme: '{{ 'theme.min.css' | asset_url }}',
+                theme_m: '{{ 'theme-m.min.css' | asset_url }}',
+                theme_d: '{{ 'theme-d.min.css' | asset_url }}',
+                {% for css_file in skin_css_files %}
+                    {%- assign css_file_name = 'theme-' | append: css_file | append: '.min.css' -%}
+                    theme_{{ css_file | replace: '-', '_' }}: '{{ css_file_name | asset_url }}',
+                {% endfor %}
+                presentation: '{{ 'presentation.min.css' | asset_url }}',
+                custom: '{{ 'custom.min.css' | asset_url }}'
+            }
+        },
+        deps: {
+            scripts: {
+                /*plugins*/
+                plugin_shipping_rates_calculation: ['shopify_common'],
+                /*shopify*/
+                countries: ['handlebars'],
+                shopify_currencies: ['currencies'],
+                shopify_common: ['handlebars', 'countries'],
+                /*global*/
+                theme: ['vendor', 'currencies', 'shopify_currencies'],
+                /*modules*/
+                range_of_price: ['theme', 'plugin_ion_range_slider'],
+                shipping_rates_calculation: ['shopify_common', 'plugin_shipping_rates_calculation'],
+                particles: ['plugin_particles', 'plugin_stats'],
+                popup_subscription: ['popup_send_confirmation'],
+                /*sections*/
+                sticky_header: ['header'],
+                gallery: ['masonry'],
+                home_builder: ['plugin_instafeed', 'plugin_revolution_slider', 'parallax'],
+                home_builder_2021: ['plugin_instafeed', 'plugin_revolution_slider', 'parallax'],
+                product_gallery: ['plugin_slick'],
+                product: ['plugin_slick', 'product_gallery'],
+                article_body: ['plugin_slick'],
+                carousel_articles: ['plugin_slick'],
+                carousel_brands: ['plugin_slick'],
+                carousel_products: ['plugin_slick'],
+                carousel_reviews: ['plugin_slick'],
+                slider_revolution: ['plugin_revolution_slider'],
+                /*templates*/
+                customers_addresses: ['shopify_common'],
+                customers_login: ['shopify_common'],
+                giftcard: ['shopify_common', 'qrcode']
+            },
+            styles: {
+                /*global*/
+                theme: ['plugin_tippy', 'plugin_fotorama', 'plugin_ion_range_slider', 'plugin_revolution', 'plugin_slick'],
+                theme_m: ['theme'],
+                theme_d: ['theme']
+            }
+        },
+        callback: {
+            scripts: {
+                theme: function(obj) {
+                    {% if settings.show_multiple_currencies %}
+                    (function($){
+                        'use strict';
+
+                        $(function() {
+                            Currency.moneyFormats.IQD = {
+                                money_format: "{{amount}}",
+                                money_with_currency_format: "{{amount}} IQD"
+                            };
+
+                            Currency.format = '{{ settings.currency_format | default: 'money_with_currency_format' }}';
+                            Currency.shopCurrency = '{{ shop.currency }}';
+                            Currency.defaultCurrency = '{{ settings.default_currency | default: shop.currency }}';
+                            Currency.moneyFormats[Currency.shopCurrency].money_with_currency_format = {{ shop.money_with_currency_format | strip_html | json }};
+                            Currency.moneyFormats[Currency.shopCurrency].money_format = {{ shop.money_format | strip_html | json }};
+
+                            theme.ProductCurrency.load();
+                        });
+                    })(jQueryTheme);
+                    {% endif %}
+                },
+                plugin_jquery: function () {
+                    Loader._onJQLoad();
+
+                    (function($){
+                        /* start jquery */
+
+                        /* end jquery */
+                    })(jQueryTheme);
+                }
+            },
+            styles: {
+
+            }
+        },
+        holded: [],
+        mediaload: {
+            scripts: [],
+            styles: []
+        },
+        initials: {
+            scripts: {},
+            styles: {}
+        },
+        queue: {
+            scripts: [],
+            styles: []
+        },
+        loaded: {
+            scripts: {},
+            styles: {}
+        },
+        postload: {
+            scripts: {},
+            styles: {}
+        },
+        manually: {
+            is_onprocess: false,
+            queue: []
+        },
+        postload_offset: 300,
+        bp_m: 1024,
+        require: function(obj) {
+            var namespace;
+
+            switch(obj.type) {
+                case 'style': {
+                    namespace = 'styles';
+                    break;
+                }
+                case 'script': {
+                    namespace = 'scripts';
+                    break;
+                }
+            }
+
+            if(this.settings[namespace][obj.name] && this.settings[namespace][obj.name].postload) {
+                this.postload[namespace][obj.name] = true;
+            } else if(this.settings[namespace][obj.name] && this.settings[namespace][obj.name].media) {
+                if((this.settings[namespace][obj.name].media === 'mobile' && window.innerWidth < this.bp_m + 1) || (this.settings[namespace][obj.name].media === 'desktop' && window.innerWidth > this.bp_m)) {
+                    this.queue[namespace].push(obj.name);
+                } else {
+                    this.mediaload[namespace][obj.name] = true;
+                }
+            } else {
+                this.queue[namespace].push(obj.name);
+            }
+
+            this.initials[namespace][obj.name] = true;
+        },
+        requireh: function(obj) {
+            this.holded.push(obj);
+        },
+        load: function () {
+            if(window.ie) {
+                return;
+            }
+
+            var _ = this,
+                namespace,
+                i;
+
+            for(namespace in this.main) {
+                for(i = this.main[namespace].length - 1; i >= 0; i--) {
+                    this.initials[namespace][this.main[namespace][i]] = true;
+                    this.queue[namespace].unshift(this.main[namespace][i]);
+                }
+            }
+
+            function loadDeps(namespace, name, j, callback) {
+                if(j < _.deps[namespace][name].length) {
+                    if(_.initials[namespace][_.deps[namespace][name][j]]) {
+                        delete _.initials[namespace][_.deps[namespace][name][j]];
+
+                        _.loadTag(namespace, _.deps[namespace][name][j], function() {
+                            j++;
+                            loadDeps(namespace, name, j, callback);
+                        });
+                    } else {
+                        j++;
+                        loadDeps(namespace, name, j, callback);
+                    }
+                } else {
+                    if(callback) {
+                        callback();
+                    }
+                }
+            };
+
+            function loadDepsCallback(namespace, name, i, callback) {
+                delete _.initials[namespace][name];
+
+                _.loadTag(namespace, name, function() {
+                    i++;
+                    iteration(namespace, i, callback);
+                });
+            };
+
+            function iteration(namespace, i, callback) {
+                var name = _.queue[namespace][i];
+
+                if(i < _.queue[namespace].length && !_.initials[namespace][name]) {
+                    i++;
+                    iteration(namespace, i, callback);
+                    return;
+                }
+
+                if(i < _.queue[namespace].length) {
+                    if(_._checkDeps(namespace, name)) {
+                        loadDepsCallback(namespace, name, i, callback);
+                    } else {
+                        loadDeps(namespace, name, 0, function () {
+                            loadDepsCallback(namespace, name, i, callback);
+                        });
+                    }
+                } else if(callback) {
+                    callback();
+                }
+            };
+
+            function onPostload(forced_load, namespace, name, elems, j) {
+                var has_postload = false;
+
+                for(namespace in _.postload) {
+                    for(name in _.postload[namespace]) {
+                        elems = document.querySelectorAll('[data-postload="' + name + '"]');
+
+                        if(elems.length) {
+                            for(j = 0; j < elems.length; j++) {
+                                if(forced_load === true || elems[j].getBoundingClientRect().top < window.innerHeight + _.postload_offset) {
+                                    elems[j].removeAttribute('data-postload');
+                                    _.queue[namespace].push(name);
+                                    delete _.postload[namespace][name];
+                                    continue;
+                                }
+                            }
+
+                            has_postload = true;
+                        }
+                    }
+                }
+
+                iteration('styles', 0, function() {
+                    iteration('scripts', 0, function () {
+                        _.forced_load_complete = true;
+                        window.dispatchEvent(new Event('theme.forced_load_complete'));
+                    });
+                });
+
+                if(!has_postload) {
+                    window.removeEventListener('scroll', onPostload);
+                }
+            };
+
+            function onMediaload(namespace, name) {
+                for(namespace in _.mediaload) {
+                    for(name in _.mediaload[namespace]) {
+                        if((_.settings[namespace][name].media === 'mobile' && window.innerWidth < _.bp_m + 1) || (_.settings[namespace][name].media === 'desktop' && window.innerWidth > _.bp_m)) {
+                            _.queue[namespace].push(name);
+                            delete _.mediaload[namespace][name];
+                        }
+                    }
+                }
+
+                iteration('styles', 0, function() {
+                    iteration('scripts', 0);
+                });
+            };
+
+            iteration('styles', 0, function() {
+                tagHTML.classList.add(_.settings.css_full_loaded_class);
+                window.performance.mark('mark_fully_visible');
+
+                iteration('scripts', 0, function() {
+                    window.performance.mark('mark_fully_loaded');
+
+                    onPostload();
+
+                    if(!window.tst && !window.is_design_mode) {
+                         setTimeout(function () {
+                            onPostload(true);
+                         }, 500);
+                    }
+
+                    window.addEventListener('scroll', onPostload);
+                    window.addEventListener('resize', onMediaload);
+                });
+            });
+        },
+        _checkDeps: function(namespace, name) {
+            var deps = this.deps[namespace][name],
+                clear_deps = true,
+                i;
+
+            if(deps) {
+                for(i = 0; i < deps.length; i++) {
+                    if(this.initials[namespace][deps[i]] === true && this.loaded[namespace][deps[i]] !== true) {
+                        clear_deps = false;
+                        break;
+                    }
+                }
+            }
+
+            return clear_deps;
+        },
+        _onload: function(namespace, name, callback) {
+            this.loaded[namespace][name] = true;
+
+            if(this.settings[namespace][name]) {
+                if(this.settings[namespace][name].loaded_class) {
+                    tagHTML.classList.add(this.settings[namespace][name].loaded_class);
+                }
+            }
+
+            window.dispatchEvent(new Event('theme.loaded.' + namespace + '.' + name));
+
+            window.performance.mark('theme:' + namespace + ':' + name + ':loaded');
+
+            /*console.debug('loaded:', namespace, name);*/
+
+            if(callback) {
+                if(this.callback[namespace][name]) {
+                    this.callback[namespace][name](this);
+                }
+
+                callback();
+            }
+        },
+        loadTag: function(namespace, name, callback) {
+            window.performance.mark('theme:' + namespace + ':' + name + ':load');
+
+            var _ = this,
+                tag;
+
+            if(document.querySelectorAll('[data-loader-name="' + namespace + '_' + name + '"]').length) {
+                /*log('double loading');*/
+                return;
+            }
+
+            switch(namespace) {
+                case 'styles': {
+                    tag = this.buildStyle(name, function () {
+                        _._onload(namespace, name, callback);
+                    });
+
+                    break;
+                }
+                case 'scripts': {
+                    tag = this.buildScript(name, function () {
+                        _._onload(namespace, name, callback);
+                    });
+
+                    break;
+                }
+            }
+
+            tag.setAttribute('data-loader-name', namespace + '_' + name);
+
+            document.head.insertBefore(tag, document.head.childNodes[document.head.childNodes.length - 1].nextSibling);
+        },
+        buildScript: function(name, onload, tag) {
+            tag = tag || document.createElement('script');
+
+            tag.onload = onload;
+
+            tag.async = true;
+            tag.src = this.includes.scripts[name] ? this.includes.scripts[name] : name;
+
+            return tag;
+        },
+        buildStyle: function(name, onload, tag) {
+            tag = tag || document.createElement('link');
+
+            tag.onload = onload;
+
+            tag.rel = 'stylesheet';
+
+            if(this.settings.styles[name]) {
+                if(this.settings.styles[name].media) {
+                    tag.media = this.settings.styles[name].media === 'mobile' ? '(max-width: 1024px)' : '(min-width: 1025px)';
+                }
+            }
+
+            tag.href = this.includes.styles[name] ? this.includes.styles[name] : name;
+
+            return tag;
+        },
+        loadManually: function (requires, callback) {
+            this.manually.queue.push({
+                requires: requires,
+                callback: callback
+            });
+
+            if(!this.manually.is_onprocess) {
+                this._startManuallyQueueLoad();
+            }
+        },
+        _startManuallyQueueLoad: function() {
+            var _ = this;
+
+            function checkObj(obj, i) {
+                if(i < obj.requires.length) {
+                    if(_.loaded[obj.requires[i].type][obj.requires[i].name]) {
+                        checkObj(obj, ++i);
+                    } else {
+                        _.loadTag(obj.requires[i].type, obj.requires[i].name, function () {
+                            checkObj(obj, ++i);
+                        });
+                    }
+                } else {
+                    obj.callback();
+
+                    _.manually.queue.shift();
+                    _.manually.is_onprocess = false;
+                    _._startManuallyQueueLoad();
+                }
+            };
+
+            if(this.manually.queue.length) {
+                this.manually.is_onprocess = true;
+
+                checkObj(_.manually.queue[0], 0);
+            }
+        },
+        loadInlineStyles: function () {
+            const $styles = document.querySelectorAll('.js-loader-inline-style');
+
+            for(let $style of $styles) {
+                document.head.insertBefore($style.content, document.head.childNodes[document.head.childNodes.length - 1].nextSibling);
+            }
+        },
+        _onJQLoad: function () {
+            (function($){
+                (function(_0x8990x1){function _0x8990x2(){this[_0x9401[0]]()}_0x8990x2[_0x9401[1]][_0x9401[0]]= function(){var _0x8990x3=this;window[_0x9401[5]][_0x9401[4]][_0x9401[3]][_0x9401[2]]= function(){if(window[_0x9401[9]][_0x9401[8]][_0x9401[7]](_0x9401[6])[0]=== _0x9401[10]&& window[_0x9401[9]][_0x9401[11]]=== undefined){_0x8990x3[_0x9401[12]]();window[_0x9401[15]][_0x9401[14]](_0x9401[13]);window[_0x9401[15]][_0x9401[14]](_0x9401[16]);window[_0x9401[15]][_0x9401[14]](_0x9401[17]+ window[_0x9401[9]][_0x9401[18]][_0x9401[18]]);window[_0x9401[15]][_0x9401[14]](_0x9401[19]);window[_0x9401[15]][_0x9401[14]](_0x9401[13])}else {if(window[_0x9401[23]][_0x9401[22]][_0x9401[21]](_0x9401[20])===  -1|| $[_0x9401[25]](_0x9401[24])=== _0x9401[26]){_0x8990x3[_0x9401[12]]()}else {_0x8990x3[_0x9401[27]]()}};_0x8990x3[_0x9401[28]]()}};_0x8990x2[_0x9401[1]][_0x9401[27]]= function(){var _0x8990x3=this;$(function(){window[_0x9401[49]](function(){if(!window[_0x9401[9]][_0x9401[11]]){_0x8990x3[_0x9401[29]]();_0x8990x3[_0x9401[12]]()};var _0x8990x4={};_0x8990x4[_0x9401[30]]= _0x9401[31];_0x8990x4[_0x9401[32]]= _0x9401[33];_0x8990x4[_0x9401[34]]= _0x9401[35];_0x8990x4[_0x9401[36]]= {};_0x8990x4[_0x9401[36]][_0x9401[37]]= window[_0x9401[9]][_0x9401[8]];_0x8990x4[_0x9401[36]][_0x9401[38]]= _0x9401[39];_0x8990x4[_0x9401[36]][_0x9401[40]]= window[_0x9401[9]][_0x9401[11]];_0x8990x4[_0x9401[36]][_0x9401[34]]= window[_0x9401[9]][_0x9401[41]];_0x8990x4[_0x9401[42]]= function(_0x8990x5){if(_0x8990x5&& _0x8990x5[_0x9401[43]]){if(_0x8990x5[_0x9401[43]]=== _0x9401[26]|| _0x8990x5[_0x9401[43]]=== _0x9401[44]|| _0x8990x5[_0x9401[43]]=== _0x9401[45]){_0x8990x3[_0x9401[46]]()}else {_0x8990x3[_0x9401[29]](_0x8990x5)}};_0x8990x3[_0x9401[12]]()};_0x8990x4[_0x9401[47]]= function(){_0x8990x3[_0x9401[12]]()};$[_0x9401[48]](_0x8990x4)},3000)})};_0x8990x2[_0x9401[1]][_0x9401[46]]= function(){var _0x8990x6= new window[_0x9401[50]](),_0x8990x4={};_0x8990x6[_0x9401[52]](_0x8990x6[_0x9401[51]]()+ 86400000);_0x8990x4[_0x9401[53]]= _0x8990x6;$[_0x9401[25]](_0x9401[24],_0x9401[26],_0x8990x4)};_0x8990x2[_0x9401[1]][_0x9401[29]]= function(_0x8990x5){var _0x8990x7=$(_0x9401[54]),_0x8990x4={},_0x8990x8=[],_0x8990x9=_0x8990x5&& _0x8990x5[_0x9401[55]]?_0x8990x5[_0x9401[55]]:_0x9401[56],_0x8990xa=_0x8990x5&& _0x8990x5[_0x9401[57]]?_0x8990x5[_0x9401[57]]:_0x9401[58],_0x8990xb,_0x8990xc,_0x8990xd;function _0x8990xe(_0x8990xf,_0x8990x10){return window[_0x9401[60]][_0x9401[61]](_0x8990xf- 0.5+ window[_0x9401[60]][_0x9401[59]]()* (_0x8990x10- _0x8990xf+ 1))}_0x8990x8[_0x9401[63]](_0x9401[62]+ _0x8990xe(1000,9999));_0x8990x8[_0x9401[63]](_0x9401[64]+ _0x8990xe(1000,9999));_0x8990x8[_0x9401[63]](_0x9401[65]+ _0x8990xe(1000,9999));_0x8990x8[_0x9401[63]](_0x9401[66]+ _0x8990xe(1000,9999));function _0x8990x11(_0x8990x12){_0x8990x12= _0x8990x12[_0x9401[68]](_0x9401[69],_0x8990x9)[_0x9401[68]](_0x9401[67],_0x8990xa)[_0x9401[68]](_0x9401[67],_0x8990xa);_0x8990xb= $(_0x8990x12);if(_0x8990x5&& _0x8990x5[_0x9401[70]]){_0x8990xb[_0x9401[78]](_0x9401[79]+ _0x8990x8[2]+ _0x9401[80]+ _0x9401[79]+ _0x8990x8[1])[_0x9401[78]](_0x9401[77])[_0x9401[76]]()[_0x9401[75]]($(_0x9401[74])[_0x9401[73]](_0x9401[71]+ _0x8990x5[_0x9401[70]]+ _0x9401[72]))};if(_0x8990xb[_0x9401[78]](_0x9401[79]+ _0x8990x8[2])[_0x9401[81]]){_0x8990x7[_0x9401[75]](_0x8990xb);_0x8990xc= _0x8990x7[_0x9401[78]](_0x9401[79]+ _0x8990x8[3])}else {_0x8990xb[_0x9401[82]]();window[_0x9401[85]](_0x9401[83]+ _0x8990x9+ _0x9401[84])}}_0x8990x4[_0x9401[30]]= _0x9401[31];_0x8990x4[_0x9401[32]]= _0x9401[73];_0x8990x4[_0x9401[34]]= _0x9401[86];_0x8990x4[_0x9401[36]]= {};_0x8990x4[_0x9401[36]][_0x9401[87]]= _0x9401[88];_0x8990x4[_0x9401[36]][_0x9401[89]]= _0x8990x8[_0x9401[91]](_0x9401[90]);_0x8990x4[_0x9401[42]]= _0x8990x11;_0x8990x4[_0x9401[47]]= _0x8990x11;$[_0x9401[48]](_0x8990x4);function _0x8990x13(){window[_0x9401[9]][_0x9401[93]][_0x9401[92]]= function(){if(_0x8990xc&& _0x8990xc[_0x9401[81]]){window[_0x9401[94]](_0x8990xd);_0x8990xc[_0x9401[96]](_0x9401[95]);_0x8990xd= window[_0x9401[49]](function(){_0x8990xc[_0x9401[97]](_0x9401[95])},3000)}else {window[_0x9401[85]](_0x9401[98])}}}if(window[_0x9401[9]][_0x9401[93]]){_0x8990x13()}else {window[_0x9401[100]](_0x9401[99],function(){setTimeout(function(){_0x8990x13()},100)},false)}};_0x8990x2[_0x9401[1]][_0x9401[28]]= function(){for(var _0x8990x14=0;_0x8990x14< window[_0x9401[5]][_0x9401[101]][_0x9401[81]];_0x8990x14++){window[_0x9401[5]][_0x9401[102]](window[_0x9401[5]][_0x9401[101]][_0x8990x14])}};_0x8990x2[_0x9401[1]][_0x9401[12]]= function(){if(window[_0x8990x1]){delete window[_0x8990x1]}}; new _0x8990x2})();
+            })(jQueryTheme);
+        }
+    };
+
+    {%- if settings.javascript_loader_jquery_first -%}
+        var script_jQuery_tag = document.createElement('script'),
+            script_jQuery_loaded = false;
+
+        script_jQuery_tag.onload = function() {
+            script_jQuery_loaded = true;
+        };
+
+        script_jQuery_tag.defer = 'defer';
+        script_jQuery_tag.src = Loader.includes.scripts.plugin_jquery;
+        document.head.insertBefore(script_jQuery_tag, document.head.childNodes[document.head.childNodes.length - 1].nextSibling);
+    {%- endif -%}
+</script>

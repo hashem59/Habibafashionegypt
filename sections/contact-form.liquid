@@ -1,0 +1,108 @@
+<div data-section-id="{{ section.id }}" data-section-type="contact-form">
+    <div class="container">
+        <div class="contact-form">
+            {%- if section.settings.title != blank -%}
+                <h4 class="mb-35 text-center">{{ section.settings.title }}</h4>
+            {%- endif -%}
+            <div class="row">
+                {%- if section.settings.page_content != blank or section.settings.content != blank -%}
+                    <div class="col-12 col-md-4 mb-30">
+                        <div class="rte">
+                            {% include 'parse-page-html-content' with default_page: 'include-contact-form' page_content: section.settings.page_content %}
+                        </div>
+                    </div>
+                {%- endif -%}
+                <div class="col-12 col-md-8 mx-auto">
+                    <h3>{{ 'contact.form.title' | t }}</h3>
+                    <p class="fs-lg">{{ 'contact.form.paragraph' | t }}</p>
+                    {% form 'contact' %}
+                        {%- if form.posted_successfully? -%}
+                            <p class="form-success">{{ 'contact.form.post_success' | t }}</p>
+                        {%- endif -%}
+                        <input type="text"
+                               name="contact[name]"
+                               id="ContactFormName"
+                               placeholder="{{ 'contact.form.name_placeholder' | t }}"
+                               value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                               required="required">
+                        <input type="email"
+                               name="contact[email]"
+                               id="ContactFormEmail"
+                               placeholder="{{ 'contact.form.email_placeholder' | t }}"
+                               value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                               spellcheck="false"
+                               autocomplete="off"
+                               autocapitalize="off"
+                               required="required">
+                        <input type="tel"
+                               class="form-control"
+                               name="contact[phone]"
+                               id="ContactFormPhone"
+                               placeholder="{{ 'contact.form.phone_placeholder' | t }}"
+                               value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                               required="required">
+                        <textarea rows="8"
+                                  name="contact[body]"
+                                  id="ContactFormMessage"
+                                  placeholder="{{ 'contact.form.message_placeholder' | t }}"
+                                  required="required">
+                          {%- if form.body -%}
+                              {{ form.body }}
+                          {%- endif -%}
+                        </textarea>
+                        {% include 'form-get-message' %}
+                        <div class="pt-10">
+                            <button type="submit" class="btn"><i class="mr-5">{% render 'icon-theme-196' %}</i>{{ 'contact.form.send' | t }}</button>
+                        </div>
+                    {% endform %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Contact form",
+    "settings": [
+        {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "header",
+            "content": "Content"
+        },
+        {
+            "type": "page",
+            "id": "page_content",
+            "label": "Page content",
+            "info": "Default page: 'parse-page-html-content'"
+        },
+        {
+            "type": "header",
+            "content": "Video manual"
+        },
+        {
+            "type": "paragraph",
+            "content": "[Home sections](https:\/\/www.youtube.com\/watch?v=QQ6wFwBts4k&list=PLj-506KaR_vcQjwcpC6yII-1JY0bSj7df&index=9)"
+        },
+        {
+            "type": "header",
+            "content": "User manual"
+        },
+        {
+            "type": "paragraph",
+            "content": "[Contact Form](https:\/\/mpthemes.net\/shella-shopify-theme\/documentation-version4\/doc02-06-home-contact-form.php#contact-form)"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Contact form",
+            "category": "3) Static content"
+        }
+    ]
+}
+{% endschema %}

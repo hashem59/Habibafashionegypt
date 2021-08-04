@@ -1,0 +1,81 @@
+<!-- snippets/product-info-res-variables.liquid -->
+{%- assign template_layout = settings.product_info_layout -%}
+{%- if product.tags contains 'gallery-layout-1' -%}
+    {%- assign template_layout = '1' -%}
+{%- elsif product.tags contains 'gallery-layout-2' -%}
+    {%- assign template_layout = '2' -%}
+{%- elsif product.tags contains 'gallery-layout-3' -%}
+    {%- assign template_layout = '3' -%}
+{%- elsif product.tags contains 'gallery-layout-4' -%}
+    {%- assign template_layout = '4' -%}
+{%- elsif product.tags contains 'gallery-layout-5' -%}
+    {%- assign template_layout = '5' -%}
+{%- endif -%}
+{%- assign enable_fullscreen_popup = settings.product_info_enable_fullscreen_popup -%}
+{%- if enable_fullscreen_popup -%}
+    {%- assign show_btn_fullscreen = settings.product_info_show_btn_fullscreen -%}
+{%- endif -%}
+{%- assign show_btn_video = settings.product_info_show_btn_video -%}
+{%- assign video_autoplay = settings.product_info_video_autoplay -%}
+{%- assign show_arrows = true -%}
+{%- assign enable_zoom = settings.product_info_enable_zoom -%}
+{%- assign show_label_in_stock = settings.product_info_show_label_in_stock -%}
+{%- assign show_label_pre_order = settings.product_info_show_label_pre_order -%}
+{%- assign show_label_out_stock = settings.product_info_show_label_out_stock -%}
+{%- assign show_label_sale = settings.product_info_show_label_sale -%}
+{%- assign show_label_new = settings.product_info_show_label_new -%}
+{%- assign show_label_hot = settings.product_info_show_label_hot -%}
+{%- assign show_collections = settings.product_info_show_collections -%}
+{%- assign show_title = settings.product_info_show_title -%}
+{%- assign description_place = settings.product_info_description_place -%}
+{%- assign show_sku = settings.product_info_show_sku -%}
+{%- assign show_barcode = settings.product_info_show_barcode -%}
+{%- assign show_availability = settings.product_info_show_availability -%}
+{%- assign show_type = settings.product_info_show_type -%}
+{%- assign show_vendor = settings.product_info_show_vendor -%}
+{%- assign show_price = settings.product_info_show_price -%}
+{%- assign show_sale_details = settings.product_info_show_sale_details -%}
+{%- assign show_taxes = settings.product_info_show_taxes -%}
+{%- assign show_countdown = settings.product_info_show_countdown -%}
+{%- assign show_stock_countdown = settings.product_info_show_stock_countdown -%}
+{%- assign show_stock_countdown_range = settings.product_info_show_stock_countdown_range -%}
+{%- assign stock_countdown_min = settings.product_stock_countdown_min | abs -%}
+{%- assign show_text_countdown = settings.product_info_show_text_countdown -%}
+{%- assign show_visitors = settings.product_info_show_visitors -%}
+{%- assign show_options = settings.product_info_show_options -%}
+{%- assign show_custom_options = settings.product_show_custom_options -%}
+{%- assign show_size_guide = settings.product_info_show_size_guide -%}
+{%- assign show_delivery_return = settings.product_info_show_delivery_return -%}
+{%- assign show_message = settings.product_info_show_message -%}
+{%- assign show_quantity = settings.product_info_show_quantity -%}
+{%- assign show_notes = settings.product_info_show_notes -%}
+{%- assign show_button_add_to_cart = settings.product_info_show_button_add_to_cart -%}
+{%- assign show_button_add_to_wishlist = settings.product_info_show_button_add_to_wishlist -%}
+{%- assign show_button_add_to_compare = settings.product_info_show_button_add_to_compare -%}
+{%- assign show_button_dynamic_checkout = show_button_dynamic_checkout | default: settings.product_info_page_show_button_dynamic_checkout -%}
+{%- assign show_dynamic_checkout_confirmation = show_dynamic_checkout_confirmation | default: settings.product_info_page_show_dynamic_checkout_confirmation -%}
+{%- assign styled_dynamic_checkout = styled_dynamic_checkout | default: settings.product_info_page_styled_dynamic_checkout -%}
+{%- assign show_free_shipping = settings.cart_show_free_shipping -%}
+{%- assign show_pickup_available = settings.product_info_show_pickup_available -%}
+{%- assign show_reviews = settings.product_info_show_reviews -%}
+{%- assign hide_reviews_counter = settings.product_info_hide_reviews_counter -%}
+{%- assign hide_empty_reviews = settings.product_info_hide_empty_reviews -%}
+{%- assign show_payments = settings.product_info_show_payments -%}
+{%- assign show_social_share_buttons = settings.product_info_show_social_share_buttons -%}
+{%- assign social_share_buttons_type = settings.product_info_social_share_buttons_type -%}
+{%- if settings.compare_type == 'disable' -%}
+    {%- assign show_button_add_to_compare = false -%}
+{%- endif -%}
+{%- if settings.wishlist_type == 'disable' -%}
+    {%- assign show_button_add_to_wishlist = false -%}
+{%- endif -%}
+{%- if settings.reviews_type == 'disable' -%}
+    {%- assign show_reviews = false -%}
+{%- endif -%}
+{%- if template_layout == '3' or template_layout == '4' -%}
+    {%- assign enable_sticky_sidebar = true -%}
+    {%- assign enable_sticky_gallery = true -%}
+{%- else -%}
+    {%- assign enable_sticky_sidebar = enable_sticky_sidebar | default: settings.product_info_page_enable_sticky_sidebar -%}
+    {%- assign enable_sticky_gallery = enable_sticky_gallery | default: settings.product_info_page_enable_sticky_gallery -%}
+{%- endif -%}

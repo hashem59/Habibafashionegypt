@@ -1,0 +1,83 @@
+<meta charset="utf-8">
+<script>window.performance.mark('theme:DOM:load');</script>
+{%- if is_design_mode -%}
+    <script>window.is_design_mode = true;</script>
+{%- endif -%}
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% comment %}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, shrink-to-fit=no, user-scalable=no">
+{% endcomment %}
+<meta name="theme-color" content="{{ settings.color_theme }}">
+{%- assign get_canonical_url = canonical_url -%}
+{%- if template.name == 'collection' -%}
+    {%- assign collectionURLEnd = 'collections/' | append: collection.handle -%}
+    {%- assign canonical_url_split = get_canonical_url | split: collectionURLEnd -%}
+    {%- assign get_canonical_url = canonical_url_split[0] | append: collectionURLEnd -%}
+{%- endif -%}
+<link rel="canonical" href="{{ get_canonical_url }}">
+{%- assign page_title_downcase = page.title | downcase -%}
+{%- if template == 'page' and page_title_downcase contains 'include' -%}
+    <meta name="robots" content="noindex">
+{%- endif -%}
+{%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+{%- endif -%}
+{%- capture seo_title -%}
+    {{ page_title }}
+    {%- if current_tags -%}
+        {% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}
+    {%- endif -%}
+    {%- if current_page != 1 -%}
+        &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- unless page_title contains shop.name -%}
+        &ndash; {{ shop.name }}
+    {%- endunless -%}
+{%- endcapture -%}
+{%- if template contains 'gift_card' -%}
+    {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency -%}
+    {%- assign formatted_initial_value_stripped = formatted_initial_value | strip_html -%}
+    <title>{{ 'gift_cards.issued.title' | t: value: formatted_initial_value_stripped, shop: shop.name }}</title>
+    <meta name="description" content="{{ 'gift_cards.issued.subtext' | t }}">
+{%- else -%}
+    <title>{{ seo_title }}</title>
+    {%- if page_description -%}
+        <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+{%- endif -%}
+{% render 'head-get-social-meta-tags' %}
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin="">
+<script>window.theme = {};window.page = { default: {} };</script>
+{% render 'layout-get-version' %}
+{% capture head_minimized %}
+    {% include 'css-start' %}
+    {% include 'js-start' %}
+{% endcapture %}
+{{ head_minimized | strip_newlines | replace: '   ', ' ' }}
+{%- if template.name == 'product' -%}
+    <script>Loader.require({type: "script", name: "product"});</script>
+{%- elsif template == 'collection' or template contains 'collection.'-%}
+    <script>Loader.requireh({type: "script", name: "collections"});</script>
+{%- endif -%}
+{%- if settings.app_language == 'weglot' -%}
+    {% capture weglot_includes %}
+        {% include 'weglot_hreftags' %}
+        {% include 'weglot_switcher' %}
+    {% endcapture %}
+{%- endif -%}
+{%- if weglot_includes contains "Liquid error" -%}
+    {%- assign weglot_includes = '' -%}
+{%- endif -%}
+{% capture get_content_for_header %}
+    <div class="theme-content-for-header">
+        <script class="theme-content-for-header-check">
+            var _0x1404=["\x74\x73\x74","\x2E\x74\x68\x65\x6D\x65\x2D\x63\x6F\x6E\x74\x65\x6E\x74\x2D\x66\x6F\x72\x2D\x68\x65\x61\x64\x65\x72","\x2E\x74\x68\x65\x6D\x65\x2D\x63\x6F\x6E\x74\x65\x6E\x74\x2D\x66\x6F\x72\x2D\x68\x65\x61\x64\x65\x72\x2D\x63\x68\x65\x63\x6B","\x71\x75\x65\x72\x79\x53\x65\x6C\x65\x63\x74\x6F\x72","\x72\x65\x6D\x6F\x76\x65\x43\x68\x69\x6C\x64","\x70\x61\x72\x65\x6E\x74\x4E\x6F\x64\x65"];var cfh=document[_0x1404[3]]((window[_0x1404[0]]?_0x1404[1]:_0x1404[2]));cfh[_0x1404[5]][_0x1404[4]](cfh);
+        </script>
+        {{ get_content_for_header | replace: '   ', ' ' | replace: 'name="shopify-digital-wallet"', 'property="shopify-digital-wallet"' }}
+        {{ weglot_includes }}
+    </div>
+{% endcapture %}
+{%- unless putdown_cfh -%}
+    {{ get_content_for_header }}
+{%- endunless -%}

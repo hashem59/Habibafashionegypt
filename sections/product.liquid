@@ -1,0 +1,307 @@
+{% include 'global-variables' %}
+{%- assign is_product_page = true -%}
+{%- assign sidebar = sidebar | default: settings.product_info_page_sidebar -%}
+{% capture container_class %}{% if sidebar != 'off' %} product-page__container--with-sidebar{% endif %}{% if sidebar == 'left' %} order-xl-1{% endif %}{% endcapture %}
+{% capture sidebar_class %}{% if sidebar == 'left' %} product-page__sidebar--left pr-xl-30 mr-xl-30{% elsif sidebar == 'right' %} product-page__sidebar--right pl-xl-30 ml-xl-30{% endif %}{% endcapture %}
+{% capture sidebar_html %}
+    {%- if sidebar != 'off' -%}
+        {% include 'product-info-res-variables' %}
+        <div class="product-page__sidebar{{ sidebar_class }}{% if enable_sticky_sidebar %} sticky-sidebar-xl js-sticky-sidebar{% endif %}" data-js-sticky-sidebar-media-xl>
+            {%- if enable_sticky_sidebar -%}
+                <div data-js-sticky-sidebar-body>
+            {%- endif -%}
+                    <div data-js-position-desktop="sidebar">
+                        {% include 'product-page-get-sidebar' %}
+                    </div>
+            {%- if enable_sticky_sidebar -%}
+                </div>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+{% endcapture %}
+{% include 'product-info-res-variables' %}
+{% include 'product-res-variables' %}
+{%- assign show_addthis = show_addthis | default: false -%}
+{%- assign show_tabs = show_tabs | default: section.settings.show_tabs -%}
+{%- assign tabs_type = tabs_type | default: section.settings.tabs_type -%}
+{%- assign show_tab_description = show_tab_description | default: section.settings.show_tab_description -%}
+{%- assign show_tab_reviews = show_tab_reviews | default: section.settings.show_tab_reviews -%}
+{% capture content_margins %}mt-{{ offset_product_page_content_margin_top_d }} mb-{{ offset_product_page_content_margin_bottom_d }}{% endcapture %}
+<div data-section-id="{{ section.id }}" data-section-type="product-page" data-enable-history-state="true">
+    {%- case template_layout -%}
+        {%- when '1' -%}
+            <div class="product-page {{ content_margins }}">
+                <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+                    <div class="product-page__container{{ container_class }}">
+                        <div class="product-page__main">
+                            {% include 'product-page-get-main' %}
+                        </div>
+                        {%- if section.settings.show_tabs -%}
+                            <div class="product-page__tabs mt-40">
+                                {% include 'product-page-get-tabs' %}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                    {{ sidebar_html }}
+                </div>
+            </div>
+        {%- when '2' -%}
+            <div class="product-page {{ content_margins }}">
+                <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+                    <div class="product-page__container{{ container_class }}">
+                        <div class="product-page__main">
+                            {% include 'product-page-get-main' %}
+                        </div>
+                    </div>
+                    {{ sidebar_html }}
+                </div>
+            </div>
+        {%- when '3' -%}
+            <div class="product-page {{ content_margins }}">
+                <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+                    <div class="product-page__container{{ container_class }}">
+                        <div class="product-page__main">
+                            {% include 'product-page-get-main' %}
+                        </div>
+                    </div>
+                    {{ sidebar_html }}
+                </div>
+            </div>
+        {%- when '4' -%}
+            <div class="product-page {{ content_margins }}">
+                <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+                    <div class="product-page__container{{ container_class }}">
+                        <div class="product-page__main">
+                            {% include 'product-page-get-main' %}
+                        </div>
+                    </div>
+                    {{ sidebar_html }}
+                </div>
+            </div>
+        {%- when '5' -%}
+            <div class="product-page {{ content_margins }}">
+                <div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+                    <div class="product-page__container{{ container_class }}">
+                        <div class="product-page__main">
+                            {% include 'product-page-get-main' %}
+                        </div>
+                        {%- if section.settings.show_tabs -%}
+                            <div class="product-page__tabs mt-40">
+                                {% include 'product-page-get-tabs' %}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                    {{ sidebar_html }}
+                </div>
+            </div>
+    {%- endcase -%}
+</div>
+
+{%- if enable_sticky_sidebar -%}
+    <script>
+        Loader.require({type: "script", name: "sticky_sidebar"});
+    </script>
+{%- endif -%}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  {%- if product.featured_media -%}
+    {%- assign media_size = product.featured_media.preview_image.width | append: 'x' -%}
+    "image": [
+      {{ product.featured_media | img_url: media_size | prepend: "https:" | json }}
+    ],
+  {%- endif -%}
+  "description": {{ product.description | strip_html | json }},
+  {%- if current_variant.sku != blank -%}
+    "sku": {{ current_variant.sku | json }},
+  {%- endif -%}
+  "brand": {
+    "@type": "Thing",
+    "name": {{ product.vendor | json }}
+  },
+  "offers": [
+    {%- for variant in product.variants -%}
+      {
+        "@type" : "Offer",
+        {%- if variant.sku != blank -%}
+          "sku": {{ variant.sku | json }},
+        {%- endif -%}
+        "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price" : {{ variant.price | divided_by: 100.00 | json }},
+        "priceCurrency" : {{ cart.currency.iso_code | json }},
+        "url" : {{ shop.url | append: variant.url | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    {
+        "type": "paragraph",
+        "content": "To enable the SIDEBAR on the product page, activate the option Theme settings -> Product Page & Quick View -> Sidebar on product page -> Sidebar position"
+    },
+    {
+      "type": "header",
+      "content": "Tabs"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tabs",
+      "label": "Show tabs",
+      "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "scrolling_to_opened_tab",
+        "label": "Scrolling to opened tab",
+        "info": "Only for vertical tabs on desktop and on mobile tabs",
+        "default": false
+    },
+    {
+        "type": "select",
+        "id": "tabs_type",
+        "label": "Tabs type",
+        "default": "tabs",
+        "info": "In this section you can select one of the options: \"Default tabs\" or \"Sheet of tabs\". Once you select the option \"Sheet of tabs\" the Reviews and Description blocks will be displayed without a tab, but all other tabs will be hidden using this combination.",
+        "options": [
+            {
+                "value": "tabs",
+                "label": "Default tabs"
+            },
+            {
+                "value": "sheet",
+                "label": "Sheet of tabs"
+            }
+        ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tab_description",
+      "label": "Show tab 'Description'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tab_reviews",
+      "label": "Show tab 'Reviews'",
+      "info": "Be sure you configure the reviews app at the Theme settings -> Reviews.",
+      "default": true
+    },
+    {
+        "type": "paragraph",
+        "content": "Click 'Add content' ↓ to add CUSTOM TAB or content for SIDEBAR"
+    },
+    {
+        "type": "header",
+        "content": "User manual"
+    },
+    {
+        "type": "paragraph",
+        "content": "[Product Page](https:\/\/mpthemes.net\/shella-shopify-theme\/documentation-version4\/doc03-01-product-section.php#product-page-section)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab_custom_html",
+      "name": "Custom HTML tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Custom HTML"
+        },
+        {
+          "type": "page",
+          "id": "page_content",
+          "label": "Page content",
+          "info": "Default page: 'Include Product Tab Custom HTML'"
+        }
+      ]
+    },
+    {
+      "type": "tab_custom_text",
+      "name": "Custom text tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Custom text"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "HTML content",
+          "default": "<p>Text content of Tab goes here!</p><p>You can make&nbsp;text <strong>bold</strong>, <em>italic</em> or add <a href=\"\/blogs\/news\" title=\"News\">link</a> using rich text editor.</p><p></p>"
+        }
+      ]
+    },
+    {
+      "type": "sidebar_custom_html",
+      "name": "Sidebar custom HTML",
+      "settings": [
+        {
+          "type": "page",
+          "id": "page_content",
+          "label": "Page content",
+          "info": "Default page: 'Include Product Sidebar Custom HTML'"
+        }
+      ]
+    },
+    {
+      "type": "sidebar_products",
+      "name": "Sidebar products",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FEATURED PRODUCTS"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "max_count",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "pds",
+          "label": "Max count",
+          "info": "0 is infinite",
+          "default": 3
+        },
+        {
+          "type": "select",
+          "id": "product_type",
+          "label": "Products type",
+          "default": "short",
+          "options": [
+            {
+              "value": "short",
+              "label": "Short"
+            },
+            {
+              "value": "full",
+              "label": "Full"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,127 @@
+<div data-section-id="{{ section.id }}" data-section-type="subscription-form">
+    <div class="subscription-form subscription-form--style-{{ section.settings.style }}">
+        <div class="container py-20">
+            <div class="row">
+                {%- if section.settings.title != blank or section.settings.paragraph != blank -%}
+                    <div class="col-12 col-lg-6 d-lg-flex flex-lg-column justify-content-lg-center align-items-lg-stretch">
+                        <div class="subscription-form__info text-center text-lg-left">
+                            {%- if section.settings.title != blank -%}
+                                <h5 class="subscription-form__title mb-0">{{ section.settings.title }}</h5>
+                            {%- endif -%}
+                            {%- if section.settings.paragraph != blank -%}
+                                <p class="subscription-form__paragraph mb-0 mt-10 mt-lg-3">{{ section.settings.paragraph }}</p>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                {%- endif -%}
+                <div class="col-12 d-lg-flex flex-lg-column justify-content-lg-center align-items-lg-stretch col-lg-6{% if section.settings.title != blank or section.settings.paragraph != blank %} mt-20 mt-lg-0{% else %} offset-lg-3{% endif %}">
+                    <div class="subscription-form__form">
+                        {%- if settings.subscription_method == 'shopify' -%}
+                            {% form 'customer', id: null, class: 'form-group--type-inline d-flex d-flex flex-column flex-lg-row mb-0' %}
+                                {% render 'form-get-check-error-popup' %}
+                                <input type="hidden" name="contact[tags]" value="newsletter">
+                                <input type="email" name="contact[email]" class="mb-10 mb-lg-0 mr-lg-10{% if form.errors %} input--error{% endif %}" placeholder="{{ section.settings.placeholder }}" required="required">
+                                <input type="submit" class="btn" name="commit" value="{{ section.settings.button_text }}">
+                            {% endform %}
+                        {%- elsif settings.subscription_method == 'mailchimp' -%}
+                            <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="form-group--type-inline d-flex d-flex flex-column flex-lg-row mb-30" target="_blank">
+                                <input type="email" name="EMAIL" id="PopupSubscribe" class="mb-10 mb-lg-0 mr-lg-10" placeholder="{{ section.settings.placeholder }}" required="required">
+                                <input type="submit" class="btn" value="{{ section.settings.button_text }}">
+                            </form>
+                        {%- endif -%}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%- if section.settings.show_bottom_separator -%}
+            <div class="border-top"></div>
+        {%- endif -%}
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Subscription form",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Content"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "NEWSLETTER SUBSCRIPTION"
+        },
+        {
+            "type": "text",
+            "id": "paragraph",
+            "label": "Paragraph",
+            "default": "Sign up for Shella updates to receive information about new arrivals, future events and specials."
+        },
+        {
+            "type": "text",
+            "id": "placeholder",
+            "label": "Placeholder",
+            "default": "Enter Your Email Address"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button text",
+            "default": "SUBSCRIBE!"
+        },
+{
+"type": "select",
+"id": "style",
+"label": "Colorize style",
+"default": "1",
+"options": [
+{
+"value": "1",
+"label": "Style #1"
+},
+{
+"value": "2",
+"label": "Style #2"
+},
+{
+"value": "3",
+"label": "Style #3"
+},
+{
+"value": "4",
+"label": "Style #4"
+},
+{
+"value": "5",
+"label": "Style #5"
+}
+]
+},
+{
+  "type": "header",
+  "content": "Video manual"
+},
+{
+  "type": "paragraph",
+  "content": "[Home sections](https:\/\/www.youtube.com\/watch?v=QQ6wFwBts4k&list=PLj-506KaR_vcQjwcpC6yII-1JY0bSj7df&index=9)"
+},
+{
+  "type": "header",
+  "content": "User manual"
+},
+{
+  "type": "paragraph",
+  "content": "[Subscription Form](https://mpthemes.net/shella-shopify-theme/documentation-version4/doc02-09-home-subscription-form.php#subscription-form)"
+}
+    ],
+    "presets": [
+        {
+            "name": "Subscription form",
+            "category": "3) Static content"
+        }
+    ]
+}
+{% endschema %}

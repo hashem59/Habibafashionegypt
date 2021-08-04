@@ -1,0 +1,44 @@
+{% include 'global-variables' %}
+{% include 'product-cart-res-variables' %}
+{%- assign image_size = '100x' -%}
+{%- assign show_title = show_title | default: true -%}
+{%- assign show_variant = show_variant | default: true -%}
+{%- assign show_price = show_price | default: true -%}
+{%- assign show_button_remove = show_button_remove | default: true -%}
+<div class="product-cart mb-20" data-js-product data-product-variant-id="{{ id }}">
+    <div class="d-flex flex-row align-items-start">
+        <div class="product-cart__image mr-15">
+            <a href="{{ url }}" class="d-block">
+                <img>
+            </a>
+        </div>
+        <div class="product-cart__content d-flex flex-column align-items-start">
+            {%- if show_title -%}
+                <div class="product-cart__title mb-3">
+                    <h3 class="h6 m-0">
+                        <a href="{{ url }}">{{ title }}</a>
+                    </h3>
+                </div>
+            {%- endif -%}
+            {%- if show_variant -%}
+                {% capture default_variant_title %}{{ 'products.product.default_variant_title' | t }}{% endcapture %}
+                <div class="product-cart__variant{% if variant_title == 'Default Title' %} d-none{% endif %}">{{ variant_title | replace: 'Default Title', default_variant_title }}</div>
+            {%- endif -%}
+            {%- if show_price -%}
+                <div class="product-cart__price mt-10 mb-10">
+                    <span class="product-cart__quantity">{{ quantity }}</span> <span>{{ 'layout.cart.quantity_and_price_separator' | t }}</span> <span class="product-cart__price-value"><span class="price"><span>{{ price | money }}</span></span></span>
+                </div>
+            {%- endif -%}
+            {%- if show_button_remove -%}
+                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="product-cart__remove btn-link js-product-button-remove-from-cart">{{ 'products.product.remove' | t }}</a>
+            {%- endif -%}
+        </div>
+    </div>
+    {%- if settings.cart_popup_show_quantity_input -%}
+        <div class="input-quantity input-quantity--type-05 d-flex mt-15 js-product-quantity">
+            <div class="d-flex flex-center border cursor-pointer" data-control="-"><i>{% render 'icon-theme-189' %}</i></div>
+            <input type="number" class="product-cart__input-quantity w-100 mx-10 mb-0 text-center js-input-quantity-cart" name="updates[]" value="1" min="1">
+            <div class="d-flex flex-center border cursor-pointer" data-control="+"><i>{% render 'icon-theme-188' %}</i></div>
+        </div>
+    {%- endif -%}
+</div>

@@ -1,0 +1,58 @@
+{%- assign accordion_is_hidden = true -%}
+<div class="collection-current-tags" data-js-collection-current-tags>
+    <div class="collection-current-tags__items d-flex flex-wrap">
+        {%- assign current_filters = filter_by_tags -%}
+        {%- if filter_by_types -%}
+            {%- assign current_filters = current_filters | concat: filter_by_types -%}
+        {%- endif -%}
+        {%- if filter_by_vendors -%}
+            {%- assign current_filters = current_filters | concat: filter_by_vendors -%}
+        {%- endif -%}
+        {%- if filter_by_options -%}
+            {%- assign current_filters = current_filters | concat: filter_by_options -%}
+        {%- endif -%}
+        {%- if current_filters.size > 0 or filter_by_title != blank or filter_by_price_from != blank or filter_by_price_to != blank -%}
+            {%- assign has_content = true -%}
+            {%- assign accordion_is_hidden = false -%}
+        {%- endif -%}
+        {%- for filter_by_tag in filter_by_tags -%}
+            <div data-value="{{ filter_by_tag }}" data-filter-type="tg" class="d-flex flex-center px-10 mb-10 mr-10 cursor-pointer text-capitalize">{{ filter_by_tag }} <i class="ml-3">{% render 'icon-theme-190' %}</i></div>
+        {%- endfor -%}
+        {%- for filter_by_type in filter_by_types -%}
+            <div data-value="{{ filter_by_type }}" data-filter-type="tp" class="d-flex flex-center px-10 mb-10 mr-10 cursor-pointer text-capitalize">{{ filter_by_type }} <i class="ml-3">{% render 'icon-theme-190' %}</i></div>
+        {%- endfor -%}
+        {%- for filter_by_vendor in filter_by_vendors -%}
+            <div data-value="{{ filter_by_vendor }}" data-filter-type="vd" class="d-flex flex-center px-10 mb-10 mr-10 cursor-pointer text-capitalize">{{ filter_by_vendor }} <i class="ml-3">{% render 'icon-theme-190' %}</i></div>
+        {%- endfor -%}
+        {%- for filter_by_option in filter_by_options -%}
+            {%- assign option_n_value = filter_by_options[forloop.index0] | split: '::' -%}
+            <div data-value="{{ filter_by_options[forloop.index0] }}" data-filter-type="opt" class="d-flex flex-center px-10 mb-10 mr-10 cursor-pointer text-capitalize">{{ option_n_value[0] }} − {{ option_n_value[1] }} <i class="ml-3">{% render 'icon-theme-190' %}</i></div>
+        {%- endfor -%}
+        {%- if filter_by_title != blank -%}
+            <div data-filter-type="tt" class="d-flex flex-center px-10 mb-10 mr-10 cursor-pointer">{{ filter_by_title | capitalize }} <i class="ml-3">{% render 'icon-theme-190' %}</i></div>
+        {%- endif -%}
+        {%- if filter_by_price_from != blank or filter_by_price_to != blank -%}
+            <div data-filter-type="pr" class="d-flex flex-center px-10 mb-10 mr-10 cursor-pointer">{% if filter_by_price_from != blank %}{{ filter_by_price_from | money }}{% else %}{{ 0 | money }}{% endif %}<pre class="m-0"> − </pre>{% if filter_by_price_to != blank %}{{ filter_by_price_to | money }}{% else %}<pre class="m-0 fs-lg">∞</pre>{% endif %} <i class="ml-3">{% render 'icon-theme-190' %}</i></div>
+        {%- endif -%}
+        {%- if place == 'body' -%}
+            <div class="collection-current-tags__clear d-inline-flex flex-center mb-10 mr-10 cursor-pointer" data-js-collection-current-tags-clear>
+                <i class="mr-8">{% render 'icon-theme-165' %}</i>
+                <span class="btn-link mt-2">{{ 'collections.sidebar.clear_all_tags' | t }}</span>
+            </div>
+        {%- endif -%}
+    </div>
+    {%- unless place == 'body' -%}
+        <div class="collection-current-tags__clear d-inline-flex{% if settings.collection_sidebar_position == 'top' %} d-lg-none{% endif %} flex-center my-10 cursor-pointer" data-js-collection-current-tags-clear>
+            <i class="mr-8">{% render 'icon-theme-165' %}</i>
+            <span class="btn-link mt-2">{{ 'collections.sidebar.clear_all_tags' | t }}</span>
+        </div>
+        {%- if settings.collection_sidebar_position == 'top' -%}
+            {% capture section_head_side_html %}
+                <div class="collection-current-tags__clear d-inline-flex flex-center cursor-pointer" data-js-collection-current-tags-clear>
+                    <i class="mr-8">{% render 'icon-theme-165' %}</i>
+                    <span class="btn-link mt-2">{{ 'collections.sidebar.clear_all_tags' | t }}</span>
+                </div>
+            {% endcapture %}
+        {%- endif -%}
+    {%- endunless -%}
+</div>

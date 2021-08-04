@@ -1,0 +1,37 @@
+<div class="theme-templates">
+    <template id="template-popup-search-ajax">
+        <div class="col-12 col-lg-2">
+            {% include 'product-search' with product: null %}
+        </div>
+    </template>
+    <template id="template-search-ajax">
+        <div class="col-12 mb-10">
+            {% include 'product-search-2' with product: null %}
+        </div>
+    </template>
+    <template id="template-cart-ajax">
+        <div>
+            {% include 'product-cart' with product: null %}
+        </div>
+    </template>
+    <template id="template-cart-discount">
+        <div>
+            <div class="popup-cart__discount h6 d-flex align-items-center my-10">
+                <span class="d-flex align-items-center mr-10">
+                    <i class="mt-2 mr-6">{% include 'icon-theme-137' %}</i> <span data-js-popup-cart-discount-title>{{ discount_application.title | upcase }}</span>
+                </span>
+                <span class="h5 d-flex align-items-center mb-0 ml-auto">
+                    <span class="mb-2">-</span><span data-js-popup-cart-discount-price>{{ discount_application.total_allocated_amount | money }}</span>
+                </span>
+            </div>
+        </div>
+    </template>
+    {%- assign namespaces = 'wishlist,compare' | split: ',' -%}
+    {%- for namespace in namespaces -%}
+        <template id="template-{{ namespace }}-ajax">
+            <div>
+                {% include 'product-store-lists' %}
+            </div>
+        </template>
+    {%- endfor -%}
+</div>

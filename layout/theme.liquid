@@ -1,0 +1,101 @@
+{%- if content_for_header contains 'Shopify.designMode' or canonical_url contains 'challenge' -%}
+  {%- assign is_design_mode = true -%}
+{%- else -%}
+  {%- assign putdown_cfh = true -%}
+{%- endif -%}
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"{% if settings.layout_enable_rtl %} dir="rtl"{% endif %}> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"{% if settings.layout_enable_rtl %} dir="rtl"{% endif %}> <!--<![endif]-->
+<head>
+  {% capture get_content_for_header %}
+    {{ content_for_header }}
+    {%- if settings.reviews_type == 'loox' -%}
+      {{ shop.metafields.loox["global_html_head"] }}
+    {%- endif -%}
+  {% endcapture %}
+  {% include 'head' %}
+</head>
+{% render 'layout-get-shella' %}
+{% capture document %}
+<body{% render 'layout-get-body-attributes' %}>
+{%- if settings.layout_enable_preloader -%}
+  {% render 'layout-get-preloader' with is_fixed: true %}
+{%- endif -%}
+{%- if settings.product_show_custom_options and settings.product_enable_variants_section -%}
+  {% section 'product-variants' %}
+{%- endif -%}
+{% section 'header' %}
+<main id="MainContent">
+  {{ content_for_layout }}
+</main>
+{% section 'footer' %}
+{% include 'popups' %}
+{% include 'footbar' %}
+{%- if settings.presentation_enable or template == 'product' and settings.product_info_page_show_usage_info_sidebar -%}
+  {% include 'fixed-sidebar' %}
+{%- endif -%}
+{% include 'templates' %}
+{% include 'layout-get-includes' %}
+{% endcapture %}
+{%- unless is_design_mode -%}
+  {{ document | replace: '   ', ' ' }}
+{%- else -%}
+  {{ document }}
+{%- endunless -%}
+{%- if putdown_cfh -%}
+  {% capture get_content_for_header %}
+    {%- unless settings.javascript_loader_jquery_first -%}
+      {%- assign get_content_for_header = get_content_for_header | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('theme.loaded.scripts.plugin_jquery', asyncLoad, false);" | replace: "window.attachEvent('onload', asyncLoad);", "window.attachEvent('theme.loaded.scripts.plugin_jquery', asyncLoad);" -%}
+    {%- endunless -%}
+    {{ get_content_for_header }}
+  {% endcapture %}
+  {{ get_content_for_header }}
+{%- endif -%}
+<!-- START APPS -->
+{%- if settings.app_klarna_enable -%}
+  <!-- start Klarna app -->
+  <script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} window.KlarnaThemeGlobals.data_purchase_amount={{product.first_available_variant.price}};window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+  <!-- end Klarna app -->
+{%- endif -%}
+{%- if settings.app_growave_enable -%}
+  <!-- start Growave app -->
+  {% capture the_snippet_content %}{% render 'socialshopwave-helper' %}{% endcapture %}
+  {%- unless the_snippet_content contains 'Liquid error' -%}
+    {{ the_snippet_content }}
+  {%- endunless -%}
+  <script>
+    sswRun(function(){
+      var intervalId = setInterval(function() {
+        if(ssw('.ssw-stars.ssw-stars-large').length) {
+          ssw('.ssw-stars.ssw-stars-large').on('click', function() {
+            ssw('.product-page__tabs .tabs__btn[data-tab="reviews"]').click();
+            ssw('html, body').animate({
+              scrollTop: ssw("#ssw-widget-recommends-html").offset().top - 200
+            }, 100);
+          });
+          clearInterval(intervalId);
+        }
+      },1000);
+    });
+  </script>
+  <!-- end Growave app -->
+{%- endif -%}
+{%- if settings.reviews_type == 'loox' -%}
+  {{ shop.metafields.loox["global_html_body"] }}
+  <style>
+    .loox-rating .loox-icon {
+      font-size: 1.22em;
+    }
+    .loox-rating .loox-icon:not(:last-child) {
+      margin-right: 5px;
+    }
+    .loox-rating span {
+      margin-left: 2px;
+      vertical-align: 2px;
+    }
+  </style>
+{%- endif -%}
+<!-- END APPS -->
+<script>window.performance.mark('theme:DOM:loaded');</script>
+</body>
+</html>

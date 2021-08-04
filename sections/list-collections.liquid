@@ -1,0 +1,506 @@
+{%- case section.settings.size_of_columns_mobile -%}
+    {%- when '1' -%}{%- assign grid_mobile = 'col-12' -%}
+    {%- when '2' -%}{%- assign grid_mobile = 'col-6' -%}
+{%- endcase -%}
+{%- case section.settings.size_of_columns -%}
+    {%- when '1' -%}{%- assign grid = grid_mobile | append: ' col-md-12' -%}
+    {%- when '2' -%}{%- assign grid = grid_mobile | append: ' col-md-6' -%}
+    {%- when '3' -%}{%- assign grid = grid_mobile | append: ' col-md-6 col-lg-4 ' -%}
+    {%- when '4' -%}{%- assign grid = grid_mobile | append: ' col-md-6 col-lg-3' -%}
+    {%- when '5' -%}{%- assign grid = grid_mobile | append: ' col-sm-6 col-md-4 col-lg-2-5' -%}
+    {%- when '6' -%}{%- assign grid = grid_mobile | append: ' col-sm-6 col-md-4 col-lg-2' -%}
+{%- endcase -%}
+<div data-section-id="{{ section.id }}" data-section-type="list-collections">
+    <div class="container">
+        <div class="list-collections mb-40 mb-lg-30">
+            <div class="row{% if section.settings.masonry_enable %} masonry invisible{% endif %}">
+                {%- if section.settings.display_type == 'selected' and section.settings.sort == 'manually' -%}
+                    {%- for block in section.blocks -%}
+                        {%- if block.settings.for_collection != blank -%}
+                            {% capture selected_collections %}{{ selected_collections }}{% if selected_collections != blank %}|||{% endif %}{{ block.settings.for_collection }}{% endcapture %}
+                        {%- endif -%}
+                    {%- endfor -%}
+                    {%- assign selected_collections = selected_collections | split: '|||' -%}
+                {%- else -%}
+                    {%- assign selected_collections = collections -%}
+                    {%- case section.settings.sort -%}
+                        {% when 'products_high' or 'products_low' %}
+                            {%- assign selected_collections = selected_collections | sort: 'all_products_count' -%}
+                        {% when 'date' or 'date_reversed' %}
+                            {%- assign selected_collections = selected_collections | sort: 'published_at' -%}
+                    {%- endcase -%}
+                    {%- if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed' -%}
+                        {%- assign selected_collections = selected_collections | reverse -%}
+                    {%- endif -%}
+                {%- endif -%}
+                {%- for collection in selected_collections -%}
+                    {%- if section.settings.display_type == 'selected' and section.settings.sort == 'manually' -%}
+                        {%- assign collection_obj = collections[collection] -%}
+                    {%- else -%}
+                        {%- assign collection_obj = collections[collection.handle] -%}
+                    {%- endif -%}
+                    {%- unless collection_obj.handle == 'frontpage' -%}
+                        {%- assign matches_block = null -%}
+                        {%- for block in section.blocks -%}
+                            {%- if block.settings.for_collection == collection_obj.handle -%}
+                                {%- assign matches_block = block -%}
+                                {%- break -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                        {%- if section.settings.display_type == 'selected' and matches_block == null -%}
+                            {%- continue -%}
+                        {%- endif -%}
+                        {%- assign image = matches_block.settings.image | default: collection_obj.image | default: collection_obj.products.first.images[0] -%}
+                        {%- assign url = matches_block.settings.url | default: collection_obj.url -%}
+                        {%- assign text_line_1 = matches_block.settings.text_line_1 | default: collection_obj.title -%}
+                        {%- if section.settings.uppercase_collection -%}
+                            {%- assign text_line_1 = text_line_1 | upcase -%}
+                        {%- endif -%}
+                        {% capture collection_info %}{{ 'list_collections.collection_info' | t: count: collection_obj.products_count }}{% endcapture %}
+                        {%- assign text_line_2 = matches_block.settings.text_line_2 -%}
+                        {%- if section.settings.show_products_count and text_line_2 == blank -%}
+                            {%- assign text_line_2 = collection_info -%}
+                        {%- endif -%}
+                        {%- assign button_1 = matches_block.settings.button_1 -%}
+                        <div class="{{ grid }} mb-20 mb-lg-30">
+                            {% render 'promobox' with block: section image: image url: url text_line_1: text_line_1 text_line_2: text_line_2 button_1: button_1 style: section.settings.style %}
+                        </div>
+                    {%- endunless -%}
+                {%- endfor -%}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    {%- if section.settings.masonry_enable -%}
+        Loader.require({type: "script", name: "masonry"});
+    {%- endif -%}
+</script>
+
+{% schema %}
+{
+    "name": "List collections",
+    "settings": [
+        {
+            "type": "radio",
+            "id": "display_type",
+            "label": "Select collections to show",
+            "default": "all",
+            "options": [
+                {
+                    "value": "all",
+                    "label": "All"
+                },
+                {
+                    "value": "selected",
+                    "label": "Selected"
+                }
+            ]
+        },
+        {
+        "type": "select",
+        "id": "sort",
+        "label": "Sort collections by:",
+        "default": "alphabetical",
+        "options": [
+        {
+        "value": "products_high",
+        "label": "Product count, high to low"
+        },
+        {
+        "value": "products_low",
+        "label": "Product count, low to high"
+        },
+        {
+        "value": "alphabetical",
+        "label": "Alphabetically, A-Z"
+        },
+        {
+        "value": "alphabetical_reversed",
+        "label": "Alphabetically, Z-A"
+        },
+        {
+        "value": "date",
+        "label": "Date, old to new"
+        },
+        {
+        "value": "date_reversed",
+        "label": "Date, new to old"
+        },
+        {
+        "value": "manually",
+        "label": "Manually (By the order of the selected blocks)"
+        }
+        ]
+        },
+        {
+            "type": "checkbox",
+            "id": "show_products_count",
+            "label": "Show products count",
+            "default": true
+        },
+        {
+            "type": "select",
+            "id": "size_of_columns",
+            "label": "Size of the columns",
+            "default": "4",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "1 item in the row"
+                },
+                {
+                    "value": "2",
+                    "label": "2 items in the row"
+                },
+                {
+                    "value": "3",
+                    "label": "3 items in the row"
+                },
+                {
+                    "value": "4",
+                    "label": "4 items in the row"
+                },
+                {
+                    "value": "5",
+                    "label": "5 items in the row"
+                },
+                {
+                    "value": "6",
+                    "label": "6 items in the row"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "size_of_columns_mobile",
+            "label": "Size of the columns on mobile",
+            "default": "2",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "1 item in the row"
+                },
+                {
+                    "value": "2",
+                    "label": "2 items in the row"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "type",
+            "label": "Type",
+            "default": "list-collections-1",
+            "options": [
+                {
+                "value": "list-collections-1",
+                "label": "Type #1 (Below the image)"
+                },
+                {
+                "value": "list-collections-2",
+                "label": "Type #2 (Ribbon bottom the image)"
+                },
+                {
+                "value": "clean",
+                "label": "Clean (Image without text)"
+                },
+                {
+                "value": "clean-bordered",
+                "label": "Clean with border"
+                },
+                {
+                "value": "clean-hover-bordered",
+                "label": "Clean with border on hover"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "style",
+            "label": "Colorize style",
+            "default": "0",
+            "options": [
+                {
+                "value": "0",
+                "label": "Auto"
+                },
+                {
+                "value": "1",
+                "label": "Style #1"
+                },
+                {
+                "value": "2",
+                "label": "Style #2"
+                },
+                {
+                "value": "3",
+                "label": "Style #3"
+                },
+                {
+                "value": "4",
+                "label": "Style #4"
+                },
+                {
+                "value": "5",
+                "label": "Style #5"
+                },
+                {
+                "value": "6",
+                "label": "Style #6"
+                },
+                {
+                "value": "7",
+                "label": "Style #7"
+                },
+                {
+                "value": "8",
+                "label": "Style #8"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "masonry_enable",
+            "label": "Enable masonry",
+            "default": false
+        },
+        {
+        "type": "select",
+        "id": "height",
+        "label": "Image height",
+        "default": "auto",
+        "options": [
+        {
+        "value": "auto",
+        "label": "Auto adaptation to the image"
+        },
+        {
+        "value": "30",
+        "label": "30% of width"
+        },
+        {
+        "value": "40",
+        "label": "40% of width"
+        },
+        {
+        "value": "50",
+        "label": "50% of width"
+        },
+        {
+        "value": "60",
+        "label": "60% of width"
+        },
+        {
+        "value": "70",
+        "label": "70% of width"
+        },
+        {
+        "value": "80",
+        "label": "80% of width"
+        },
+        {
+        "value": "90",
+        "label": "90% of width"
+        },
+        {
+        "value": "100",
+        "label": "100% of width (Square)"
+        },
+        {
+        "value": "110",
+        "label": "110% of width"
+        },
+        {
+        "value": "120",
+        "label": "120% of width"
+        },
+        {
+        "value": "130",
+        "label": "130% of width"
+        },
+        {
+        "value": "140",
+        "label": "140% of width"
+        },
+        {
+        "value": "150",
+        "label": "150% of width"
+        }
+        ]
+        },
+        {
+            "type": "range",
+            "id": "image_size",
+            "min": 200,
+            "max": 2000,
+            "step": 100,
+            "unit": "px",
+            "label": "Image size",
+            "info": "These are the fields for image quality. If images lazy loading is on, the option is ignored",
+            "default": 900
+        },
+        {
+            "type": "checkbox",
+            "id": "format_pjpg",
+            "label": "Enable format 'PJPG'",
+            "info": "Don't work with transparent images",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Animation"
+        },
+{
+"type": "select",
+"id": "animation_to",
+"label": "Move image on hover to",
+"default": "none",
+"options": [
+{
+"value": "none",
+"label": "None"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "top-left",
+"label": "Top left"
+},
+{
+"value": "top",
+"label": "Top"
+},
+{
+"value": "top-right",
+"label": "Top right"
+},
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "bottom-right",
+"label": "Bottom right"
+},
+{
+"value": "bottom",
+"label": "Bottom"
+},
+{
+"value": "bottom-left",
+"label": "Bottom left"
+},
+{
+"value": "left",
+"label": "Left"
+}
+]
+},
+{
+"type": "select",
+"id": "animation_from",
+"label": "Static image position",
+"default": "none",
+"options": [
+{
+"value": "none",
+"label": "None"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "top-left",
+"label": "Top left"
+},
+{
+"value": "top",
+"label": "Top"
+},
+{
+"value": "top-right",
+"label": "Top right"
+},
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "bottom-right",
+"label": "Bottom right"
+},
+{
+"value": "bottom",
+"label": "Bottom"
+},
+{
+"value": "bottom-left",
+"label": "Bottom left"
+},
+{
+"value": "left",
+"label": "Left"
+}
+]
+},
+{
+"type": "select",
+"id": "animation_opacity",
+"label": "Image opacity",
+"default": "none",
+"options": [
+{
+"value": "none",
+"label": "None"
+},
+{
+"value": "static",
+"label": "Static"
+},
+{
+"value": "hover",
+"label": "Hover"
+}
+]
+}
+    ],
+    "blocks": [
+        {
+            "type": "collection",
+            "name": "Collection",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "for_collection",
+                    "label": "For collection"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+{
+"type": "text",
+"id": "text_line_1",
+"label": "Text line #1"
+},
+{
+"type": "text",
+"id": "text_line_2",
+"label": "Text line #2"
+},
+{
+"type": "text",
+"id": "button_1",
+"label": "Button text"
+}
+            ]
+        }
+    ]
+}
+{% endschema %}

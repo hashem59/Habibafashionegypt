@@ -1,0 +1,109 @@
+{% layout none %}
+<div>
+    <div class="{{ current_tags[0] }} {{ current_tags[2] }}">
+        <div class="{{ current_tags[1] }}">
+            <div></div>
+            <div>
+                <p><span>You review demo version of Shella theme.</span></p>
+                <p>Thank you for interest to our product. To remove this popup and activate theme <a href="https://mpthemes.net/shella-shopify-theme/documentation-version4/doc07-02-theme-settings-license.php#license" target="_blank">add</a> </br><a href="https://mpthemes.net/shella-shopify-theme/documentation-version4/doc07-02-theme-settings-license.php#license" target="_blank"><span>your purchase</span> code</a> at theme settings or <a href="[[owner_url]]" target="_blank">purchase theme</a>.</p>
+                <p>Email <a href="mailto:[[owner_email]]">[[owner_email]]</a> for more details. </p>
+            </div>
+        </div>
+    </div>
+    <div class="{{ current_tags[0] }} {{ current_tags[3] }}">
+        <div class="{{ current_tags[1] }}">
+            <div></div>
+            <div>
+                <p>Sidebar filter is not available in demo mode. </br>You can test it on our demo.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .{{ current_tags[0] }} {
+        position: fixed;
+        display: flex;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999999999;
+        pointer-events: none;
+    }
+    .{{ current_tags[1] }} {
+        position: relative;
+        pointer-events: all;
+    }
+    .{{ current_tags[1] }} {
+        padding: 20px;
+    }
+    .{{ current_tags[1] }} div:first-child {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0.9;
+        background-color: #F34235;
+    }
+    .{{ current_tags[1] }} div:not(:first-child) {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .{{ current_tags[0] }} p {
+        margin-bottom: 0;
+        font-size: 32px;
+        line-height: 38px;
+        text-align: center;
+    }
+    @media (max-width: 1024px) {
+        .{{ current_tags[0] }} p  {
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+    .{{ current_tags[0] }} p,
+    .{{ current_tags[0] }} a,
+    .{{ current_tags[0] }} a:hover,
+    .{{ current_tags[0] }} a:active,
+    .{{ current_tags[0] }} a:focus,
+    .{{ current_tags[0] }} a:visited {
+        color: #ffffff;
+    }
+    .{{ current_tags[0] }} a {
+        text-decoration: underline;
+    }
+    .{{ current_tags[0] }} span {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .{{ current_tags[2] }} {
+        align-items: flex-end;
+    }
+    .{{ current_tags[2] }} .{{ current_tags[1] }} {
+        width: 100%;
+    }
+    @media (max-width: 1024px) {
+        .{{ current_tags[2] }} {
+            display: none;
+        }
+    }
+    .{{ current_tags[3] }} {
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition-duration: 0.2s;
+        transition-property: opacity;
+    }
+    .{{ current_tags[3] }} .{{ current_tags[1] }} {
+        pointer-events: none;
+    }
+    .{{ current_tags[3] }}.visible {
+        opacity: 1;
+    }
+    .{{ current_tags[3] }}.visible .{{ current_tags[1] }} {
+        pointer-events: all;
+    }
+</style>

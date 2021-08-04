@@ -1,0 +1,56 @@
+{%- assign countdown_type = countdown_type | default: 1 -%}
+{%- if mobile_centered == null -%}
+    {%- assign mobile_centered = true -%}
+{%- endif -%}
+<div{% unless countdown_date %} class="d-none-important"{% endunless %} data-js-product-countdown>
+    {%- case countdown_type -%}
+    {% when 1 %}
+        <div class="countdown countdown--type-01 d-flex flex-wrap justify-content-start js-countdown{% if countdown_lazy %} js-countdown--lazy{% endif %}"{% if countdown_date %} data-date="{{ countdown_date }}"{% endif %}>
+            {%- if countdown_date -%}
+                <span class="countdown__section">
+                    <span class="countdown__time">--</span>
+                    <span class="countdown__postfix">{{ 'products.product.countdown.days' | t }}</span>
+                </span>
+                <span class="countdown__section">
+                    <span class="countdown__time">--</span>
+                    <span class="countdown__postfix">{{ 'products.product.countdown.hours' | t }}</span>
+                </span>
+                <span class="countdown__section">
+                    <span class="countdown__time">--</span>
+                    <span class="countdown__postfix">{{ 'products.product.countdown.minutes' | t }}</span>
+                </span>
+                <span class="countdown__section">
+                    <span class="countdown__time">--</span>
+                    <span class="countdown__postfix">{{ 'products.product.countdown.seconds' | t }}</span>
+                </span>
+            {%- endif -%}
+        </div>
+    {% when 2 %}
+        <div class="countdown-wrapper d-flex flex-column">
+            <div class="countdown countdown--type-02 d-flex flex-wrap js-countdown{% if countdown_lazy %} js-countdown--lazy{% endif %}{% if mobile_centered %} justify-content-center{% endif %}{% if centered != true %} justify-content-lg-start{% endif %} order-1"{% if countdown_date %} data-date="{{ countdown_date }}"{% endif %}>
+                {%- if countdown_date -%}
+                    <span class="countdown__section">
+                        <span class="countdown__time"><span>-</span><span>-</span></span>
+                        <span class="countdown__postfix">{{ 'products.product.countdown.days' | t }}</span>
+                    </span>
+                    <span class="countdown__section">
+                        <span class="countdown__time"><span>-</span><span>-</span></span>
+                        <span class="countdown__postfix">{{ 'products.product.countdown.hours' | t }}</span>
+                    </span>
+                    <span class="countdown__section">
+                        <span class="countdown__time"><span>-</span><span>-</span></span>
+                        <span class="countdown__postfix">{{ 'products.product.countdown.minutes' | t }}</span>
+                    </span>
+                    <span class="countdown__section">
+                        <span class="countdown__time"><span>-</span><span>-</span></span>
+                        <span class="countdown__postfix">{{ 'products.product.countdown.seconds' | t }}</span>
+                    </span>
+                {%- endif -%}
+            </div>
+            {%- if countdown_title -%}
+                <p class="h5 mb-10 ls-0{% if mobile_centered %} text-center{% endif %}{% if centered != true %} text-lg-left{% endif %}">{{ countdown_title }}</p>
+            {%- endif -%}
+        </div>
+    {%- endcase -%}
+</div>
+

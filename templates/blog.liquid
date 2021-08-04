@@ -1,0 +1,35 @@
+{% include 'breadcrumbs' %}
+<div class="blogs pb-1">
+  <div class="container">
+    <div class="row pb-60">
+      {%- if settings.blog_show_sidebar != 'hide' -%}
+        {%- if settings.blog_sidebar_position == 'dropdown' -%}
+          <div class="blogs__sidebar d-none">
+            {% section 'blog-sidebar' %}
+          </div>
+        {%- else -%}
+          <div class="blogs__sidebar blogs__sidebar--width-md blogs__sidebar--offset-bottom d-none d-lg-block col-auto{% if settings.blog_sidebar_position == 'right' %} order-2{% endif %}{% if settings.blog_enable_sticky %} sticky-sidebar js-sticky-sidebar{% endif %}">
+            {%- if settings.blog_enable_sticky -%}
+              <div data-js-sticky-sidebar-body>
+            {%- endif -%}
+                <div data-js-position-desktop="sidebar">
+                  {% section 'blog-sidebar' %}
+                </div>
+            {%- if settings.blog_enable_sticky -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+      <div class="blogs__body col">
+        {% section 'blog-body' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- if settings.blog_enable_sticky -%}
+  <script>
+    Loader.require({type: "script", name: "sticky_sidebar"});
+  </script>
+{%- endif -%}
