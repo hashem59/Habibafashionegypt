@@ -61,11 +61,11 @@
     "color_theme10": "",
     "color_theme11": "",
     "color_theme12": "",
-    "font_base": "basic_commercial_n4",
+    "font_base": "montserrat_n4",
     "font_base_apply_to_all": true,
     "font_base_type": "none",
     "font_size_body": 16,
-    "font_heading": "basic_commercial_n7",
+    "font_heading": "montserrat_n7",
     "font_heading_type": "bold",
     "font_size_h1": 44,
     "font_size_h2": 32,
@@ -73,7 +73,7 @@
     "font_size_h4": 26,
     "font_size_h5": 16,
     "font_size_h6": 13,
-    "font_button": "basic_commercial_n4",
+    "font_button": "roboto_n7",
     "font_size_button": 14,
     "font_size_input": 14,
     "font_menu": "basic_commercial_n4",
@@ -558,8 +558,7 @@
           "1582767223711",
           "1582769733910"
         ],
-        "settings": {
-        }
+        "settings": {}
       },
       "header": {
         "type": "header",
@@ -1039,8 +1038,7 @@
           },
           "1586284627913": {
             "type": "payments",
-            "settings": {
-            }
+            "settings": {}
           }
         },
         "block_order": [
@@ -1721,8 +1719,7 @@
           "1586291808135",
           "1586291810188"
         ],
-        "settings": {
-        }
+        "settings": {}
       },
       "list-collections": {
         "type": "list-collections",
@@ -1745,8 +1742,7 @@
       },
       "blog-sidebar": {
         "type": "blog-sidebar",
-        "settings": {
-        }
+        "settings": {}
       },
       "blog-body": {
         "type": "blog-body",
@@ -1848,8 +1844,7 @@
           "1586292269155",
           "1586292270787"
         ],
-        "settings": {
-        }
+        "settings": {}
       },
       "contact-map": {
         "type": "contact-map",
