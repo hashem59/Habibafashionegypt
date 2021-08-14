@@ -1,0 +1,7 @@
+.header--style-1 .header__line-additional {
+  background-color: var(--header-tape-style-1-bg);
+  border-bottom: var(--header-style-1-additional-line-bd);
+}
+.header--style-1 .header__line-additional, .header--style-1 .header__line-additional * {
+  color: #ffffff
+}
