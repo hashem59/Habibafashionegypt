@@ -2,7 +2,7 @@
   background-color: var(--header-tape-style-1-bg);
   border-bottom: var(--header-style-1-additional-line-bd);
 }
-.header--style-1 .header__line-additional, .header--style-1 .header__line-additional *و
+.header--style-1 .header__line-additional, .header--style-1 .header__line-additional *,
 .header--style-1 .header__line-additional_button--login, .header--style-1 .header__line-additional_button--login:active, .header--style-1 .header__line-additional_button--login:link, .header--style-1 .header__line-additional_button--login:visited, .header--style-1 .header__line-additional_button--register, .header--style-1 .header__line-additional_button--register:active, .header--style-1 .header__line-additional_button--register:link, .header--style-1 .header__line-additional_button--register:visited {
   color: #ffffff
 }
