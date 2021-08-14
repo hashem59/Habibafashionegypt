@@ -5,3 +5,8 @@
 .header--style-1 .header__line-additional, .header--style-1 .header__line-additional * {
   color: #ffffff
 }
+
+.header__tape--style-1 {
+  background-color: var(--button3-bg);
+  border-bottom: var(--header-tape-style-1-bd);
+}
