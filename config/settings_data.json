@@ -120,7 +120,7 @@
     "product_collection_show_label_new": true,
     "product_collection_show_label_hot": true,
     "product_collection_centered_info": false,
-    "product_collection_more_info_type": "vendor",
+    "product_collection_more_info_type": "hide",
     "product_collection_show_title": true,
     "product_collection_show_price": true,
     "product_collection_show_button_quick_view": false,
@@ -142,7 +142,7 @@
     "product_collection_show_vendor": false,
     "product_collection_show_description": true,
     "product_collection_list_show_quantity": false,
-    "product_info_layout": "1",
+    "product_info_layout": "3",
     "product_info_show_mobile_thumbnails": true,
     "product_info_enable_fullscreen_popup": false,
     "product_info_show_btn_fullscreen": true,
@@ -160,7 +160,7 @@
     "product_info_show_label_hot": false,
     "product_info_show_collections": false,
     "product_info_show_title": true,
-    "product_info_description_place": "info",
+    "product_info_description_place": "tabs",
     "product_info_show_price": true,
     "product_info_show_sale_details": true,
     "product_info_show_taxes": false,
@@ -181,7 +181,7 @@
     "product_info_delivery_return_page_content": "",
     "product_info_show_message": false,
     "product_info_show_quantity": true,
-    "product_info_button_layout": "3",
+    "product_info_button_layout": "2",
     "product_info_show_button_add_to_cart": true,
     "product_button_addtocart_size": "default",
     "product_info_show_button_add_to_wishlist": false,
@@ -205,6 +205,7 @@
     "product_footbar_show_options": true,
     "product_footbar_show_quantity": true,
     "product_footbar_show_button_add_to_cart": true,
+    "product_quick_view_layout": "1",
     "product_info_show_stock_countdown": false,
     "product_info_show_stock_countdown_range": false,
     "product_stock_countdown_min": 10,
@@ -267,7 +268,7 @@
     "social_share_enable_reddit": true,
     "subscription_method": "shopify",
     "subscription_mailchimp_form_action": "\/\/myshopify.us18.list-manage.com\/subscribe\/post?u=8a50b61e56896303a04d0243e&amp;id=3c3d06b907",
-    "subscription_popup_enable": true,
+    "subscription_popup_enable": false,
     "subscription_popup_layout": "4",
     "subscription_popup_show_icon": true,
     "subscription_popup_text_line_01": "ULTIMATE SALE",
@@ -290,7 +291,7 @@
     "subscription_popup_show_once": "true",
     "subscription_popup_delay": 8,
     "subscription_popup_cookies_life": "1",
-    "subscription_confirmation_popup_enable": true,
+    "subscription_confirmation_popup_enable": false,
     "subscription_confirmation_popup_success_message": "Thanks for subscribing!",
     "subscription_confirmation_popup_success_button": "Continue shopping",
     "blog_show_sidebar": "hide",
@@ -318,7 +319,7 @@
     "notification_cookies_enable": false,
     "notification_cookies_button_information_link": "",
     "notification_cookies_delay": 0,
-    "notification_cookies_show_once": true,
+    "notification_cookies_show_once": false,
     "notification_cookies_cookies_life": "1",
     "notification_products_enable": false,
     "notification_products_collection": "featured",
@@ -976,7 +977,7 @@
           "1593945756616"
         ],
         "settings": {
-          "type": "1",
+          "type": "6",
           "style": "1",
           "logo_mobile_centered": true,
           "height": 0,
@@ -1006,7 +1007,7 @@
           "1586284525260": {
             "type": "menu",
             "settings": {
-              "title": "",
+              "title": "Collections",
               "show_title_on_desktop": true,
               "menu": "main-menu",
               "size": 0,
@@ -1016,9 +1017,9 @@
           "4eaf35c6-23ae-4eaa-a692-fedbbac92183": {
             "type": "menu",
             "settings": {
-              "title": "",
+              "title": "Useful links",
               "show_title_on_desktop": true,
-              "menu": "",
+              "menu": "footer-menu",
               "size": 0,
               "rows_limit": 0
             }
@@ -1155,7 +1156,7 @@
             "type": "slick_slide",
             "settings": {
               "url": "shopify:\/\/collections\/nightshirts",
-              "image": "shopify:\/\/shop_images\/habibaa1554.jpg",
+              "image": "shopify:\/\/shop_images\/704.jpg",
               "image_size": 900,
               "image_mobile_size": 550,
               "image_position_x": 50,
@@ -1663,7 +1664,7 @@
           "1586291704115"
         ],
         "settings": {
-          "show_tabs": false,
+          "show_tabs": true,
           "scrolling_to_opened_tab": true,
           "tabs_type": "tabs",
           "show_tab_description": true,

@@ -1,0 +1,27 @@
+.header--style-1 .header__line-additional {
+  background-color: var(--header-tape-style-1-bg);
+  border-bottom: var(--header-style-1-additional-line-bd);
+}
+.header--style-1 .header__line-additional, .header--style-1 .header__line-additional *,
+.header--style-1 .header__line-additional_button--login, .header--style-1 .header__line-additional_button--login:active, .header--style-1 .header__line-additional_button--login:link, .header--style-1 .header__line-additional_button--login:visited, .header--style-1 .header__line-additional_button--register, .header--style-1 .header__line-additional_button--register:active, .header--style-1 .header__line-additional_button--register:link, .header--style-1 .header__line-additional_button--register:visited {
+  color: #ffffff
+}
+
+.header__tape--style-1 {
+  background-color: var(--button3-bg);
+  border-bottom: var(--header-tape-style-1-bd);
+}
+
+[lang="ar"] button.shopify-payment-button__button {
+  font-size: 0px !important;
+}
+[lang="ar"] button.shopify-payment-button__button::before {
+  content: "شراء الأن";
+  line-height: 1.42;
+  text-align: center;
+  white-space: normal;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
