@@ -11,3 +11,17 @@
   background-color: var(--button3-bg);
   border-bottom: var(--header-tape-style-1-bd);
 }
+
+[lang="ar"] button.shopify-payment-button__button {
+  font-size: 0px !important;
+}
+[lang="ar"] button.shopify-payment-button__button::before {
+  content: "شراء الأن";
+  line-height: 1.42;
+  text-align: center;
+  white-space: normal;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
