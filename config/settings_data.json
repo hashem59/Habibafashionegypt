@@ -1107,7 +1107,7 @@
           "53e8ee98-2d60-4c2b-9920-ca668457bd4f": {
             "type": "slick_slider",
             "settings": {
-              "height": "auto",
+              "height": "preset_1",
               "min_height": 0,
               "size_of_column": "auto",
               "arrows": true,
@@ -1117,21 +1117,23 @@
           },
           "5b642942-f7a1-4c57-8bbb-47970055d2ac": {
             "type": "slick_slide",
+            "disabled": true,
             "settings": {
               "url": "shopify:\/\/collections\/sportswear",
-              "image": "shopify:\/\/shop_images\/habibaa1652_3000.jpg",
-              "image_size": 900,
-              "image_mobile_size": 550,
+              "image": "shopify:\/\/shop_images\/habibaa1687_800.jpg",
+              "image_size": 2000,
+              "image_mobile": "shopify:\/\/shop_images\/F470B683-E121-4F45-8798-897108E71014.jpg",
+              "image_mobile_size": 1050,
               "image_position_x": 50,
               "color_image_mask": "#f9f9f9",
-              "image_mask_opacity": 0.2,
+              "image_mask_opacity": 0.1,
               "text_line_1": "",
-              "text_line_2": "Pyjamas",
+              "text_line_2": "",
               "text_line_3": "",
               "style": "2",
-              "button_1": "SHOP NOW",
+              "button_1": "",
               "button_1_url": "shopify:\/\/collections\/sportswear",
-              "color_button_type_1": "secondary",
+              "color_button_type_1": "clean-transparent",
               "button_2": "",
               "button_2_url": "",
               "color_button_type_2": "default",
@@ -1144,7 +1146,7 @@
               "content_position": "center_left",
               "content_align": "center",
               "add_container": false,
-              "content_width": 100,
+              "content_width": 77,
               "text_width": 0,
               "animation_text": "none",
               "customization_class": ""
@@ -1154,18 +1156,18 @@
             "type": "slick_slide",
             "settings": {
               "url": "shopify:\/\/collections\/nightshirts",
-              "image": "shopify:\/\/shop_images\/704.jpg",
+              "image": "shopify:\/\/shop_images\/habibaa1626_800.jpg",
               "image_size": 900,
               "image_mobile_size": 550,
               "image_position_x": 50,
               "color_image_mask": "#f9f9f9",
-              "image_mask_opacity": 0.2,
+              "image_mask_opacity": 0.1,
               "text_line_1": "",
-              "text_line_2": "Nightshirts",
+              "text_line_2": "",
               "text_line_3": "",
               "style": "1",
               "button_1": "SHOP NOW",
-              "button_1_url": "shopify:\/\/collections\/nightshirts",
+              "button_1_url": "shopify:\/\/collections\/sportswear",
               "color_button_type_1": "default",
               "button_2": "",
               "button_2_url": "",
@@ -1176,13 +1178,25 @@
               "video_autoplay": true,
               "video_controls": false,
               "type": "type-1",
-              "content_position": "top_center",
+              "content_position": "center",
               "content_align": "center",
               "add_container": false,
               "content_width": 100,
-              "text_width": 0,
+              "text_width": 200,
               "animation_text": "none",
               "customization_class": ""
+            }
+          },
+          "4df99656-5521-4ee7-a172-0f56c51cb3dd": {
+            "type": "instagram",
+            "settings": {
+              "show_post_details": true,
+              "limit": 12,
+              "size_of_images": "6",
+              "inner_disable_paddings": true,
+              "fixed_height": 100,
+              "disable_lazyload": false,
+              "size_of_column": "auto"
             }
           }
         },
@@ -1190,7 +1204,8 @@
           "1586279874234",
           "53e8ee98-2d60-4c2b-9920-ca668457bd4f",
           "5b642942-f7a1-4c57-8bbb-47970055d2ac",
-          "27f82477-b79c-4d01-9407-2c02c2dc216a"
+          "27f82477-b79c-4d01-9407-2c02c2dc216a",
+          "4df99656-5521-4ee7-a172-0f56c51cb3dd"
         ],
         "settings": {
           "title": "",

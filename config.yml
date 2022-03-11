@@ -2,7 +2,8 @@
 #   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@habibafashionegypt.myshopify.com/admin/api/2021-07/orders.json
 development:
   password: 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
-  theme_id: "126057283773"
+  # theme_id: "126057283773"
+  theme_id: "126753603773"
   store: habibafashionegypt.myshopify.com
   ignore_files:
   - "*.png" # patterns that start with * need to be quoted to have vaild yaml

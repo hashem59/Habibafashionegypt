@@ -25,3 +25,8 @@
   text-transform: uppercase;
   text-decoration: none;
 }
+.product-options__value--circle.active::before, .product-options__value--large-text.active, .product-options__value--square.active, .product-options__value--text.active {
+  border-color: var(--product-options-act-bd)!important;
+  background-color: #e2e2e2;
+    box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 60%);
+}
